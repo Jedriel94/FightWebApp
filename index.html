@@ -7,7 +7,10 @@
   <link rel="stylesheet" href="styles.css">
   <style>
     /* HERO */
-    .hero { background: linear-gradient(135deg,#0A0A0A,#1a0005); border: 1px solid var(--border); border-left: 3px solid var(--red); margin: 20px 0 0; padding: 28px 28px 20px; }
+    .hero { position: relative; border: 1px solid var(--border); border-left: 3px solid var(--red); margin: 20px 0 0; padding: 28px 28px 20px; overflow: hidden; }
+    .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.25; z-index: 0; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(10,10,10,0.85), rgba(26,0,5,0.7)); z-index: 1; }
+    .hero-content { position: relative; z-index: 2; }
     .hero-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 8px; }
     .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: 54px; line-height: 1; letter-spacing: 2px; }
     .hero-title span { color: var(--red); }
@@ -79,6 +82,11 @@
 
   <!-- HERO -->
   <div class="hero">
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="https://cdn.prod.website-files.com/68cdee54e314bf9f0d540f83%2F68f2e1aa473d411245d43de2_MFL%20web%20video%20%20%281%29-transcode.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
     <div class="hero-tag">Próximo Evento</div>
     <div class="hero-title">MFL <span>8</span></div>
     <div class="hero-date">Sáb 14 Jun 2026 · Arena Ciudad de México</div>
@@ -94,6 +102,7 @@
       <div class="cd-block"><div class="cd-num" id="cd-m">00</div><div class="cd-label">Min</div></div>
       <div class="cd-sep">:</div>
       <div class="cd-block"><div class="cd-num" id="cd-s">00</div><div class="cd-label">Seg</div></div>
+    </div>
     </div>
   </div>
 
