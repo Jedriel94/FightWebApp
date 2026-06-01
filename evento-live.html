@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MFL 8 — EN VIVO | FightMFL</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .event-header { background: linear-gradient(135deg,#0A0A0A,#1a0005); border: 1px solid var(--border); border-left: 3px solid var(--red); margin: 20px 0; padding: 24px 28px; display: flex; justify-content: space-between; align-items: center; }
+    .event-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
+    .event-title { font-family: 'Bebas Neue', sans-serif; font-size: 42px; letter-spacing: 2px; line-height: 1; }
+    .event-meta { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 8px; }
+    .live-pill { display: flex; align-items: center; gap: 8px; background: rgba(232,0,29,0.12); border: 1px solid rgba(232,0,29,0.3); padding: 10px 18px; }
+    .live-text { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: var(--red); letter-spacing: 2px; }
+    .live-sub { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; text-align: center; }
+
+    .fight-live { background: var(--mid); border: 1px solid rgba(232,0,29,0.3); border-left: 3px solid var(--red); margin-bottom: 6px; position: relative; overflow: hidden; }
+    .fight-live-glow { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--red); opacity: 0.6; }
+    .av-lg.live-av { border-color: rgba(232,0,29,0.5); animation: pulse-border 2s infinite; }
+    @keyframes pulse-border { 0%,100%{border-color:rgba(232,0,29,0.5)} 50%{border-color:rgba(232,0,29,0.15)} }
+    .round-info { font-family: 'Bebas Neue', sans-serif; font-size: 13px; color: var(--red); letter-spacing: 1px; }
+
+    .fight-next { background: #0d0d0d; border: 1px solid var(--border); margin-bottom: 4px; opacity: 0.6; }
+    .next-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #555; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <nav>
+    <a class="logo" href="index.html">FIGHT<span>MFL</span></a>
+    <a href="index.html" class="back">← Inicio</a>
+  </nav>
+
+  <div class="event-header">
+    <div>
+      <div class="event-tag">Evento en curso</div>
+      <div class="event-title">MFL 8</div>
+      <div class="event-meta">14 Jun 2026 · Arena Ciudad de México</div>
+    </div>
+    <div class="live-pill">
+      <div class="live-dot"></div>
+      <div>
+        <div class="live-text">EN VIVO</div>
+        <div class="live-sub">Pelea 4 de 8</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PELEA EN CURSO -->
+  <div class="section-label">Ahora en el octágono</div>
+  <div class="fight-live">
+    <div class="fight-live-glow"></div>
+    <div class="fight-inner" style="padding:16px 20px">
+      <div class="live-badge"><div class="live-dot"></div>En vivo · Round 2 · Peso Welter · 170 lbs</div>
+      <div class="matchup">
+        <div class="fc">
+          <div class="av-lg live-av">CR</div>
+          <div class="flag-lg">🇲🇽</div>
+          <div class="fn-lg">Carlos "El Toro" Reyes</div>
+          <div class="rec">12-3-0</div>
+        </div>
+        <div class="vs-col">
+          <div class="vs-lg">VS</div>
+          <div class="wt">Main Event</div>
+          <div class="round-info">Round 2</div>
+        </div>
+        <div class="fc">
+          <div class="av-lg live-av">DT</div>
+          <div class="flag-lg">🇲🇽</div>
+          <div class="fn-lg">Diego "La Cobra" Torres</div>
+          <div class="rec">9-2-0</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIGUIENTE -->
+  <div class="section-label">Siguiente pelea</div>
+  <div class="fight-next">
+    <div class="fight-inner" style="padding:14px 20px">
+      <div class="next-tag">⏳ Próxima · Co-Estelar · Peso Ligero · 155 lbs</div>
+      <div class="matchup">
+        <div class="fc"><div class="av-md">AV</div><div class="flag-md">🇲🇽</div><div class="fn-md">Andrés Villanueva</div><div class="rec">7-1-0</div></div>
+        <div class="vs-col"><div class="vs-md">VS</div><div class="wt">155 lbs</div></div>
+        <div class="fc"><div class="av-md">RG</div><div class="flag-md">🇲🇽</div><div class="fn-md">Ramón Gutiérrez</div><div class="rec">6-2-0</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TERMINADAS -->
+  <div class="section-label">Peleas terminadas</div>
+
+  <div class="fight-card">
+    <div class="fight-inner" style="padding:12px 20px">
+      <div class="next-tag" style="color:#333">Peso Pluma · 145 lbs</div>
+      <div class="matchup">
+        <div class="fc"><div class="av-sm w">JM</div><div class="flag-sm">🇲🇽</div><div class="fn-sm">José Mendoza</div><div class="rec">5-0-0</div></div>
+        <div class="vs-col"><div class="vs-sm" style="color:#2a2a2a">VS</div><div class="wt">145 lbs</div></div>
+        <div class="fc"><div class="av-sm">LP</div><div class="flag-sm">🇲🇽</div><div class="fn-sm dim">Luis Peralta</div><div class="rec">4-2-0</div></div>
+      </div>
+    </div>
+    <div class="result-bar">
+      <div class="win-tag">Ganador</div>
+      <div><span class="r-method">Decisión Unánime</span> <span class="r-detail">R3</span></div>
+      <div class="r-name">José Mendoza</div>
+    </div>
+  </div>
+
+  <div class="fight-card">
+    <div class="fight-inner" style="padding:12px 20px">
+      <div class="next-tag" style="color:#333">Peso Gallo · 135 lbs</div>
+      <div class="matchup">
+        <div class="fc"><div class="av-sm">MS</div><div class="flag-sm">🇲🇽</div><div class="fn-sm dim">Marco Salinas</div><div class="rec">3-2-0</div></div>
+        <div class="vs-col"><div class="vs-sm" style="color:#2a2a2a">VS</div><div class="wt">135 lbs</div></div>
+        <div class="fc"><div class="av-sm w">HR</div><div class="flag-sm">🇲🇽</div><div class="fn-sm">Héctor Ruiz</div><div class="rec">4-0-0</div></div>
+      </div>
+    </div>
+    <div class="result-bar">
+      <div class="win-tag">Ganador</div>
+      <div><span class="r-method">KO</span> <span class="r-detail">R1 · 2:18</span></div>
+      <div class="r-name">Héctor Ruiz</div>
+    </div>
+  </div>
+
+  <div class="fight-card">
+    <div class="fight-inner" style="padding:12px 20px">
+      <div class="next-tag" style="color:#333">Preliminar · 170 lbs</div>
+      <div class="matchup">
+        <div class="fc"><div class="av-sm w">RM</div><div class="flag-sm">🇲🇽</div><div class="fn-sm">Ricardo Mora</div><div class="rec">1-0-0</div></div>
+        <div class="vs-col"><div class="vs-sm" style="color:#2a2a2a">VS</div><div class="wt">170 lbs</div></div>
+        <div class="fc"><div class="av-sm">PV</div><div class="flag-sm">🇲🇽</div><div class="fn-sm dim">Pablo Vega</div><div class="rec">0-2-0</div></div>
+      </div>
+    </div>
+    <div class="result-bar">
+      <div class="win-tag">Ganador</div>
+      <div><span class="r-method">TKO</span> <span class="r-detail">R1 · 1:55</span></div>
+      <div class="r-name">Ricardo Mora</div>
+    </div>
+  </div>
+
+  <footer>
+    <a class="footer-logo" href="index.html">FIGHT<span>MFL</span></a>
+    <div class="footer-links">
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
+      <a href="#">Contacto</a>
+    </div>
+    <div class="footer-copy">© 2026 FightMFL</div>
+  </footer>
+
+</div>
+</body>
+</html>
