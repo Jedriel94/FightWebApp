@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eventos | FightMFL</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* BANNER PRÓXIMO EVENTO */
+    .event-banner { position: relative; border: 1px solid var(--border); border-left: 3px solid var(--red); margin: 24px 0 0; padding: 40px; overflow: hidden; min-height: 280px; display: flex; align-items: flex-end; background: linear-gradient(135deg,#0A0A0A,#1a0005); }
+    .banner-bg { position: absolute; inset: 0; background: repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(232,0,29,0.02) 40px,rgba(232,0,29,0.02) 80px); }
+    .banner-accent { position: absolute; top: 0; right: 0; width: 40%; height: 100%; background: linear-gradient(to left, rgba(232,0,29,0.06), transparent); }
+    .banner-content { position: relative; z-index: 2; width: 100%; }
+    .banner-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 8px; }
+    .banner-title { font-family: 'Bebas Neue', sans-serif; font-size: 64px; line-height: 1; letter-spacing: 2px; }
+    .banner-title span { color: var(--red); }
+    .banner-fight { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; color: #ccc; letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+    .banner-meta { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin: 12px 0 20px; border-left: 2px solid var(--red); padding-left: 10px; }
+    .banner-btns { display: flex; gap: 10px; }
+
+    /* TABS */
+    .tabs { display: flex; border-bottom: 1px solid var(--border); margin: 28px 0 20px; }
+    .tab { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; padding: 14px 28px; cursor: pointer; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all .2s; }
+    .tab.active { color: white; border-bottom-color: var(--red); }
+    .tab:hover:not(.active) { color: #ccc; }
+
+    /* GRID DE EVENTOS */
+    .events-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+    /* TARJETA DE EVENTO */
+    .event-card { background: var(--mid); border: 1px solid var(--border); cursor: pointer; text-decoration: none; color: var(--light); display: block; transition: border-color .2s; overflow: hidden; }
+    .event-card:hover { border-color: #333; }
+    .event-card.featured { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; }
+    .event-card-img { background: linear-gradient(135deg, #1a0005, #0a0a0a); height: 160px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .event-card.featured .event-card-img { height: 100%; min-height: 200px; }
+    .event-card-img-bg { position: absolute; inset: 0; background: repeating-linear-gradient(45deg,transparent,transparent 30px,rgba(232,0,29,0.03) 30px,rgba(232,0,29,0.03) 60px); }
+    .event-fighters { display: flex; align-items: center; gap: 12px; position: relative; z-index: 1; }
+    .ef-avatar { width: 64px; height: 64px; border-radius: 50%; background: #1a1a1a; border: 2px solid #2a2a2a; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: #444; }
+    .event-card.featured .ef-avatar { width: 80px; height: 80px; font-size: 22px; }
+    .ef-vs { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: var(--red); }
+    .event-card-info { padding: 16px 20px; }
+    .event-card.featured .event-card-info { padding: 24px 28px; display: flex; flex-direction: column; justify-content: center; }
+    .ec-num { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
+    .ec-name { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 1px; line-height: 1; }
+    .event-card.featured .ec-name { font-size: 40px; }
+    .ec-fight { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; color: #aaa; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+    .event-card.featured .ec-fight { font-size: 18px; }
+    .ec-meta { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 10px; }
+    .ec-btn { display: inline-block; margin-top: 14px; font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--red); border-bottom: 1px solid rgba(232,0,29,0.3); padding-bottom: 2px; }
+
+    /* PASADOS en lista */
+    .past-list { display: flex; flex-direction: column; gap: 6px; }
+    .past-item { background: var(--mid); border: 1px solid var(--border); border-left: 3px solid transparent; display: grid; grid-template-columns: 80px 1fr auto; align-items: center; gap: 20px; padding: 20px 24px; text-decoration: none; color: var(--light); transition: border-left-color .2s; }
+    .past-item:hover { border-left-color: var(--red); }
+    .past-num { font-family: 'Bebas Neue', sans-serif; font-size: 40px; color: #1e1e1e; line-height: 1; }
+    .past-name { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; text-transform: uppercase; }
+    .past-fight { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; color: var(--muted); margin-top: 3px; }
+    .past-meta { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .past-right { text-align: right; }
+    .past-result { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+    .past-fights { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .check { color: var(--red); }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <nav>
+    <a class="logo" href="index.html">FIGHT<span>MFL</span></a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="eventos.html" class="active">Eventos</a>
+      <a href="#">Peleadores</a>
+      <a href="#">Noticias</a>
+    </div>
+  </nav>
+
+  <!-- BANNER PRÓXIMO -->
+  <div class="event-banner">
+    <div class="banner-bg"></div>
+    <div class="banner-accent"></div>
+    <div class="banner-content">
+      <div class="banner-tag">Próximo Evento</div>
+      <div class="banner-title">MFL <span>8</span></div>
+      <div class="banner-fight">Carlos "El Toro" Reyes vs Diego "La Cobra" Torres</div>
+      <div class="banner-meta">Sáb 14 Jun 2026 · Arena Ciudad de México · CDMX</div>
+      <div class="banner-btns">
+        <a href="evento-proximo.html" class="btn">Ver Cartelera</a>
+        <a href="#" class="btn-ghost">Boletos</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('proximos')">Próximos</div>
+    <div class="tab" onclick="switchTab('pasados')">Pasados</div>
+  </div>
+
+  <!-- PRÓXIMOS -->
+  <div class="tab-content active" id="tab-proximos">
+    <div class="events-grid">
+
+      <a href="evento-proximo.html" class="event-card featured">
+        <div class="event-card-img">
+          <div class="event-card-img-bg"></div>
+          <div class="event-fighters">
+            <div class="ef-avatar">CR</div>
+            <div class="ef-vs">VS</div>
+            <div class="ef-avatar">DT</div>
+          </div>
+        </div>
+        <div class="event-card-info">
+          <div class="ec-num">⭐ Próximo · Main Event</div>
+          <div class="ec-name">MFL 8</div>
+          <div class="ec-fight">Reyes vs Torres · Peso Welter</div>
+          <div class="ec-meta">Sáb 14 Jun 2026 · Arena Ciudad de México</div>
+          <div class="ec-btn">Ver cartelera completa →</div>
+        </div>
+      </a>
+
+      <a href="#" class="event-card">
+        <div class="event-card-img">
+          <div class="event-card-img-bg"></div>
+          <div class="event-fighters">
+            <div class="ef-avatar">??</div>
+            <div class="ef-vs">VS</div>
+            <div class="ef-avatar">??</div>
+          </div>
+        </div>
+        <div class="event-card-info">
+          <div class="ec-num">Por confirmar</div>
+          <div class="ec-name">MFL 9</div>
+          <div class="ec-fight">Cartelera por anunciar</div>
+          <div class="ec-meta">Ago 2026 · CDMX</div>
+        </div>
+      </a>
+
+      <a href="#" class="event-card">
+        <div class="event-card-img">
+          <div class="event-card-img-bg"></div>
+          <div class="event-fighters">
+            <div class="ef-avatar">??</div>
+            <div class="ef-vs">VS</div>
+            <div class="ef-avatar">??</div>
+          </div>
+        </div>
+        <div class="event-card-info">
+          <div class="ec-num">Por confirmar</div>
+          <div class="ec-name">MFL 10</div>
+          <div class="ec-fight">Cartelera por anunciar</div>
+          <div class="ec-meta">Oct 2026 · CDMX</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- PASADOS -->
+  <div class="tab-content" id="tab-pasados">
+    <div class="past-list">
+
+      <a href="evento.html" class="past-item">
+        <div class="past-num">07</div>
+        <div>
+          <div class="past-name">MFL 7 — Night of Champions</div>
+          <div class="past-fight">Reyes vs Torres · Main Event</div>
+          <div class="past-meta">12 Abr 2026 · Foro Deportivo Norte · CDMX</div>
+        </div>
+        <div class="past-right">
+          <div class="past-result"><span class="check">✓</span> Resultados</div>
+          <div class="past-fights">8 peleas</div>
+        </div>
+      </a>
+
+      <a href="evento.html" class="past-item">
+        <div class="past-num">06</div>
+        <div>
+          <div class="past-name">MFL 6 — Collision</div>
+          <div class="past-fight">Villanueva vs Gutiérrez · Main Event</div>
+          <div class="past-meta">15 Feb 2026 · Gimnasio Olímpico · CDMX</div>
+        </div>
+        <div class="past-right">
+          <div class="past-result"><span class="check">✓</span> Resultados</div>
+          <div class="past-fights">7 peleas</div>
+        </div>
+      </a>
+
+      <a href="evento.html" class="past-item">
+        <div class="past-num">05</div>
+        <div>
+          <div class="past-name">MFL 5 — Rising</div>
+          <div class="past-fight">Mendoza vs Peralta · Main Event</div>
+          <div class="past-meta">10 Nov 2025 · Arena Norte · CDMX</div>
+        </div>
+        <div class="past-right">
+          <div class="past-result"><span class="check">✓</span> Resultados</div>
+          <div class="past-fights">6 peleas</div>
+        </div>
+      </a>
+
+      <a href="evento.html" class="past-item">
+        <div class="past-num">04</div>
+        <div>
+          <div class="past-name">MFL 4 — Warfare</div>
+          <div class="past-fight">Ruiz vs Salinas · Main Event</div>
+          <div class="past-meta">20 Sep 2025 · Foro Deportivo Norte · CDMX</div>
+        </div>
+        <div class="past-right">
+          <div class="past-result"><span class="check">✓</span> Resultados</div>
+          <div class="past-fights">6 peleas</div>
+        </div>
+      </a>
+
+      <a href="evento.html" class="past-item">
+        <div class="past-num">03</div>
+        <div>
+          <div class="past-name">MFL 3 — Underground</div>
+          <div class="past-fight">Mora vs Cruz · Main Event</div>
+          <div class="past-meta">14 Jul 2025 · Arena Norte · CDMX</div>
+        </div>
+        <div class="past-right">
+          <div class="past-result"><span class="check">✓</span> Resultados</div>
+          <div class="past-fights">5 peleas</div>
+        </div>
+      </a>
+
+      <a href="evento.html" class="past-item">
+        <div class="past-num">02</div>
+        <div>
+          <div class="past-name">MFL 2 — Debut</div>
+          <div class="past-fight">Ríos vs Niño · Main Event</div>
+          <div class="past-meta">10 May 2025 · Gimnasio Olímpico · CDMX</div>
+        </div>
+        <div class="past-right">
+          <div class="past-result"><span class="check">✓</span> Resultados</div>
+          <div class="past-fights">5 peleas</div>
+        </div>
+      </a>
+
+      <a href="evento.html" class="past-item">
+        <div class="past-num">01</div>
+        <div>
+          <div class="past-name">MFL 1 — The Beginning</div>
+          <div class="past-fight">Reyes vs Castillo · Main Event</div>
+          <div class="past-meta">15 Mar 2025 · Foro Deportivo Norte · CDMX</div>
+        </div>
+        <div class="past-right">
+          <div class="past-result"><span class="check">✓</span> Resultados</div>
+          <div class="past-fights">4 peleas</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <footer>
+    <a class="footer-logo" href="index.html">FIGHT<span>MFL</span></a>
+    <div class="footer-links">
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
+      <a href="#">Contacto</a>
+    </div>
+    <div class="footer-copy">© 2026 FightMFL</div>
+  </footer>
+
+</div>
+
+<script>
+  function switchTab(tab) {
+    document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', (tab==='proximos'&&i===0)||(tab==='pasados'&&i===1)));
+    document.getElementById('tab-proximos').classList.toggle('active', tab==='proximos');
+    document.getElementById('tab-pasados').classList.toggle('active', tab==='pasados');
+  }
+</script>
+</body>
+</html>
