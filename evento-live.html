@@ -44,8 +44,22 @@
 
   <nav>
     <a class="logo" href="index.html">FIGHT<span>MFL</span></a>
-    <a href="index.html" class="back">← Inicio</a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="eventos.html" class="active">Eventos</a>
+      <a href="noticias.html">Noticias</a>
+      <a href="tienda.html">Tienda</a>
+    </div>
+    <button class="hamburger" id="hamburger-btn">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html">Inicio</a>
+    <a href="eventos.html" class="active">Eventos</a>
+    <a href="noticias.html">Noticias</a>
+    <a href="tienda.html">Tienda</a>
+  </div>
 
   <div class="event-header">
     <div>
@@ -165,5 +179,16 @@
   </footer>
 
 </div>
+
+<script>
+  const btn = document.getElementById('hamburger-btn');
+  const menu = document.getElementById('mobile-menu');
+  if (btn && menu) {
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('open');
+      menu.classList.toggle('open');
+    });
+  }
+</script>
 </body>
 </html>

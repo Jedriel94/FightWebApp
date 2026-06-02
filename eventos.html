@@ -91,11 +91,19 @@
     <div class="nav-links">
       <a href="index.html">Inicio</a>
       <a href="eventos.html" class="active">Eventos</a>
-      <a href="#">Peleadores</a>
       <a href="noticias.html">Noticias</a>
       <a href="tienda.html">Tienda</a>
     </div>
+    <button class="hamburger" id="hamburger-btn">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html">Inicio</a>
+    <a href="eventos.html" class="active">Eventos</a>
+    <a href="noticias.html">Noticias</a>
+    <a href="tienda.html">Tienda</a>
+  </div>
 
   <!-- BANNER PRÓXIMO -->
   <div class="event-banner">
@@ -293,6 +301,17 @@
     document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', (tab==='proximos'&&i===0)||(tab==='pasados'&&i===1)));
     document.getElementById('tab-proximos').classList.toggle('active', tab==='proximos');
     document.getElementById('tab-pasados').classList.toggle('active', tab==='pasados');
+  }
+</script>
+
+<script>
+  const btn = document.getElementById('hamburger-btn');
+  const menu = document.getElementById('mobile-menu');
+  if (btn && menu) {
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('open');
+      menu.classList.toggle('open');
+    });
   }
 </script>
 </body>

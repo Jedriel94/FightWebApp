@@ -85,10 +85,19 @@
     <div class="nav-links">
       <a href="index.html">Inicio</a>
       <a href="eventos.html">Eventos</a>
-      <a href="#">Peleadores</a>
       <a href="noticias.html" class="active">Noticias</a>
+      <a href="tienda.html">Tienda</a>
     </div>
+    <button class="hamburger" id="hamburger-btn">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html">Inicio</a>
+    <a href="eventos.html">Eventos</a>
+    <a href="noticias.html" class="active">Noticias</a>
+    <a href="tienda.html">Tienda</a>
+  </div>
 
   <!-- NOTICIA DESTACADA -->
   <a href="noticia.html" class="news-hero">
@@ -234,6 +243,17 @@
       btn.classList.add('active');
     });
   });
+</script>
+
+<script>
+  const btn = document.getElementById('hamburger-btn');
+  const menu = document.getElementById('mobile-menu');
+  if (btn && menu) {
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('open');
+      menu.classList.toggle('open');
+    });
+  }
 </script>
 </body>
 </html>
