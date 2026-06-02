@@ -61,6 +61,21 @@
     .video-title { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; line-height: 1.3; }
     .video-meta { font-size: 11px; color: var(--muted); margin-top: 6px; }
   </style>
+
+  <style id="mobile-noticias">
+  @media (max-width: 768px) {
+    .news-hero { min-height: 480px; }
+    .news-hero-content { max-width: 100%; padding: 20px 16px 30px; }
+    .news-hero-fighter { display: none; }
+    .news-hero-title { font-size: 36px; }
+    .news-hero-quote { font-size: 14px; }
+    .news-grid-main { grid-template-columns: 1fr; }
+    .news-grid-wide { grid-template-columns: 1fr; }
+    .filters { gap: 4px; }
+    .filter-btn { font-size: 10px; padding: 5px 12px; }
+    .quote-text { font-size: 20px; }
+  }
+  </style>
 </head>
 <body>
 <div class="page">

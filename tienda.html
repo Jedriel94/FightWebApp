@@ -69,6 +69,23 @@
     .ship-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
     .ship-divider { width: 1px; height: 40px; background: var(--border); }
   </style>
+
+  <style id="mobile-tienda">
+  @media (max-width: 768px) {
+    .shop-banner { flex-direction: column; gap: 14px; padding: 20px 16px; }
+    .shop-title { font-size: 40px; }
+    .shipping-bar { flex-direction: column; gap: 14px; align-items: flex-start; padding: 16px; }
+    .ship-divider { display: none; }
+    .products-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
+    .featured-product { grid-template-columns: 1fr; }
+    .fp-img { min-height: 200px; border-right: none; border-bottom: 1px solid var(--border); }
+    .fp-info { padding: 20px 16px; }
+    .fp-name { font-size: 28px; }
+    .fp-price { font-size: 28px; }
+    .categories { gap: 4px; }
+    .cat-btn { font-size: 11px; padding: 6px 12px; }
+  }
+  </style>
 </head>
 <body>
 <div class="page">

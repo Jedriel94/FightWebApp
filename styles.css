@@ -225,3 +225,33 @@ footer {
 .footer-links { display: flex; gap: 16px; }
 .footer-links a { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); text-decoration: none; cursor: pointer; }
 .footer-copy { font-size: 11px; color: #333; }
+
+/* ===================== RESPONSIVE MOBILE ===================== */
+@media (max-width: 768px) {
+
+  .page { padding: 0 12px 40px; }
+
+  /* NAV */
+  nav { flex-wrap: wrap; gap: 10px; padding: 12px 0; }
+  .nav-links { gap: 14px; flex-wrap: wrap; }
+  .nav-links a { font-size: 12px; }
+  .logo { font-size: 24px; }
+
+  /* MATCHUP */
+  .matchup { gap: 6px; }
+  .fn-lg { font-size: 13px; }
+  .fn-md { font-size: 12px; }
+  .fn-sm { font-size: 11px; }
+  .av-lg { width: 54px; height: 54px; font-size: 16px; }
+  .av-md { width: 42px; height: 42px; font-size: 13px; }
+  .av-sm { width: 34px; height: 34px; font-size: 11px; }
+  .vs-lg { font-size: 22px; }
+  .vs-md { font-size: 18px; }
+  .flag-lg { font-size: 14px; }
+  .flag-md { font-size: 12px; }
+  .flag-sm { font-size: 11px; }
+
+  /* FOOTER */
+  footer { flex-direction: column; gap: 12px; text-align: center; }
+  .footer-links { justify-content: center; }
+}

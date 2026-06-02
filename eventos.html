@@ -64,6 +64,24 @@
     .tab-content { display: none; }
     .tab-content.active { display: block; }
   </style>
+
+  <style id="mobile-eventos">
+  @media (max-width: 768px) {
+    .shop-banner, .event-banner { padding: 20px 16px; }
+    .banner-title { font-size: 44px; }
+    .banner-fight { font-size: 16px; }
+    .events-grid { grid-template-columns: 1fr; }
+    .event-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
+    .event-card.featured .event-card-img { min-height: 160px; }
+    .ec-name { font-size: 28px; }
+    .event-card.featured .ec-name { font-size: 32px; }
+    .past-item { grid-template-columns: 50px 1fr; gap: 10px; padding: 14px; }
+    .past-right { display: none; }
+    .past-name { font-size: 15px; }
+    .past-fight { font-size: 12px; }
+    .tabs { overflow-x: auto; }
+  }
+  </style>
 </head>
 <body>
 <div class="page">
