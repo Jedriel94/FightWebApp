@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MFL 8 — Cartelera | FightMFL</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* HERO EVENTO */
+    .event-hero { position: relative; min-height: 380px; display: flex; align-items: flex-end; overflow: hidden; border: 1px solid var(--border); margin: 24px 0 0; }
+    .event-hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #0a0a0a 0%, #1a0005 60%, #0a0a0a 100%); }
+    .event-hero-pattern { position: absolute; inset: 0; background: repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(232,0,29,0.03) 40px,rgba(232,0,29,0.03) 80px); }
+    .event-hero-fighters { position: absolute; right: 0; top: 0; bottom: 0; width: 55%; display: flex; align-items: center; justify-content: center; gap: 0; }
+    .hero-fighter-wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .hero-fighter-wrap.left { margin-right: -20px; }
+    .hero-fighter-wrap.right { margin-left: -20px; }
+    .hero-av { width: 140px; height: 140px; border-radius: 50%; background: linear-gradient(135deg, #2a0008, #1a1a1a); border: 3px solid #2a2a2a; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: #333; }
+    .hero-av.red-corner { border-color: rgba(232,0,29,0.5); }
+    .hero-vs-center { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--red); z-index: 1; text-shadow: 0 0 30px rgba(232,0,29,0.3); }
+    .hero-fighter-name { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; text-transform: uppercase; text-align: center; }
+    .hero-fighter-flag { font-size: 20px; }
+    .event-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.95) 30%, rgba(0,0,0,0.2) 70%, transparent 100%); z-index: 1; }
+    .event-hero-content { position: relative; z-index: 2; padding: 36px 40px; max-width: 55%; }
+    .eh-nav { display: flex; gap: 16px; margin-bottom: 20px; }
+    .eh-nav a { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); text-decoration: none; }
+    .eh-nav a:hover { color: white; }
+    .eh-nav span { color: #333; }
+    .eh-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .eh-title { font-family: 'Bebas Neue', sans-serif; font-size: 64px; line-height: 1; letter-spacing: 2px; }
+    .eh-title span { color: var(--red); }
+    .eh-fight { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; color: #ccc; letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+    .eh-meta { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin: 14px 0 20px; border-left: 2px solid var(--red); padding-left: 10px; line-height: 1.8; }
+    .eh-btns { display: flex; gap: 8px; }
+
+    /* NAVEGACION EVENTO */
+    .event-nav { display: flex; border-bottom: 1px solid var(--border); margin: 28px 0 0; }
+    .event-tab { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; padding: 14px 24px; cursor: pointer; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all .2s; }
+    .event-tab.active { color: white; border-bottom-color: var(--red); }
+    .event-tab:hover:not(.active) { color: #ccc; }
+
+    /* COMO VER */
+    .how-to-watch { background: var(--mid); border: 1px solid var(--border); padding: 16px 20px; margin: 20px 0; display: flex; align-items: center; gap: 20px; }
+    .htw-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+    .htw-divider { width: 1px; height: 30px; background: var(--border); }
+    .htw-times { display: flex; gap: 24px; flex: 1; }
+    .htw-time { }
+    .htw-time-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+    .htw-time-val { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 700; text-transform: uppercase; color: white; margin-top: 2px; }
+
+    /* PELEA ESTELAR */
+    .fight-featured { background: var(--mid); border: 1px solid var(--border); border-left: 3px solid var(--red); margin-bottom: 6px; overflow: hidden; }
+    .fight-featured-inner { padding: 28px 32px; }
+    .ff-badge { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+    .ff-matchup { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px; }
+    .ff-fighter { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; }
+    .ff-av { width: 100px; height: 100px; border-radius: 50%; background: #1a1a1a; border: 2px solid #252525; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 30px; color: #444; }
+    .ff-av.red { border-color: rgba(232,0,29,0.4); }
+    .ff-flag { font-size: 22px; }
+    .ff-name { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; text-transform: uppercase; line-height: 1.1; }
+    .ff-nick { font-size: 13px; color: var(--red); font-style: italic; }
+    .ff-record { font-size: 12px; color: var(--muted); }
+    .ff-ranking { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; color: #555; letter-spacing: 1px; text-transform: uppercase; }
+    .ff-vs { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .ff-vs-text { font-family: 'Bebas Neue', sans-serif; font-size: 44px; color: var(--red); }
+    .ff-weight { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; text-align: center; }
+    .ff-rounds { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; color: #444; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* PELEA CO-ESTELAR */
+    .fight-co { background: var(--mid); border: 1px solid var(--border); margin-bottom: 6px; }
+    .fight-co-inner { padding: 22px 28px; }
+    .fc-badge { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+    .fc-matchup { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; }
+    .fc-fighter { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; }
+    .fc-av { width: 72px; height: 72px; border-radius: 50%; background: #1a1a1a; border: 2px solid #252525; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: #444; }
+    .fc-name { font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 700; text-transform: uppercase; line-height: 1.1; }
+    .fc-record { font-size: 11px; color: var(--muted); }
+    .fc-vs { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--red); }
+    .fc-weight { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; text-align: center; }
+
+    /* PELEA NORMAL */
+    .fight-row { background: var(--mid); border: 1px solid var(--border); margin-bottom: 4px; }
+    .fight-row-inner { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; padding: 16px 20px; }
+    .fr-fighter { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 5px; }
+    .fr-av { width: 52px; height: 52px; border-radius: 50%; background: #1a1a1a; border: 2px solid #252525; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 15px; color: #444; }
+    .fr-name { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 700; text-transform: uppercase; line-height: 1.1; }
+    .fr-record { font-size: 11px; color: var(--muted); }
+    .fr-vs { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: #2a2a2a; }
+    .fr-weight { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; text-align: center; display: block; margin-top: 2px; }
+
+    /* PRELIMS */
+    .prelim-row { background: var(--mid); border: 1px solid var(--border); margin-bottom: 4px; }
+    .prelim-inner { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; padding: 12px 20px; }
+    .pr-fighter { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; }
+    .pr-av { width: 42px; height: 42px; border-radius: 50%; background: #1a1a1a; border: 2px solid #1e1e1e; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 12px; color: #333; }
+    .pr-name { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 600; text-transform: uppercase; color: #aaa; }
+    .pr-record { font-size: 10px; color: var(--muted); }
+    .pr-vs { font-family: 'Bebas Neue', sans-serif; font-size: 16px; color: #222; }
+    .pr-weight { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; color: #333; text-transform: uppercase; letter-spacing: 1px; text-align: center; display: block; }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <nav>
+    <a class="logo" href="index.html">FIGHT<span>MFL</span></a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="eventos.html" class="active">Eventos</a>
+      <a href="noticias.html">Noticias</a>
+      <a href="tienda.html">Tienda</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="event-hero">
+    <div class="event-hero-bg"></div>
+    <div class="event-hero-pattern"></div>
+    <div class="event-hero-fighters">
+      <div class="hero-fighter-wrap left">
+        <div class="hero-av red-corner">CR</div>
+        <div class="hero-fighter-flag">🇲🇽</div>
+        <div class="hero-fighter-name">El Toro Reyes</div>
+      </div>
+      <div class="hero-vs-center">VS</div>
+      <div class="hero-fighter-wrap right">
+        <div class="hero-av">DT</div>
+        <div class="hero-fighter-flag">🇲🇽</div>
+        <div class="hero-fighter-name">La Cobra Torres</div>
+      </div>
+    </div>
+    <div class="event-hero-overlay"></div>
+    <div class="event-hero-content">
+      <div class="eh-nav">
+        <a href="eventos.html">Eventos</a>
+        <span>›</span>
+        <a href="#">MFL 8</a>
+      </div>
+      <div class="eh-tag">
+        <div style="width:8px;height:8px;background:var(--red);border-radius:50%;animation:blink 2s infinite"></div>
+        Próximo Evento
+      </div>
+      <div class="eh-title">MFL <span>8</span></div>
+      <div class="eh-fight">Reyes vs Torres</div>
+      <div class="eh-meta">
+        Sáb 14 Jun 2026 · 8:00 PM<br>
+        Arena Ciudad de México · CDMX
+      </div>
+      <div class="eh-btns">
+        <a href="evento-live.html" class="btn">Seguir en Vivo</a>
+        <a href="#" class="btn-ghost">Boletos</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMO VER -->
+  <div class="how-to-watch">
+    <div class="htw-label">Cómo ver</div>
+    <div class="htw-divider"></div>
+    <div class="htw-times">
+      <div class="htw-time">
+        <div class="htw-time-label">Preliminares</div>
+        <div class="htw-time-val">6:00 PM · YouTube MFL</div>
+      </div>
+      <div class="htw-divider"></div>
+      <div class="htw-time">
+        <div class="htw-time-label">Cartelera Estelar</div>
+        <div class="htw-time-val">8:00 PM · YouTube MFL</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="event-nav">
+    <div class="event-tab active" onclick="switchTab('estelar')">Cartelera Estelar</div>
+    <div class="event-tab" onclick="switchTab('prelims')">Preliminares</div>
+  </div>
+
+  <!-- ESTELAR -->
+  <div class="tab-content active" id="tab-estelar" style="padding-top:20px">
+
+    <div class="section-label">Pelea Estelar</div>
+
+    <div class="fight-featured">
+      <div class="fight-featured-inner">
+        <div class="ff-badge">⭐ Main Event · 5 Rounds · Título en juego</div>
+        <div class="ff-matchup">
+          <div class="ff-fighter">
+            <div class="ff-av red">CR</div>
+            <div class="ff-flag">🇲🇽</div>
+            <div class="ff-name">Carlos Reyes</div>
+            <div class="ff-nick">"El Toro"</div>
+            <div class="ff-record">12-3-0</div>
+            <div class="ff-ranking">Ranking #1</div>
+          </div>
+          <div class="ff-vs">
+            <div class="ff-vs-text">VS</div>
+            <div class="ff-weight">Peso Welter<br>170 lbs</div>
+            <div class="ff-rounds">5 rounds</div>
+          </div>
+          <div class="ff-fighter">
+            <div class="ff-av">DT</div>
+            <div class="ff-flag">🇲🇽</div>
+            <div class="ff-name">Diego Torres</div>
+            <div class="ff-nick">"La Cobra"</div>
+            <div class="ff-record">9-2-0</div>
+            <div class="ff-ranking">Ranking #3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top:20px">Co-Estelar</div>
+
+    <div class="fight-co">
+      <div class="fight-co-inner">
+        <div class="fc-badge">Co-Main Event · 3 Rounds · Peso Ligero 155 lbs</div>
+        <div class="fc-matchup">
+          <div class="fc-fighter">
+            <div class="fc-av">AV</div>
+            <div class="flag-md">🇲🇽</div>
+            <div class="fc-name">Andrés Villanueva</div>
+            <div class="fc-record">7-1-0 · Ranking #2</div>
+          </div>
+          <div style="text-align:center">
+            <div class="fc-vs">VS</div>
+            <div class="fc-weight">155 lbs · 3 rounds</div>
+          </div>
+          <div class="fc-fighter">
+            <div class="fc-av">RG</div>
+            <div class="flag-md">🇲🇽</div>
+            <div class="fc-name">Ramón Gutiérrez</div>
+            <div class="fc-record">6-2-0 · Ranking #4</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top:20px">Cartelera Principal</div>
+
+    <div class="fight-row">
+      <div class="fight-row-inner">
+        <div class="fr-fighter">
+          <div class="fr-av">JM</div>
+          <div class="flag-sm">🇲🇽</div>
+          <div class="fr-name">José Mendoza</div>
+          <div class="fr-record">5-0-0</div>
+        </div>
+        <div style="text-align:center">
+          <div class="fr-vs">VS</div>
+          <span class="fr-weight">Peso Pluma · 145 lbs</span>
+        </div>
+        <div class="fr-fighter">
+          <div class="fr-av">LP</div>
+          <div class="flag-sm">🇲🇽</div>
+          <div class="fr-name">Luis Peralta</div>
+          <div class="fr-record">4-1-0</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fight-row">
+      <div class="fight-row-inner">
+        <div class="fr-fighter">
+          <div class="fr-av">MS</div>
+          <div class="flag-sm">🇲🇽</div>
+          <div class="fr-name">Marco Salinas</div>
+          <div class="fr-record">3-1-0</div>
+        </div>
+        <div style="text-align:center">
+          <div class="fr-vs">VS</div>
+          <span class="fr-weight">Peso Gallo · 135 lbs</span>
+        </div>
+        <div class="fr-fighter">
+          <div class="fr-av">HR</div>
+          <div class="flag-sm">🇲🇽</div>
+          <div class="fr-name">Héctor Ruiz</div>
+          <div class="fr-record">4-0-0</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fight-row">
+      <div class="fight-row-inner">
+        <div class="fr-fighter">
+          <div class="fr-av">IC</div>
+          <div class="flag-sm">🇲🇽</div>
+          <div class="fr-name">Iván Castillo</div>
+          <div class="fr-record">2-0-0</div>
+        </div>
+        <div style="text-align:center">
+          <div class="fr-vs">VS</div>
+          <span class="fr-weight">Peso Ligero · 155 lbs</span>
+        </div>
+        <div class="fr-fighter">
+          <div class="fr-av">OF</div>
+          <div class="flag-sm">🇲🇽</div>
+          <div class="fr-name">Omar Flores</div>
+          <div class="fr-record">1-1-0</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PRELIMS -->
+  <div class="tab-content" id="tab-prelims" style="padding-top:20px">
+
+    <div class="section-label">Preliminares</div>
+
+    <div class="prelim-row">
+      <div class="prelim-inner">
+        <div class="pr-fighter">
+          <div class="pr-av">RM</div>
+          <div class="flag-sm">🇲🇽</div>
+          <div class="pr-name">Ricardo Mora</div>
+          <div class="pr-record">1-0-0</div>
+        </div>
+        <div style="text-align:center">
+          <div class="pr-vs">VS</div>
+          <span class="pr-weight">145 lbs</span>
+        </div>
+        <div class="pr-fighter">
+          <div class="pr-av">PV</div>
+          <div class="flag-sm">🇲🇽</div>
+          <div class="pr-name">Pablo Vega</div>
+          <div class="pr-record">0-1-0</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prelim-row">
+      <div class="prelim-inner">
+        <div class="pr-fighter">
+          <div class="pr-av">SL</div>
+          <div class="flag-sm">🇲🇽</div>
+          <div class="pr-name">Samuel Lara</div>
+          <div class="pr-record">0-0-0</div>
+        </div>
+        <div style="text-align:center">
+          <div class="pr-vs">VS</div>
+          <span class="pr-weight">135 lbs</span>
+        </div>
+        <div class="pr-fighter">
+          <div class="pr-av">EC</div>
+          <div class="flag-sm">🇲🇽</div>
+          <div class="pr-name">Ernesto Cruz</div>
+          <div class="pr-record">0-0-0</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prelim-row">
+      <div class="prelim-inner">
+        <div class="pr-fighter">
+          <div class="pr-av">TR</div>
+          <div class="flag-sm">🇲🇽</div>
+          <div class="pr-name">Tomás Ríos</div>
+          <div class="pr-record">1-1-0</div>
+        </div>
+        <div style="text-align:center">
+          <div class="pr-vs">VS</div>
+          <span class="pr-weight">170 lbs</span>
+        </div>
+        <div class="pr-fighter">
+          <div class="pr-av">GN</div>
+          <div class="flag-sm">🇲🇽</div>
+          <div class="pr-name">Gerardo Niño</div>
+          <div class="pr-record">2-0-0</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <a class="footer-logo" href="index.html">FIGHT<span>MFL</span></a>
+    <div class="footer-links">
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
+      <a href="#">Contacto</a>
+    </div>
+    <div class="footer-copy">© 2026 FightMFL</div>
+  </footer>
+
+</div>
+
+<script>
+  function switchTab(tab) {
+    document.querySelectorAll('.event-tab').forEach((t,i) => t.classList.toggle('active', (tab==='estelar'&&i===0)||(tab==='prelims'&&i===1)));
+    document.getElementById('tab-estelar').classList.toggle('active', tab==='estelar');
+    document.getElementById('tab-prelims').classList.toggle('active', tab==='prelims');
+  }
+</script>
+</body>
+</html>
