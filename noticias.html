@@ -78,28 +78,47 @@
   </style>
 </head>
 <body>
-<header>
-  <div class="page">
-    <nav>
-      <a class="logo" href="index.html">FIGHT<span>MFL</span></a>
-      <div class="nav-links">
-      <a href="index.html">Inicio</a>
-      <a href="eventos.html">Eventos</a>
-      <a href="noticias.html" class="active">Noticias</a>
-      <a href="tienda.html">Tienda</a>
+<header style="background:#0A0A0A;border-bottom:1px solid #1E1E1E;position:sticky;top:0;z-index:200;">
+  <div style="max-width:900px;margin:0 auto;padding:0 16px;">
+    <nav style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;">
+      <a href="index.html" style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:white;text-decoration:none;">FIGHT<span style="color:#E8001D;">MFL</span></a>
+      <div id="nav-desktop" style="display:flex;gap:24px;">
+        <a href="index.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#666666;text-decoration:none;">Inicio</a>
+        <a href="eventos.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#666666;text-decoration:none;">Eventos</a>
+        <a href="noticias.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#ffffff;text-decoration:none;">Noticias</a>
+        <a href="tienda.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#666666;text-decoration:none;">Tienda</a>
       </div>
-      <button class="hamburger" id="hamburger-btn">
-        <span></span><span></span><span></span>
+      <button id="hamburger-btn" style="display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:transparent;border:none;" onclick="toggleMenu()">
+        <span style="width:24px;height:2px;background:white;display:block;transition:all .3s;"></span>
+        <span style="width:24px;height:2px;background:white;display:block;transition:all .3s;"></span>
+        <span style="width:24px;height:2px;background:white;display:block;transition:all .3s;"></span>
       </button>
     </nav>
   </div>
-  <div class="mobile-menu" id="mobile-menu">
-    <a href="index.html">Inicio</a>
-    <a href="eventos.html">Eventos</a>
-    <a href="noticias.html" class="active">Noticias</a>
-    <a href="tienda.html">Tienda</a>
+  <div id="mobile-menu" style="display:none;flex-direction:column;background:#0d0d0d;border-top:1px solid #1E1E1E;">
+    <a href="index.html" style="font-family:'Barlow Condensed',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666666;text-decoration:none;padding:18px 20px;border-bottom:1px solid #1E1E1E;display:block;">Inicio</a>
+    <a href="eventos.html" style="font-family:'Barlow Condensed',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666666;text-decoration:none;padding:18px 20px;border-bottom:1px solid #1E1E1E;display:block;">Eventos</a>
+    <a href="noticias.html" style="font-family:'Barlow Condensed',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#ffffff;text-decoration:none;padding:18px 20px;border-bottom:1px solid #1E1E1E;display:block;border-left:3px solid #E8001D;">Noticias</a>
+    <a href="tienda.html" style="font-family:'Barlow Condensed',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666666;text-decoration:none;padding:18px 20px;border-bottom:1px solid #1E1E1E;display:block;">Tienda</a>
   </div>
 </header>
+<style>
+@media(max-width:768px){
+  #nav-desktop{display:none!important;}
+  #hamburger-btn{display:flex!important;}
+}
+@media(min-width:769px){
+  #mobile-menu{display:none!important;}
+}
+</style>
+<script>
+function toggleMenu(){
+  var m=document.getElementById('mobile-menu');
+  m.style.display=m.style.display==='flex'?'none':'flex';
+  m.style.flexDirection='column';
+}
+</script>
+
 <div class="page">
 
 
@@ -253,15 +272,6 @@
 
 
 
-<script>
-  const btn = document.getElementById('hamburger-btn');
-  const menu = document.getElementById('mobile-menu');
-  if (btn && menu) {
-    btn.addEventListener('click', () => {
-      btn.classList.toggle('open');
-      menu.classList.toggle('open');
-    });
-  }
-</script>
+
 </body>
 </html>
