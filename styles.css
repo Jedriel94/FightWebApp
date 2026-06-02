@@ -4,12 +4,12 @@
 a { color: inherit; text-decoration: none; }
 
 :root {
-  --red: #E8001D;
-  --dark: #0A0A0A;
-  --mid: #141414;
-  --border: #1E1E1E;
-  --muted: #666;
-  --light: #F0F0F0;
+  --red: #FF0A2A;
+  --dark: #0D0F14;
+  --mid: #161A22;
+  --border: #232830;
+  --muted: #5A6478;
+  --light: #E8EAF0;
 }
 
 body {
