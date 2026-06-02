@@ -97,6 +97,39 @@
 
     .tab-content { display: none; }
     .tab-content.active { display: block; }
+
+    /* PANEL DESPLEGABLE */
+    .fight-panel { cursor: pointer; position: relative; }
+    .fight-panel::after { content: '+ VER STATS'; font-family: 'Barlow Condensed', sans-serif; font-size: 10px; letter-spacing: 2px; color: var(--muted); position: absolute; bottom: 10px; right: 16px; transition: color .2s; }
+    .fight-panel.open::after { content: '— CERRAR'; color: var(--red); }
+    .fight-panel:hover::after { color: white; }
+    .stats-drawer { display: none; border-top: 1px solid var(--border); background: #0f0f0f; }
+    .stats-drawer.open { display: block; }
+    .drawer-inner { padding: 20px 28px; }
+    .drawer-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0; }
+    .drawer-fighter-name { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 700; text-transform: uppercase; }
+    .drawer-fighter-name.red { color: #ff6b6b; }
+    .drawer-fighter-name.blue { color: #7ab3ff; text-align: right; }
+    .drawer-stat { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 10px 0; border-bottom: 1px solid #1a1a1a; }
+    .drawer-stat:last-child { border-bottom: none; }
+    .dval { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; }
+    .dval.r { color: #ff6b6b; }
+    .dval.b { color: #7ab3ff; text-align: right; }
+    .dlabel { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); text-align: center; }
+    .drawer-bar { display: flex; height: 4px; margin: 8px 0; border-radius: 2px; overflow: hidden; }
+    .drawer-bar-r { background: var(--red); border-radius: 2px 0 0 2px; }
+    .drawer-bar-b { background: #1a6ef5; border-radius: 0 2px 2px 0; }
+    .drawer-header { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #1a1a1a; }
+    .view-full { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--red); text-align: center; text-decoration: none; display: block; margin-top: 14px; }
+    .view-full:hover { color: white; }
+
+    @media(max-width:768px) {
+      .fight-panel::after { font-size: 9px; bottom: 8px; right: 12px; }
+      .drawer-inner { padding: 14px 16px; }
+      .dval { font-size: 13px; }
+      .dlabel { font-size: 9px; }
+    }
+
   </style>
 
   <style id="mobile-ep">
@@ -236,6 +269,192 @@ function toggleMenu(){
           </defs>
         </svg>
       </div>
+
+    <div class="stats-drawer" id="panel-3">
+      <div class="drawer-inner">
+        <div class="drawer-header">
+          <div class="drawer-fighter-name red">José Mendoza <span style="font-size:18px;">🇲🇽</span></div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);">Stats</div>
+          <div class="drawer-fighter-name blue">Luis Peralta <span style="font-size:18px;">🇲🇽</span></div>
+        </div>
+        <div class="drawer-stat">
+          <div class="dval r">5-0-0</div>
+          <div class="dlabel">Récord</div>
+          <div class="dval b">4-1-0</div>
+        </div>
+        <div class="drawer-stat">
+          <div class="dval r">68"</div>
+          <div class="dlabel">Alcance</div>
+          <div class="dval b">67"</div>
+        </div>
+        <div class="drawer-stat">
+          <div class="dval r">1.72m</div>
+          <div class="dlabel">Altura</div>
+          <div class="dval b">1.70m</div>
+        </div>
+        <div class="drawer-stat">
+          <div style="font-size:11px;color:#ff6b6b;font-family:'Barlow Condensed',sans-serif;">Instagram</div>
+          <div class="dlabel">Redes</div>
+          <div style="font-size:11px;color:#7ab3ff;font-family:'Barlow Condensed',sans-serif;text-align:right;">Instagram</div>
+        </div>
+        <a href="pelea.html" class="view-full">Ver stats completos →</a>
+      </div>
+
+    <div class="stats-drawer" id="panel-4">
+      <div class="drawer-inner">
+        <div class="drawer-header">
+          <div class="drawer-fighter-name red">Marco Salinas <span style="font-size:18px;">🇲🇽</span></div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);">Stats</div>
+          <div class="drawer-fighter-name blue">Héctor Ruiz <span style="font-size:18px;">🇲🇽</span></div>
+        </div>
+        <div class="drawer-stat">
+          <div class="dval r">3-1-0</div>
+          <div class="dlabel">Récord</div>
+          <div class="dval b">4-0-0</div>
+        </div>
+        <div class="drawer-stat">
+          <div class="dval r">71"</div>
+          <div class="dlabel">Alcance</div>
+          <div class="dval b">70"</div>
+        </div>
+        <div class="drawer-stat">
+          <div class="dval r">1.77m</div>
+          <div class="dlabel">Altura</div>
+          <div class="dval b">1.75m</div>
+        </div>
+        <div class="drawer-stat">
+          <div style="font-size:11px;color:#ff6b6b;font-family:'Barlow Condensed',sans-serif;">Instagram</div>
+          <div class="dlabel">Redes</div>
+          <div style="font-size:11px;color:#7ab3ff;font-family:'Barlow Condensed',sans-serif;text-align:right;">Instagram</div>
+        </div>
+        <a href="pelea.html" class="view-full">Ver stats completos →</a>
+      </div>
+
+    <div class="stats-drawer" id="panel-5">
+      <div class="drawer-inner">
+        <div class="drawer-header">
+          <div class="drawer-fighter-name red">Iván Castillo <span style="font-size:18px;">🇲🇽</span></div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);">Stats</div>
+          <div class="drawer-fighter-name blue">Omar Flores <span style="font-size:18px;">🇲🇽</span></div>
+        </div>
+        <div class="drawer-stat">
+          <div class="dval r">2-0-0</div>
+          <div class="dlabel">Récord</div>
+          <div class="dval b">1-1-0</div>
+        </div>
+        <div class="drawer-stat">
+          <div class="dval r">69"</div>
+          <div class="dlabel">Alcance</div>
+          <div class="dval b">68"</div>
+        </div>
+        <div class="drawer-stat">
+          <div class="dval r">1.73m</div>
+          <div class="dlabel">Altura</div>
+          <div class="dval b">1.71m</div>
+        </div>
+        <div class="drawer-stat">
+          <div style="font-size:11px;color:#ff6b6b;font-family:'Barlow Condensed',sans-serif;">Instagram</div>
+          <div class="dlabel">Redes</div>
+          <div style="font-size:11px;color:#7ab3ff;font-family:'Barlow Condensed',sans-serif;text-align:right;">Instagram</div>
+        </div>
+        <a href="pelea.html" class="view-full">Ver stats completos →</a>
+      </div>
+
+    <div class="stats-drawer" id="panel-6">
+      <div class="drawer-inner">
+        <div class="drawer-header">
+          <div class="drawer-fighter-name red">Ricardo Mora <span style="font-size:18px;">🇲🇽</span></div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);">Stats</div>
+          <div class="drawer-fighter-name blue">Pablo Vega <span style="font-size:18px;">🇲🇽</span></div>
+        </div>
+        <div class="drawer-stat">
+          <div class="dval r">1-0-0</div>
+          <div class="dlabel">Récord</div>
+          <div class="dval b">0-1-0</div>
+        </div>
+        <div class="drawer-stat">
+          <div class="dval r">67"</div>
+          <div class="dlabel">Alcance</div>
+          <div class="dval b">66"</div>
+        </div>
+        <div class="drawer-stat">
+          <div class="dval r">1.70m</div>
+          <div class="dlabel">Altura</div>
+          <div class="dval b">1.68m</div>
+        </div>
+        <div class="drawer-stat">
+          <div style="font-size:11px;color:#ff6b6b;font-family:'Barlow Condensed',sans-serif;">Instagram</div>
+          <div class="dlabel">Redes</div>
+          <div style="font-size:11px;color:#7ab3ff;font-family:'Barlow Condensed',sans-serif;text-align:right;">Instagram</div>
+        </div>
+        <a href="pelea.html" class="view-full">Ver stats completos →</a>
+      </div>
+
+    <div class="stats-drawer" id="panel-7">
+      <div class="drawer-inner">
+        <div class="drawer-header">
+          <div class="drawer-fighter-name red">Samuel Lara <span style="font-size:18px;">🇲🇽</span></div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);">Stats</div>
+          <div class="drawer-fighter-name blue">Ernesto Cruz <span style="font-size:18px;">🇲🇽</span></div>
+        </div>
+        <div class="drawer-stat">
+          <div class="dval r">0-0-0</div>
+          <div class="dlabel">Récord</div>
+          <div class="dval b">0-0-0</div>
+        </div>
+        <div class="drawer-stat">
+          <div class="dval r">68"</div>
+          <div class="dlabel">Alcance</div>
+          <div class="dval b">67"</div>
+        </div>
+        <div class="drawer-stat">
+          <div class="dval r">1.72m</div>
+          <div class="dlabel">Altura</div>
+          <div class="dval b">1.70m</div>
+        </div>
+        <div class="drawer-stat">
+          <div style="font-size:11px;color:#ff6b6b;font-family:'Barlow Condensed',sans-serif;">Instagram</div>
+          <div class="dlabel">Redes</div>
+          <div style="font-size:11px;color:#7ab3ff;font-family:'Barlow Condensed',sans-serif;text-align:right;">Instagram</div>
+        </div>
+        <a href="pelea.html" class="view-full">Ver stats completos →</a>
+      </div>
+
+    <div class="stats-drawer" id="panel-8">
+      <div class="drawer-inner">
+        <div class="drawer-header">
+          <div class="drawer-fighter-name red">Tomás Ríos <span style="font-size:18px;">🇲🇽</span></div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);">Stats</div>
+          <div class="drawer-fighter-name blue">Gerardo Niño <span style="font-size:18px;">🇲🇽</span></div>
+        </div>
+        <div class="drawer-stat">
+          <div class="dval r">1-1-0</div>
+          <div class="dlabel">Récord</div>
+          <div class="dval b">2-0-0</div>
+        </div>
+        <div class="drawer-stat">
+          <div class="dval r">70"</div>
+          <div class="dlabel">Alcance</div>
+          <div class="dval b">69"</div>
+        </div>
+        <div class="drawer-stat">
+          <div class="dval r">1.75m</div>
+          <div class="dlabel">Altura</div>
+          <div class="dval b">1.73m</div>
+        </div>
+        <div class="drawer-stat">
+          <div style="font-size:11px;color:#ff6b6b;font-family:'Barlow Condensed',sans-serif;">Instagram</div>
+          <div class="dlabel">Redes</div>
+          <div style="font-size:11px;color:#7ab3ff;font-family:'Barlow Condensed',sans-serif;text-align:right;">Instagram</div>
+        </div>
+        <a href="pelea.html" class="view-full">Ver stats completos →</a>
+      </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
     </div>
     <div class="event-hero-overlay"></div>
     <div class="event-hero-content">
@@ -289,7 +508,7 @@ function toggleMenu(){
 
     <div class="section-label">Pelea Estelar</div>
 
-    <a href="pelea.html" style="text-decoration:none;color:inherit;display:block;"><div class="fight-featured" onclick="window.location='pelea.html'" style="cursor:pointer;">
+    <a href="pelea.html" style="text-decoration:none;color:inherit;display:block;"><div class="fight-featured">
       <div class="fight-featured-inner">
         <div class="ff-badge">⭐ Main Event · 5 Rounds · Título en juego</div>
         <div class="ff-matchup">
@@ -320,7 +539,7 @@ function toggleMenu(){
 
     <div class="section-label" style="margin-top:20px">Co-Estelar</div>
 
-    <a href="pelea.html" style="text-decoration:none;color:inherit;display:block;"><div class="fight-co" onclick="window.location='pelea.html'" style="cursor:pointer;" style="cursor:pointer;">
+    <a href="pelea.html" style="text-decoration:none;color:inherit;display:block;"><div class="fight-co">
       <div class="fight-co-inner">
         <div class="fc-badge">Co-Main Event · 3 Rounds · Peso Ligero 155 lbs</div>
         <div class="fc-matchup">
@@ -346,7 +565,7 @@ function toggleMenu(){
 
     <div class="section-label" style="margin-top:20px">Cartelera Principal</div>
 
-    <a href="pelea.html" style="text-decoration:none;color:inherit;display:block;"><div class="fight-row" onclick="window.location='pelea.html'" style="cursor:pointer;" style="cursor:pointer;transition:border-color .2s;">
+    <a href="pelea.html" style="text-decoration:none;color:inherit;display:block;"><div class="fight-row" style="cursor:pointer;transition:border-color .2s;">
       <div class="fight-row-inner">
         <div class="fr-fighter">
           <div class="fr-av">JM</div>
@@ -367,7 +586,7 @@ function toggleMenu(){
       </div>
     </div>
 
-    <a href="pelea.html" style="text-decoration:none;color:inherit;display:block;"><div class="fight-row" onclick="window.location='pelea.html'" style="cursor:pointer;" style="cursor:pointer;transition:border-color .2s;">
+    <a href="pelea.html" style="text-decoration:none;color:inherit;display:block;"><div class="fight-row" style="cursor:pointer;transition:border-color .2s;">
       <div class="fight-row-inner">
         <div class="fr-fighter">
           <div class="fr-av">MS</div>
@@ -388,7 +607,7 @@ function toggleMenu(){
       </div>
     </div>
 
-    <a href="pelea.html" style="text-decoration:none;color:inherit;display:block;"><div class="fight-row" onclick="window.location='pelea.html'" style="cursor:pointer;" style="cursor:pointer;transition:border-color .2s;">
+    <a href="pelea.html" style="text-decoration:none;color:inherit;display:block;"><div class="fight-row" style="cursor:pointer;transition:border-color .2s;">
       <div class="fight-row-inner">
         <div class="fr-fighter">
           <div class="fr-av">IC</div>
@@ -416,7 +635,7 @@ function toggleMenu(){
 
     <div class="section-label">Preliminares</div>
 
-    <a href="pelea.html" style="text-decoration:none;color:inherit;display:block;"><div class="prelim-row" onclick="window.location='pelea.html'" style="cursor:pointer;" style="cursor:pointer;">
+    <a href="pelea.html" style="text-decoration:none;color:inherit;display:block;"><div class="prelim-row">
       <div class="prelim-inner">
         <div class="pr-fighter">
           <div class="pr-av">RM</div>
@@ -437,7 +656,7 @@ function toggleMenu(){
       </div>
     </div>
 
-    <a href="pelea.html" style="text-decoration:none;color:inherit;display:block;"><div class="prelim-row" onclick="window.location='pelea.html'" style="cursor:pointer;" style="cursor:pointer;">
+    <a href="pelea.html" style="text-decoration:none;color:inherit;display:block;"><div class="prelim-row">
       <div class="prelim-inner">
         <div class="pr-fighter">
           <div class="pr-av">SL</div>
@@ -458,7 +677,7 @@ function toggleMenu(){
       </div>
     </div>
 
-    <a href="pelea.html" style="text-decoration:none;color:inherit;display:block;"><div class="prelim-row" onclick="window.location='pelea.html'" style="cursor:pointer;" style="cursor:pointer;">
+    <a href="pelea.html" style="text-decoration:none;color:inherit;display:block;"><div class="prelim-row">
       <div class="prelim-inner">
         <div class="pr-fighter">
           <div class="pr-av">TR</div>
@@ -503,6 +722,24 @@ function toggleMenu(){
 
 
 
+
+
+<script>
+function togglePanel(id) {
+  var panel = document.getElementById('panel-' + id);
+  var btn = document.getElementById('fight-' + id);
+  if (!panel || !btn) return;
+  var isOpen = panel.classList.contains('open');
+  // Cerrar todos
+  document.querySelectorAll('.stats-drawer').forEach(function(d){ d.classList.remove('open'); });
+  document.querySelectorAll('.fight-panel').forEach(function(d){ d.classList.remove('open'); });
+  // Abrir el clickeado si estaba cerrado
+  if (!isOpen) {
+    panel.classList.add('open');
+    btn.classList.add('open');
+  }
+}
+</script>
 
 </body>
 </html>
