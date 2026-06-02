@@ -83,6 +83,40 @@ nav {
   .nav-links { display: none; }
   .hamburger { display: flex; }
 }
+.logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 2px;
+  color: white;
+  text-decoration: none;
+}
+.logo span { color: var(--red); }
+
+.nav-links { display: flex; gap: 24px; }
+
+.nav-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color .2s;
+}
+.nav-links a:hover, .nav-links a.active { color: white; }
+
+.back {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  text-decoration: none;
+}
+.back:hover { color: white; }
+
 
 
 /* SECTION LABEL */
