@@ -10,13 +10,11 @@
     .event-hero { position: relative; min-height: 380px; display: flex; align-items: flex-end; overflow: hidden; border: 1px solid var(--border); margin: 24px 0 0; }
     .event-hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #0a0a0a 0%, #1a0005 60%, #0a0a0a 100%); }
     .event-hero-pattern { position: absolute; inset: 0; background: repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(232,0,29,0.03) 40px,rgba(232,0,29,0.03) 80px); }
-    .event-hero-fighters { position: absolute; right: 0; top: 0; bottom: 0; width: 55%; display: flex; align-items: center; justify-content: center; gap: 0; }
-    .hero-fighter-wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-    .hero-fighter-wrap.left { margin-right: -20px; }
-    .hero-fighter-wrap.right { margin-left: -20px; }
-    .hero-av { width: 140px; height: 140px; border-radius: 50%; background: linear-gradient(135deg, #2a0008, #1a1a1a); border: 3px solid #2a2a2a; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: #333; }
-    .hero-av.red-corner { border-color: rgba(232,0,29,0.5); }
-    .hero-vs-center { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--red); z-index: 1; text-shadow: 0 0 30px rgba(232,0,29,0.3); }
+    .event-hero-fighters { position: absolute; right: 0; top: 0; bottom: 0; width: 58%; display: flex; align-items: flex-end; justify-content: center; gap: 0; }
+    .hero-fighter-wrap { display: flex; flex-direction: column; align-items: center; }
+    .hero-fighter-wrap.right { transform: scaleX(-1); }
+    .hero-silhouette { width: 190px; height: 300px; }
+    .hero-vs-center { font-family: 'Bebas Neue', sans-serif; font-size: 52px; color: var(--red); z-index: 3; text-shadow: 0 0 40px rgba(232,0,29,0.5); margin-bottom: 40px; position: relative; align-self: center; }
     .hero-fighter-name { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; text-transform: uppercase; text-align: center; }
     .hero-fighter-flag { font-size: 20px; }
     .event-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.95) 30%, rgba(0,0,0,0.2) 70%, transparent 100%); z-index: 1; }
@@ -120,15 +118,64 @@
     <div class="event-hero-pattern"></div>
     <div class="event-hero-fighters">
       <div class="hero-fighter-wrap left">
-        <div class="hero-av red-corner">CR</div>
-        <div class="hero-fighter-flag">🇲🇽</div>
-        <div class="hero-fighter-name">El Toro Reyes</div>
+        <svg class="hero-silhouette" viewBox="0 0 190 300" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sg1" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#2a2a2a"/>
+              <stop offset="100%" stop-color="#111111"/>
+            </linearGradient>
+          </defs>
+          <!-- cabeza -->
+          <ellipse cx="95" cy="38" rx="26" ry="32" fill="url(#sg1)"/>
+          <!-- cuello -->
+          <rect x="83" y="64" width="24" height="18" rx="4" fill="url(#sg1)"/>
+          <!-- hombros y torso -->
+          <path d="M30 82 Q50 70 83 78 L95 82 L107 78 Q140 70 160 82 L168 130 Q150 120 95 122 Q40 120 22 130 Z" fill="url(#sg1)"/>
+          <!-- torso inferior -->
+          <path d="M35 128 Q95 138 155 128 L150 195 Q130 200 95 200 Q60 200 40 195 Z" fill="url(#sg1)"/>
+          <!-- brazo izq -->
+          <path d="M30 82 Q10 100 8 145 Q12 155 24 150 Q30 130 45 115 L42 90 Z" fill="url(#sg1)"/>
+          <!-- brazo der -->
+          <path d="M160 82 Q180 100 182 145 Q178 155 166 150 Q160 130 145 115 L148 90 Z" fill="url(#sg1)"/>
+          <!-- pierna izq -->
+          <path d="M55 195 L48 260 Q50 275 62 275 Q70 275 72 260 L78 210 Z" fill="url(#sg1)"/>
+          <!-- pierna der -->
+          <path d="M135 195 L142 260 Q140 275 128 275 Q120 275 118 260 L112 210 Z" fill="url(#sg1)"/>
+          <!-- fade bottom -->
+          <rect x="0" y="240" width="190" height="60" fill="url(#fade1)"/>
+          <defs>
+            <linearGradient id="fade1" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#0a0a0a" stop-opacity="0"/>
+              <stop offset="100%" stop-color="#0a0a0a" stop-opacity="1"/>
+            </linearGradient>
+          </defs>
+        </svg>
       </div>
       <div class="hero-vs-center">VS</div>
       <div class="hero-fighter-wrap right">
-        <div class="hero-av">DT</div>
-        <div class="hero-fighter-flag">🇲🇽</div>
-        <div class="hero-fighter-name">La Cobra Torres</div>
+        <svg class="hero-silhouette" viewBox="0 0 190 300" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sg2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#222222"/>
+              <stop offset="100%" stop-color="#0d0d0d"/>
+            </linearGradient>
+          </defs>
+          <ellipse cx="95" cy="38" rx="26" ry="32" fill="url(#sg2)"/>
+          <rect x="83" y="64" width="24" height="18" rx="4" fill="url(#sg2)"/>
+          <path d="M30 82 Q50 70 83 78 L95 82 L107 78 Q140 70 160 82 L168 130 Q150 120 95 122 Q40 120 22 130 Z" fill="url(#sg2)"/>
+          <path d="M35 128 Q95 138 155 128 L150 195 Q130 200 95 200 Q60 200 40 195 Z" fill="url(#sg2)"/>
+          <path d="M30 82 Q10 100 8 145 Q12 155 24 150 Q30 130 45 115 L42 90 Z" fill="url(#sg2)"/>
+          <path d="M160 82 Q180 100 182 145 Q178 155 166 150 Q160 130 145 115 L148 90 Z" fill="url(#sg2)"/>
+          <path d="M55 195 L48 260 Q50 275 62 275 Q70 275 72 260 L78 210 Z" fill="url(#sg2)"/>
+          <path d="M135 195 L142 260 Q140 275 128 275 Q120 275 118 260 L112 210 Z" fill="url(#sg2)"/>
+          <rect x="0" y="240" width="190" height="60" fill="url(#fade2)"/>
+          <defs>
+            <linearGradient id="fade2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#0a0a0a" stop-opacity="0"/>
+              <stop offset="100%" stop-color="#0a0a0a" stop-opacity="1"/>
+            </linearGradient>
+          </defs>
+        </svg>
       </div>
     </div>
     <div class="event-hero-overlay"></div>
