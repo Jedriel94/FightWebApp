@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reyes vs Torres | FightMFL</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* HERO PELEA */
+    .fight-hero {
+      position: relative;
+      min-height: 420px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      margin: 24px 0 0;
+      border: 1px solid var(--border);
+    }
+    .fh-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #0a0a0a, #1a0005); }
+    .fh-pattern { position: absolute; inset: 0; background: repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(232,0,29,0.02) 40px,rgba(232,0,29,0.02) 80px); }
+
+    /* SILUETAS */
+    .fh-fighters { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: space-between; }
+    .fh-left { display: flex; align-items: flex-end; padding-left: 40px; }
+    .fh-right { display: flex; align-items: flex-end; padding-right: 40px; transform: scaleX(-1); }
+    .fh-silhouette { width: 200px; height: 340px; opacity: 0.7; }
+
+    /* OVERLAY */
+    .fh-overlay { position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(232,0,29,0.08) 0%, transparent 60%), linear-gradient(to bottom, transparent 30%, rgba(10,10,10,0.6) 100%); }
+
+    /* CONTENIDO CENTRO */
+    .fh-content { position: relative; z-index: 2; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 0 0 36px; }
+    .fh-event { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .fh-weight { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
+    .fh-names { display: flex; align-items: center; gap: 20px; }
+    .fh-name { font-family: 'Bebas Neue', sans-serif; font-size: 42px; letter-spacing: 1px; line-height: 1; }
+    .fh-vs { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--red); }
+    .fh-rounds { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+
+    /* LÍNEAS DE COLOR CORNER */
+    .corner-line { position: absolute; top: 0; height: 3px; width: 48%; }
+    .corner-line.red { left: 0; background: var(--red); }
+    .corner-line.blue { right: 0; background: #1a6ef5; }
+
+    /* TABS */
+    .fight-tabs { display: flex; border-bottom: 1px solid var(--border); margin: 0 0 0; }
+    .fight-tab { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; padding: 14px 24px; cursor: pointer; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all .2s; }
+    .fight-tab.active { color: white; border-bottom-color: var(--red); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* COMPARATIVA */
+    .comparison { background: var(--mid); border: 1px solid var(--border); margin-top: 20px; }
+    .comp-header { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 20px 28px; border-bottom: 1px solid var(--border); background: linear-gradient(135deg, rgba(232,0,29,0.05), transparent); }
+    .comp-fighter-name { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 1px; }
+    .comp-fighter-name.right { text-align: right; color: #7ab3ff; }
+    .comp-fighter-name.left { color: #ff6b6b; }
+    .comp-center-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); text-align: center; }
+
+    /* FILAS STATS */
+    .stat-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 16px 28px; border-bottom: 1px solid var(--border); transition: background .2s; }
+    .stat-row:last-child { border-bottom: none; }
+    .stat-row:hover { background: #171717; }
+    .stat-val { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; }
+    .stat-val.red { color: #ff6b6b; }
+    .stat-val.blue { color: #7ab3ff; text-align: right; }
+    .stat-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); text-align: center; min-width: 120px; }
+
+    /* BAR COMPARATIVA */
+    .stat-bar-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; padding: 14px 28px; border-bottom: 1px solid var(--border); }
+    .bar-val-left { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; color: #ff6b6b; text-align: right; min-width: 60px; }
+    .bar-val-right { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; color: #7ab3ff; min-width: 60px; }
+    .bar-wrap { flex: 1; display: flex; gap: 2px; height: 6px; }
+    .bar-left { height: 6px; background: var(--red); border-radius: 3px 0 0 3px; transition: width .5s; }
+    .bar-right { height: 6px; background: #1a6ef5; border-radius: 0 3px 3px 0; transition: width .5s; }
+    .stat-bar-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); text-align: center; margin-bottom: 6px; }
+
+    /* HISTORIAL */
+    .history-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 20px; }
+    .history-card { background: var(--mid); border: 1px solid var(--border); padding: 20px; }
+    .hc-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+    .hc-av { width: 48px; height: 48px; border-radius: 50%; background: #1a1a1a; border: 2px solid rgba(232,0,29,0.3); display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 16px; color: #666; }
+    .hc-av.blue { border-color: rgba(26,110,245,0.3); }
+    .hc-name { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; text-transform: uppercase; }
+    .hc-record { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .hc-fight { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .hc-fight:last-child { border-bottom: none; }
+    .hc-result { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; }
+    .hc-result.w { color: #4CAF50; }
+    .hc-result.l { color: var(--red); }
+    .hc-opponent { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; text-transform: uppercase; color: #aaa; }
+    .hc-method { font-size: 11px; color: var(--muted); text-align: right; }
+
+    /* REDES */
+    .social-row { display: flex; justify-content: center; gap: 12px; margin-top: 6px; }
+    .social-btn { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); border: 1px solid var(--border); padding: 5px 14px; text-decoration: none; transition: all .2s; }
+    .social-btn:hover { border-color: #555; color: white; }
+
+    @media(max-width:768px) {
+      .fh-name { font-size: 26px; }
+      .fh-silhouette { width: 120px; height: 200px; }
+      .comp-header { padding: 14px 16px; }
+      .comp-fighter-name { font-size: 18px; }
+      .stat-row { padding: 12px 16px; gap: 8px; }
+      .stat-val { font-size: 16px; }
+      .stat-label { font-size: 10px; min-width: 80px; }
+      .history-grid { grid-template-columns: 1fr; }
+      .stat-bar-row { padding: 12px 16px; }
+    }
+  </style>
+</head>
+<body>
+<header style="background:#0A0A0A;border-bottom:1px solid #1E1E1E;position:sticky;top:0;z-index:200;">
+  <div style="max-width:900px;margin:0 auto;padding:0 16px;">
+    <nav style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;">
+      <a href="index.html" style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:white;text-decoration:none;">FIGHT<span style="color:#E8001D;">MFL</span></a>
+      <div id="nav-desktop" style="display:flex;gap:24px;">
+        <a href="index.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">Inicio</a>
+        <a href="eventos.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#fff;text-decoration:none;">Eventos</a>
+        <a href="noticias.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">Noticias</a>
+        <a href="tienda.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">Tienda</a>
+      </div>
+      <button id="hamburger-btn" style="display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:transparent;border:none;" onclick="toggleMenu()">
+        <span style="width:24px;height:2px;background:white;display:block;"></span>
+        <span style="width:24px;height:2px;background:white;display:block;"></span>
+        <span style="width:24px;height:2px;background:white;display:block;"></span>
+      </button>
+    </nav>
+  </div>
+  <div id="mobile-menu" style="display:none;flex-direction:column;background:#0d0d0d;border-top:1px solid #1E1E1E;">
+    <a href="index.html" style="font-family:'Barlow Condensed',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666;text-decoration:none;padding:18px 20px;border-bottom:1px solid #1E1E1E;display:block;">Inicio</a>
+    <a href="eventos.html" style="font-family:'Barlow Condensed',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#fff;text-decoration:none;padding:18px 20px;border-bottom:1px solid #1E1E1E;display:block;border-left:3px solid #E8001D;">Eventos</a>
+    <a href="noticias.html" style="font-family:'Barlow Condensed',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666;text-decoration:none;padding:18px 20px;border-bottom:1px solid #1E1E1E;display:block;">Noticias</a>
+    <a href="tienda.html" style="font-family:'Barlow Condensed',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666;text-decoration:none;padding:18px 20px;display:block;">Tienda</a>
+  </div>
+</header>
+
+<div class="page">
+
+  <!-- HERO -->
+  <div class="fight-hero">
+    <div class="fh-bg"></div>
+    <div class="fh-pattern"></div>
+    <div class="corner-line red"></div>
+    <div class="corner-line blue"></div>
+
+    <div class="fh-fighters">
+      <div class="fh-left">
+        <svg class="fh-silhouette" viewBox="0 0 200 340" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="s1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ff4444" stop-opacity="0.3"/><stop offset="100%" stop-color="#1a1a1a" stop-opacity="0.1"/></linearGradient></defs>
+          <ellipse cx="100" cy="42" rx="28" ry="34" fill="url(#s1)"/>
+          <rect x="88" y="72" width="24" height="20" rx="4" fill="url(#s1)"/>
+          <path d="M32 92 Q55 78 88 86 L100 92 L112 86 Q145 78 168 92 L176 148 Q155 136 100 140 Q45 136 24 148 Z" fill="url(#s1)"/>
+          <path d="M36 144 Q100 156 164 144 L158 220 Q132 228 100 228 Q68 228 42 220 Z" fill="url(#s1)"/>
+          <path d="M32 92 Q10 112 8 164 Q14 178 32 172 Q40 148 58 128 L54 100 Z" fill="url(#s1)"/>
+          <path d="M168 92 Q190 112 192 164 Q186 178 168 172 Q160 148 142 128 L146 100 Z" fill="url(#s1)"/>
+          <path d="M56 220 L48 300 Q50 316 64 316 Q76 316 78 300 L86 232 Z" fill="url(#s1)"/>
+          <path d="M144 220 L152 300 Q150 316 136 316 Q124 316 122 300 L114 232 Z" fill="url(#s1)"/>
+          <rect x="0" y="280" width="200" height="60" fill="url(#fade1)"/>
+          <defs><linearGradient id="fade1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0a0a0a" stop-opacity="0"/><stop offset="100%" stop-color="#0a0a0a" stop-opacity="1"/></linearGradient></defs>
+        </svg>
+      </div>
+      <div class="fh-right">
+        <svg class="fh-silhouette" viewBox="0 0 200 340" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="s2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4488ff" stop-opacity="0.3"/><stop offset="100%" stop-color="#1a1a1a" stop-opacity="0.1"/></linearGradient></defs>
+          <ellipse cx="100" cy="42" rx="28" ry="34" fill="url(#s2)"/>
+          <rect x="88" y="72" width="24" height="20" rx="4" fill="url(#s2)"/>
+          <path d="M32 92 Q55 78 88 86 L100 92 L112 86 Q145 78 168 92 L176 148 Q155 136 100 140 Q45 136 24 148 Z" fill="url(#s2)"/>
+          <path d="M36 144 Q100 156 164 144 L158 220 Q132 228 100 228 Q68 228 42 220 Z" fill="url(#s2)"/>
+          <path d="M32 92 Q10 112 8 164 Q14 178 32 172 Q40 148 58 128 L54 100 Z" fill="url(#s2)"/>
+          <path d="M168 92 Q190 112 192 164 Q186 178 168 172 Q160 148 142 128 L146 100 Z" fill="url(#s2)"/>
+          <path d="M56 220 L48 300 Q50 316 64 316 Q76 316 78 300 L86 232 Z" fill="url(#s2)"/>
+          <path d="M144 220 L152 300 Q150 316 136 316 Q124 316 122 300 L114 232 Z" fill="url(#s2)"/>
+          <rect x="0" y="280" width="200" height="60" fill="url(#fade2)"/>
+          <defs><linearGradient id="fade2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0a0a0a" stop-opacity="0"/><stop offset="100%" stop-color="#0a0a0a" stop-opacity="1"/></linearGradient></defs>
+        </svg>
+      </div>
+    </div>
+
+    <div class="fh-overlay"></div>
+    <div class="fh-content">
+      <div class="fh-event">MFL 8 · Pelea Estelar · 5 Rounds</div>
+      <div class="fh-weight">Peso Welter · 170 lbs</div>
+      <div class="fh-names">
+        <div class="fh-name" style="color:#ff6b6b">Reyes</div>
+        <div class="fh-vs">VS</div>
+        <div class="fh-name" style="color:#7ab3ff">Torres</div>
+      </div>
+      <div class="fh-rounds">14 Jun 2026 · Arena Ciudad de México</div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="fight-tabs">
+    <div class="fight-tab active" onclick="switchTab('stats')">Stats Matchup</div>
+    <div class="fight-tab" onclick="switchTab('historial')">Historial</div>
+  </div>
+
+  <!-- STATS TAB -->
+  <div class="tab-content active" id="tab-stats">
+    <div class="comparison">
+      <div class="comp-header">
+        <div>
+          <div class="comp-fighter-name left">Carlos "El Toro" Reyes</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:4px;font-family:'Barlow Condensed',sans-serif;letter-spacing:1px;text-transform:uppercase;">🇲🇽 México · #1 Ranking</div>
+          <div class="social-row" style="justify-content:flex-start;margin-top:8px;">
+            <a href="#" class="social-btn">Instagram</a>
+            <a href="#" class="social-btn">TikTok</a>
+          </div>
+        </div>
+        <div class="comp-center-label">Estadísticas</div>
+        <div style="text-align:right">
+          <div class="comp-fighter-name right">Diego "La Cobra" Torres</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:4px;font-family:'Barlow Condensed',sans-serif;letter-spacing:1px;text-transform:uppercase;text-align:right;">🇲🇽 México · #3 Ranking</div>
+          <div class="social-row" style="justify-content:flex-end;margin-top:8px;">
+            <a href="#" class="social-btn">Instagram</a>
+            <a href="#" class="social-btn">TikTok</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-val red">12-3-0</div>
+        <div class="stat-label">Récord</div>
+        <div class="stat-val blue">9-2-0</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-val red">28</div>
+        <div class="stat-label">Edad</div>
+        <div class="stat-val blue">26</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-val red">1.78 m</div>
+        <div class="stat-label">Altura</div>
+        <div class="stat-val blue">1.75 m</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-val red">74"</div>
+        <div class="stat-label">Alcance</div>
+        <div class="stat-val blue">72"</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-val red">170 lbs</div>
+        <div class="stat-label">Peso</div>
+        <div class="stat-val blue">169 lbs</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-val red">Ortodoxo</div>
+        <div class="stat-label">Postura</div>
+        <div class="stat-val blue">Zurdo</div>
+      </div>
+    </div>
+
+    <!-- BARRAS STATS -->
+    <div class="comparison" style="margin-top:8px;">
+      <div style="padding:16px 28px 8px;border-bottom:1px solid var(--border);">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);">Stats de Pelea</div>
+      </div>
+
+      <div style="padding:16px 28px;">
+        <div class="stat-bar-label">Victorias por KO/TKO</div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="bar-val-left">7</div>
+          <div style="flex:1;display:flex;height:8px;border-radius:4px;overflow:hidden;gap:2px;">
+            <div style="background:var(--red);width:58%;border-radius:4px 0 0 4px;"></div>
+            <div style="background:#1a6ef5;width:42%;border-radius:0 4px 4px 0;"></div>
+          </div>
+          <div class="bar-val-right">5</div>
+        </div>
+      </div>
+
+      <div style="padding:0 28px 16px;border-bottom:1px solid var(--border);">
+        <div class="stat-bar-label">Victorias por Sumisión</div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="bar-val-left">3</div>
+          <div style="flex:1;display:flex;height:8px;border-radius:4px;overflow:hidden;gap:2px;">
+            <div style="background:var(--red);width:43%;border-radius:4px 0 0 4px;"></div>
+            <div style="background:#1a6ef5;width:57%;border-radius:0 4px 4px 0;"></div>
+          </div>
+          <div class="bar-val-right">4</div>
+        </div>
+      </div>
+
+      <div style="padding:16px 28px;border-bottom:1px solid var(--border);">
+        <div class="stat-bar-label">Victorias por Decisión</div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="bar-val-left">2</div>
+          <div style="flex:1;display:flex;height:8px;border-radius:4px;overflow:hidden;gap:2px;">
+            <div style="background:var(--red);width:50%;border-radius:4px 0 0 4px;"></div>
+            <div style="background:#1a6ef5;width:50%;border-radius:0 4px 4px 0;"></div>
+          </div>
+          <div class="bar-val-right">0</div>
+        </div>
+      </div>
+
+      <div style="padding:16px 28px;">
+        <div class="stat-bar-label">Racha Actual</div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="bar-val-left" style="font-size:14px;">3 Victorias</div>
+          <div style="flex:1;text-align:center;font-family:'Barlow Condensed',sans-serif;font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;">Racha</div>
+          <div class="bar-val-right" style="font-size:14px;">2 Victorias</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HISTORIAL TAB -->
+  <div class="tab-content" id="tab-historial">
+    <div class="history-grid">
+
+      <div class="history-card">
+        <div class="hc-header">
+          <div class="hc-av">CR</div>
+          <div>
+            <div class="hc-name" style="color:#ff6b6b;">Carlos "El Toro" Reyes</div>
+            <div class="hc-record">🇲🇽 · 12-3-0 · Ranking #1</div>
+          </div>
+        </div>
+        <div class="hc-fight">
+          <div><div class="hc-result w">W</div><div class="hc-opponent">vs. Luis Méndez</div></div>
+          <div class="hc-method">TKO · R1 · MFL 6</div>
+        </div>
+        <div class="hc-fight">
+          <div><div class="hc-result w">W</div><div class="hc-opponent">vs. Pedro Soto</div></div>
+          <div class="hc-method">SUB · R2 · MFL 5</div>
+        </div>
+        <div class="hc-fight">
+          <div><div class="hc-result w">W</div><div class="hc-opponent">vs. Ramón Cruz</div></div>
+          <div class="hc-method">DEC · R3 · MFL 4</div>
+        </div>
+        <div class="hc-fight">
+          <div><div class="hc-result l">L</div><div class="hc-opponent">vs. Jorge Lima</div></div>
+          <div class="hc-method">KO · R2 · MFL 3</div>
+        </div>
+        <div class="hc-fight">
+          <div><div class="hc-result w">W</div><div class="hc-opponent">vs. Iván Ruiz</div></div>
+          <div class="hc-method">TKO · R1 · MFL 2</div>
+        </div>
+      </div>
+
+      <div class="history-card">
+        <div class="hc-header">
+          <div class="hc-av blue">DT</div>
+          <div>
+            <div class="hc-name" style="color:#7ab3ff;">Diego "La Cobra" Torres</div>
+            <div class="hc-record">🇲🇽 · 9-2-0 · Ranking #3</div>
+          </div>
+        </div>
+        <div class="hc-fight">
+          <div><div class="hc-result w">W</div><div class="hc-opponent">vs. Marco Vega</div></div>
+          <div class="hc-method">SUB · R1 · MFL 6</div>
+        </div>
+        <div class="hc-fight">
+          <div><div class="hc-result w">W</div><div class="hc-opponent">vs. Sergio Lara</div></div>
+          <div class="hc-method">TKO · R3 · MFL 5</div>
+        </div>
+        <div class="hc-fight">
+          <div><div class="hc-result l">L</div><div class="hc-opponent">vs. Andrés Villanueva</div></div>
+          <div class="hc-method">DEC · R3 · MFL 4</div>
+        </div>
+        <div class="hc-fight">
+          <div><div class="hc-result w">W</div><div class="hc-opponent">vs. Felipe Mora</div></div>
+          <div class="hc-method">KO · R2 · MFL 3</div>
+        </div>
+        <div class="hc-fight">
+          <div><div class="hc-result w">W</div><div class="hc-opponent">vs. César Niño</div></div>
+          <div class="hc-method">TKO · R1 · MFL 2</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <a class="footer-logo" href="index.html">FIGHT<span>MFL</span></a>
+    <div class="footer-links">
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
+      <a href="#">Contacto</a>
+    </div>
+    <div class="footer-copy">© 2026 FightMFL</div>
+  </footer>
+
+</div>
+
+<style>
+@media(max-width:768px){
+  #nav-desktop{display:none!important;}
+  #hamburger-btn{display:flex!important;}
+}
+@media(min-width:769px){
+  #mobile-menu{display:none!important;}
+}
+</style>
+<script>
+function toggleMenu(){
+  var m=document.getElementById('mobile-menu');
+  m.style.display=m.style.display==='flex'?'none':'flex';
+  m.style.flexDirection='column';
+}
+function switchTab(tab){
+  document.querySelectorAll('.fight-tab').forEach((t,i)=>t.classList.toggle('active',(tab==='stats'&&i===0)||(tab==='historial'&&i===1)));
+  document.getElementById('tab-stats').classList.toggle('active',tab==='stats');
+  document.getElementById('tab-historial').classList.toggle('active',tab==='historial');
+}
+</script>
+</body>
+</html>
