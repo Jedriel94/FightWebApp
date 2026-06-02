@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap');
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
+a { color: inherit; text-decoration: none; }
 
 :root {
   --red: #E8001D;
@@ -25,7 +26,7 @@ body {
 }
 
 
-/* HEADER */
+/* HEADER & NAV */
 header {
   background: var(--dark);
   border-bottom: 1px solid var(--border);
@@ -40,6 +41,26 @@ nav {
   justify-content: space-between;
   padding: 14px 0;
 }
+.logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 2px;
+  color: white !important;
+  text-decoration: none !important;
+}
+.logo span { color: var(--red) !important; }
+.nav-links { display: flex; gap: 24px; list-style: none; }
+.nav-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted) !important;
+  text-decoration: none !important;
+  cursor: pointer;
+  transition: color .2s;
+}
+.nav-links a:hover, .nav-links a.active { color: white !important; }
 .mobile-menu {
   display: none;
   flex-direction: column;
