@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tienda | FightMFL</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* BANNER */
+    .shop-banner { background: linear-gradient(135deg,#0A0A0A,#1a0005); border: 1px solid var(--border); border-left: 3px solid var(--red); margin: 24px 0 0; padding: 40px; display: flex; justify-content: space-between; align-items: center; }
+    .shop-banner-left {}
+    .shop-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 8px; }
+    .shop-title { font-family: 'Bebas Neue', sans-serif; font-size: 56px; line-height: 1; letter-spacing: 2px; }
+    .shop-title span { color: var(--red); }
+    .shop-sub { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 8px; }
+    .shop-badge { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; background: rgba(232,0,29,0.12); color: var(--red); border: 1px solid rgba(232,0,29,0.3); padding: 8px 20px; }
+
+    /* CATEGORIAS */
+    .categories { display: flex; gap: 6px; margin: 24px 0 20px; flex-wrap: wrap; }
+    .cat-btn { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; padding: 8px 20px; border: 1px solid var(--border); color: var(--muted); cursor: pointer; background: transparent; transition: all .2s; }
+    .cat-btn:hover, .cat-btn.active { background: var(--red); border-color: var(--red); color: white; }
+
+    /* PRODUCTO DESTACADO */
+    .featured-product { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--border); margin-bottom: 8px; background: var(--mid); }
+    .fp-img { background: linear-gradient(135deg,#1a0005,#111); min-height: 320px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; border-right: 1px solid var(--border); }
+    .fp-img-pattern { position: absolute; inset: 0; background: repeating-linear-gradient(45deg,transparent,transparent 30px,rgba(232,0,29,0.04) 30px,rgba(232,0,29,0.04) 60px); }
+    .fp-mockup { position: relative; z-index: 1; text-align: center; }
+    .fp-tshirt { width: 160px; height: 180px; background: #1a1a1a; border: 1px solid #2a2a2a; display: flex; align-items: center; justify-content: center; margin: 0 auto; }
+    .fp-tshirt-logo { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--red); letter-spacing: 2px; }
+    .fp-tshirt-sub { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 2px; color: #333; text-transform: uppercase; margin-top: 4px; }
+    .fp-new { position: absolute; top: 16px; left: 16px; background: var(--red); font-family: 'Barlow Condensed', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; z-index: 2; }
+    .fp-info { padding: 36px 40px; display: flex; flex-direction: column; justify-content: center; }
+    .fp-cat { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
+    .fp-name { font-family: 'Bebas Neue', sans-serif; font-size: 42px; line-height: 1; letter-spacing: 1px; margin-bottom: 8px; }
+    .fp-desc { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+    .fp-price { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: white; margin-bottom: 6px; }
+    .fp-price-sub { font-size: 12px; color: var(--muted); margin-bottom: 24px; }
+    .fp-sizes { display: flex; gap: 6px; margin-bottom: 20px; }
+    .size-btn { width: 40px; height: 40px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all .2s; }
+    .size-btn:hover, .size-btn.active { border-color: var(--red); color: var(--red); }
+    .fp-actions { display: flex; gap: 8px; }
+
+    /* GRID DE PRODUCTOS */
+    .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+
+    .product-card { background: var(--mid); border: 1px solid var(--border); cursor: pointer; transition: border-color .2s; }
+    .product-card:hover { border-color: #333; }
+    .pc-img { height: 200px; background: linear-gradient(135deg,#1a0005,#111); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .pc-img-pattern { position: absolute; inset: 0; background: repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(232,0,29,0.04) 20px,rgba(232,0,29,0.04) 40px); }
+    .pc-mockup { position: relative; z-index: 1; text-align: center; }
+    .pc-item { width: 90px; height: 100px; background: #1e1e1e; border: 1px solid #2a2a2a; display: flex; align-items: center; justify-content: center; margin: 0 auto; }
+    .pc-item-text { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--red); letter-spacing: 1px; }
+    .pc-badge { position: absolute; top: 10px; left: 10px; font-family: 'Barlow Condensed', sans-serif; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; padding: 3px 8px; z-index: 2; }
+    .pc-badge.new { background: var(--red); color: white; }
+    .pc-badge.sold { background: #333; color: var(--muted); }
+    .pc-info { padding: 14px 16px; }
+    .pc-cat { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .pc-name { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; text-transform: uppercase; line-height: 1.2; margin-bottom: 8px; }
+    .pc-price { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: white; }
+    .pc-price-mxn { font-size: 11px; color: var(--muted); margin-left: 4px; }
+    .pc-add { display: block; width: 100%; margin-top: 10px; background: transparent; border: 1px solid var(--border); color: var(--muted); font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; padding: 8px; cursor: pointer; transition: all .2s; }
+    .pc-add:hover { border-color: var(--red); color: var(--red); }
+
+    /* BANNER ENVIO */
+    .shipping-bar { background: var(--mid); border: 1px solid var(--border); padding: 16px 24px; display: flex; justify-content: space-around; align-items: center; margin: 24px 0; }
+    .ship-item { display: flex; align-items: center; gap: 10px; }
+    .ship-icon { font-size: 20px; }
+    .ship-text { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+    .ship-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .ship-divider { width: 1px; height: 40px; background: var(--border); }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <nav>
+    <a class="logo" href="index.html">FIGHT<span>MFL</span></a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="eventos.html">Eventos</a>
+      <a href="noticias.html">Noticias</a>
+      <a href="tienda.html" class="active">Tienda</a>
+    </div>
+  </nav>
+
+  <!-- BANNER -->
+  <div class="shop-banner">
+    <div class="shop-banner-left">
+      <div class="shop-tag">Merch Oficial</div>
+      <div class="shop-title">FIGHT<span>MFL</span></div>
+      <div class="shop-sub">Colección Oficial · Temporada 2026</div>
+    </div>
+    <div class="shop-badge">🔥 Nueva colección disponible</div>
+  </div>
+
+  <!-- ENVIO -->
+  <div class="shipping-bar">
+    <div class="ship-item">
+      <div class="ship-icon">🚚</div>
+      <div><div class="ship-text">Envío gratis</div><div class="ship-sub">En pedidos +$1,000 MXN</div></div>
+    </div>
+    <div class="ship-divider"></div>
+    <div class="ship-item">
+      <div class="ship-icon">📦</div>
+      <div><div class="ship-text">Entrega 3-5 días</div><div class="ship-sub">Todo México</div></div>
+    </div>
+    <div class="ship-divider"></div>
+    <div class="ship-item">
+      <div class="ship-icon">✅</div>
+      <div><div class="ship-text">100% Oficial</div><div class="ship-sub">Merch certificado MFL</div></div>
+    </div>
+    <div class="ship-divider"></div>
+    <div class="ship-item">
+      <div class="ship-icon">🔄</div>
+      <div><div class="ship-text">Devoluciones</div><div class="ship-sub">30 días sin preguntas</div></div>
+    </div>
+  </div>
+
+  <!-- CATEGORIAS -->
+  <div class="categories">
+    <button class="cat-btn active">Todo</button>
+    <button class="cat-btn">Playeras</button>
+    <button class="cat-btn">Hoodies</button>
+    <button class="cat-btn">Gorras</button>
+    <button class="cat-btn">Shorts</button>
+    <button class="cat-btn">Accesorios</button>
+  </div>
+
+  <!-- PRODUCTO DESTACADO -->
+  <div class="featured-product">
+    <div class="fp-img">
+      <div class="fp-img-pattern"></div>
+      <div class="fp-new">Nuevo</div>
+      <div class="fp-mockup">
+        <div class="fp-tshirt">
+          <div>
+            <div class="fp-tshirt-logo">MFL</div>
+            <div class="fp-tshirt-sub">Fight League</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fp-info">
+      <div class="fp-cat">⭐ Producto Destacado · Playera</div>
+      <div class="fp-name">Playera Oficial MFL 8</div>
+      <div class="fp-desc">Edición limitada del evento MFL 8. 100% algodón premium, corte unisex. Diseño exclusivo con el arte del evento Night of Champions.</div>
+      <div class="fp-price">$599 MXN</div>
+      <div class="fp-price-sub">Envío gratis incluido</div>
+      <div class="fp-sizes">
+        <div class="size-btn">XS</div>
+        <div class="size-btn active">S</div>
+        <div class="size-btn">M</div>
+        <div class="size-btn">L</div>
+        <div class="size-btn">XL</div>
+        <div class="size-btn">XXL</div>
+      </div>
+      <div class="fp-actions">
+        <button class="btn">Agregar al carrito</button>
+        <button class="btn-ghost">Ver detalle</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRID PRODUCTOS -->
+  <div class="section-label">Todos los productos</div>
+  <div class="products-grid">
+
+    <div class="product-card">
+      <div class="pc-img">
+        <div class="pc-img-pattern"></div>
+        <div class="pc-badge new">Nuevo</div>
+        <div class="pc-mockup"><div class="pc-item"><div class="pc-item-text">MFL</div></div></div>
+      </div>
+      <div class="pc-info">
+        <div class="pc-cat">Playera</div>
+        <div class="pc-name">Playera Logo MFL Classic</div>
+        <div class="pc-price">$499 <span class="pc-price-mxn">MXN</span></div>
+        <button class="pc-add">+ Agregar</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="pc-img">
+        <div class="pc-img-pattern"></div>
+        <div class="pc-badge new">Nuevo</div>
+        <div class="pc-mockup"><div class="pc-item" style="width:110px;height:60px"><div class="pc-item-text" style="font-size:14px">MFL CAP</div></div></div>
+      </div>
+      <div class="pc-info">
+        <div class="pc-cat">Gorra</div>
+        <div class="pc-name">Gorra Snapback MFL</div>
+        <div class="pc-price">$399 <span class="pc-price-mxn">MXN</span></div>
+        <button class="pc-add">+ Agregar</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="pc-img">
+        <div class="pc-img-pattern"></div>
+        <div class="pc-mockup"><div class="pc-item" style="width:110px;height:130px"><div class="pc-item-text">MFL</div></div></div>
+      </div>
+      <div class="pc-info">
+        <div class="pc-cat">Hoodie</div>
+        <div class="pc-name">Hoodie MFL Fight Team</div>
+        <div class="pc-price">$899 <span class="pc-price-mxn">MXN</span></div>
+        <button class="pc-add">+ Agregar</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="pc-img">
+        <div class="pc-img-pattern"></div>
+        <div class="pc-badge new">Nuevo</div>
+        <div class="pc-mockup"><div class="pc-item" style="width:100px;height:110px"><div class="pc-item-text" style="font-size:13px">MFL 8</div></div></div>
+      </div>
+      <div class="pc-info">
+        <div class="pc-cat">Playera</div>
+        <div class="pc-name">Playera Evento MFL 8</div>
+        <div class="pc-price">$549 <span class="pc-price-mxn">MXN</span></div>
+        <button class="pc-add">+ Agregar</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="pc-img">
+        <div class="pc-img-pattern"></div>
+        <div class="pc-mockup"><div class="pc-item" style="width:120px;height:80px"><div class="pc-item-text" style="font-size:13px">SHORTS</div></div></div>
+      </div>
+      <div class="pc-info">
+        <div class="pc-cat">Shorts</div>
+        <div class="pc-name">Shorts MMA MFL Pro</div>
+        <div class="pc-price">$699 <span class="pc-price-mxn">MXN</span></div>
+        <button class="pc-add">+ Agregar</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="pc-img">
+        <div class="pc-img-pattern"></div>
+        <div class="pc-badge sold">Agotado</div>
+        <div class="pc-mockup"><div class="pc-item" style="opacity:0.4"><div class="pc-item-text">MFL 7</div></div></div>
+      </div>
+      <div class="pc-info">
+        <div class="pc-cat">Edición Limitada</div>
+        <div class="pc-name">Playera MFL 7 Night of Champions</div>
+        <div class="pc-price" style="color:var(--muted)">$549 <span class="pc-price-mxn">MXN</span></div>
+        <button class="pc-add" style="opacity:0.4;cursor:not-allowed">Agotado</button>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <a class="footer-logo" href="index.html">FIGHT<span>MFL</span></a>
+    <div class="footer-links">
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
+      <a href="#">Contacto</a>
+    </div>
+    <div class="footer-copy">© 2026 FightMFL</div>
+  </footer>
+
+</div>
+
+<script>
+  document.querySelectorAll('.cat-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+  document.querySelectorAll('.size-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
