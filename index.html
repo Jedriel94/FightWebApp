@@ -32,16 +32,21 @@
     .wt-sm { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; text-align: center; display: block; }
 
     .results-wrap { background: var(--mid); border: 1px solid var(--border); }
-    .results-header { padding: 18px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-    .results-event { font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 700; text-transform: uppercase; }
-    .results-date { font-size: 12px; color: var(--muted); }
-    .result-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; padding: 14px 20px; border-bottom: 1px solid var(--border); }
+    .results-header { padding: 18px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, #1a0005, #141414); }
+    .results-event { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; }
+    .results-date { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+    .result-row { display: grid; grid-template-columns: 1fr 110px 1fr; align-items: center; gap: 16px; padding: 14px 24px; border-bottom: 1px solid var(--border); transition: background .2s; }
     .result-row:last-child { border-bottom: none; }
+    .result-row:hover { background: #171717; }
+    .r-av-w { width: 38px; height: 38px; border-radius: 50%; background: #1a1a1a; border: 2px solid rgba(232,0,29,0.3); display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 12px; color: #666; flex-shrink: 0; }
+    .r-av-l { width: 38px; height: 38px; border-radius: 50%; background: #1a1a1a; border: 2px solid #222; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 12px; color: #333; flex-shrink: 0; }
+    .r-win-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--red); }
     .r-winner { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; text-transform: uppercase; color: white; }
-    .r-loser { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; text-transform: uppercase; color: var(--muted); }
-    .r-method-c { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; color: var(--red); text-align: center; text-transform: uppercase; letter-spacing: 1px; }
-    .r-detail-c { font-size: 11px; color: var(--muted); text-align: center; margin-top: 2px; }
-    .w-badge { font-size: 10px; font-family: 'Barlow Condensed', sans-serif; letter-spacing: 1px; text-transform: uppercase; background: rgba(232,0,29,0.12); color: var(--red); border: 1px solid rgba(232,0,29,0.25); padding: 2px 8px; display: inline-block; margin-bottom: 4px; }
+    .r-loser { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; text-transform: uppercase; color: #333; text-align: right; }
+    .r-center { text-align: center; }
+    .r-method-c { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--red); letter-spacing: 1px; line-height: 1; }
+    .r-detail-c { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; color: var(--muted); text-align: center; margin-top: 3px; letter-spacing: 1px; }
+    .w-badge { display: none; }
 
     .news-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .news-feat { grid-column: span 2; background: var(--mid); border: 1px solid var(--border); border-left: 3px solid var(--red); padding: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center; }
@@ -189,19 +194,19 @@
       <div class="results-date">12 Abr 2026 · CDMX</div>
     </div>
     <div class="result-row">
-      <div><div class="w-badge">ganador</div><div class="r-winner">Carlos Reyes</div></div>
-      <div><div class="r-method-c">TKO</div><div class="r-detail-c">R2 · 3:42</div></div>
-      <div><div class="r-loser">Diego Torres</div></div>
+      <div style="display:flex;align-items:center;gap:12px"><div class="r-av-w">CR</div><div><div class="r-win-tag">Ganador</div><div class="r-winner">Carlos Reyes</div></div></div>
+      <div class="r-center"><div class="r-method-c">TKO</div><div class="r-detail-c">R2 · 3:42</div></div>
+      <div style="display:flex;align-items:center;gap:12px;justify-content:flex-end"><div class="r-loser">Diego Torres</div><div class="r-av-l">DT</div></div>
     </div>
     <div class="result-row">
-      <div><div class="w-badge">ganador</div><div class="r-winner">Andrés Villanueva</div></div>
-      <div><div class="r-method-c">Sumisión</div><div class="r-detail-c">R1 · 4:15</div></div>
-      <div><div class="r-loser">Ramón Gutiérrez</div></div>
+      <div style="display:flex;align-items:center;gap:12px"><div class="r-av-w">AV</div><div><div class="r-win-tag">Ganador</div><div class="r-winner">Andrés Villanueva</div></div></div>
+      <div class="r-center"><div class="r-method-c">SUB</div><div class="r-detail-c">R1 · 4:15</div></div>
+      <div style="display:flex;align-items:center;gap:12px;justify-content:flex-end"><div class="r-loser">Ramón Gutiérrez</div><div class="r-av-l">RG</div></div>
     </div>
     <div class="result-row">
-      <div><div class="w-badge">ganador</div><div class="r-winner">José Mendoza</div></div>
-      <div><div class="r-method-c">Decisión</div><div class="r-detail-c">R3 · Unánime</div></div>
-      <div><div class="r-loser">Luis Peralta</div></div>
+      <div style="display:flex;align-items:center;gap:12px"><div class="r-av-w">JM</div><div><div class="r-win-tag">Ganador</div><div class="r-winner">José Mendoza</div></div></div>
+      <div class="r-center"><div class="r-method-c">DEC</div><div class="r-detail-c">R3 · Unánime</div></div>
+      <div style="display:flex;align-items:center;gap:12px;justify-content:flex-end"><div class="r-loser">Luis Peralta</div><div class="r-av-l">LP</div></div>
     </div>
   </div>
 
