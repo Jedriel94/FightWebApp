@@ -287,7 +287,7 @@ function toggleMenu(){
 
   async function loadNoticias() {
     const { data } = await db.from('noticias')
-      .select('*').eq('publicado', true)
+      .select('*')
       .order('created_at', { ascending: false }).limit(9)
     if (!data || !data.length) return
     const grid = document.getElementById('admin-noticias-grid')
