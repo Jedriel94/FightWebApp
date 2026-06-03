@@ -286,6 +286,83 @@ function toggleMenu(){
   }
 
   // ── Render cartelera ─────────────────────────────────────
+  // Prioridad de tipo: estelar > coestelar > principal > preliminar
+  const TIPO_PRIO = { estelar: 0, coestelar: 1, principal: 2, preliminar: 3 }
+  function tipoBadge(tipo) {
+    return { estelar:'⭐ Pelea Estelar', coestelar:'🥈 Co-Estelar', principal:'📋 Cartelera Principal', preliminar:'🥊 Preliminar' }[tipo] || tipo
+  }
+
+  function cardGrande(p, label) {
+    const p1 = p.peleador1, p2 = p.peleador2
+    return `
+    <div class="fight-main">
+      <div class="fight-badge-main">${label} · ${p.rounds} Rounds · ${p.peso_lbs} lbs</div>
+      <div class="matchup">
+        <div class="fc">
+          ${avatarHtml(p1, 'lg', 'red')}
+          <div class="flag-lg">${p1?.pais||'🏳️'}</div>
+          <div class="fn-lg">${p1?.nombre||'TBA'}${p1?.apodo?`<br><span style="color:var(--red);font-style:italic;font-size:0.65em;font-family:Arial">"${p1.apodo}"</span>`:''}</div>
+          <div class="rec">${p1?`${p1.record_g}-${p1.record_p}-${p1.record_e}`:'—'}</div>
+        </div>
+        <div class="vs-col"><div class="vs-lg">VS</div><div class="wt">${p.rounds} rounds</div></div>
+        <div class="fc">
+          ${avatarHtml(p2, 'lg', '')}
+          <div class="flag-lg">${p2?.pais||'🏳️'}</div>
+          <div class="fn-lg">${p2?.nombre||'TBA'}${p2?.apodo?`<br><span style="color:var(--red);font-style:italic;font-size:0.65em;font-family:Arial">"${p2.apodo}"</span>`:''}</div>
+          <div class="rec">${p2?`${p2.record_g}-${p2.record_p}-${p2.record_e}`:'—'}</div>
+        </div>
+      </div>
+    </div>`
+  }
+
+  function cardMediana(p, label) {
+    const p1 = p.peleador1, p2 = p.peleador2
+    return `
+    <div class="fight-co">
+      <div class="fight-badge-main" style="color:var(--muted)">${label} · ${p.rounds} Rounds · ${p.peso_lbs} lbs</div>
+      <div class="matchup">
+        <div class="fc">
+          ${avatarHtml(p1, 'md', 'red')}
+          <div class="flag-md">${p1?.pais||'🏳️'}</div>
+          <div class="fn-md">${p1?.nombre||'TBA'}</div>
+          <div class="rec">${p1?`${p1.record_g}-${p1.record_p}-${p1.record_e}`:'—'}</div>
+        </div>
+        <div class="vs-col"><div class="vs-md">VS</div><div class="wt">${p.rounds} rounds</div></div>
+        <div class="fc">
+          ${avatarHtml(p2, 'md', '')}
+          <div class="flag-md">${p2?.pais||'🏳️'}</div>
+          <div class="fn-md">${p2?.nombre||'TBA'}</div>
+          <div class="rec">${p2?`${p2.record_g}-${p2.record_p}-${p2.record_e}`:'—'}</div>
+        </div>
+      </div>
+    </div>`
+  }
+
+  function cardPequena(p) {
+    const p1 = p.peleador1, p2 = p.peleador2
+    return `
+    <div class="fight-sm" style="padding:14px 20px;">
+      <div class="tr" style="display:flex;align-items:center;gap:10px;justify-content:flex-end;">
+        <div>
+          <div class="fn-sm-home">${p1?.nombre||'TBA'}</div>
+          <div class="fr-sm">${p1?`${p1.record_g}-${p1.record_p}-${p1.record_e}`:''} ${p1?.pais||''}</div>
+        </div>
+        ${avatarHtml(p1, 'sm', 'red')}
+      </div>
+      <div style="text-align:center;">
+        <div class="vs-tiny">VS</div>
+        <span class="wt-sm">${p.peso_lbs} lbs</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        ${avatarHtml(p2, 'sm', '')}
+        <div>
+          <div class="fn-sm-home">${p2?.nombre||'TBA'}</div>
+          <div class="fr-sm">${p2?`${p2.record_g}-${p2.record_p}-${p2.record_e}`:''} ${p2?.pais||''}</div>
+        </div>
+      </div>
+    </div>`
+  }
+
   function renderCartelera(peleas, eventoNombre) {
     document.getElementById('cartelera-label').textContent = `Cartelera Principal — ${eventoNombre}`
     const wrap = document.getElementById('cartelera-content')
@@ -294,83 +371,23 @@ function toggleMenu(){
       return
     }
 
-    const estelar   = peleas.find(p => p.tipo === 'estelar')
-    const coestelar = peleas.find(p => p.tipo === 'coestelar')
-    const resto     = peleas.filter(p => p.tipo !== 'estelar' && p.tipo !== 'coestelar')
+    // Ordenar por prioridad de tipo, luego por orden
+    const sorted = [...peleas].sort((a,b) => {
+      const pa = TIPO_PRIO[a.tipo] ?? 99
+      const pb = TIPO_PRIO[b.tipo] ?? 99
+      return pa !== pb ? pa - pb : (a.orden||0) - (b.orden||0)
+    })
+
     let html = ''
-
-    // ── ESTELAR (grande) ──
-    if (estelar) {
-      const p1 = estelar.peleador1, p2 = estelar.peleador2
-      html += `
-      <div class="fight-main">
-        <div class="fight-badge-main">⭐ Pelea Estelar · ${estelar.rounds} Rounds · ${estelar.peso_lbs} lbs</div>
-        <div class="matchup">
-          <div class="fc">
-            ${avatarHtml(p1, 'lg', 'red')}
-            <div class="flag-lg">${p1?.pais||'🏳️'}</div>
-            <div class="fn-lg">${p1?.nombre||'TBA'}${p1?.apodo?` <span style="color:var(--red);font-style:italic;font-size:0.7em">"${p1.apodo}"</span>`:''}</div>
-            <div class="rec">${p1 ? `${p1.record_g}-${p1.record_p}-${p1.record_e}` : '—'}</div>
-          </div>
-          <div class="vs-col"><div class="vs-lg">VS</div><div class="wt">${estelar.rounds} rounds</div></div>
-          <div class="fc">
-            ${avatarHtml(p2, 'lg', '')}
-            <div class="flag-lg">${p2?.pais||'🏳️'}</div>
-            <div class="fn-lg">${p2?.nombre||'TBA'}${p2?.apodo?` <span style="color:var(--red);font-style:italic;font-size:0.7em">"${p2.apodo}"</span>`:''}</div>
-            <div class="rec">${p2 ? `${p2.record_g}-${p2.record_p}-${p2.record_e}` : '—'}</div>
-          </div>
-        </div>
-      </div>`
-    }
-
-    // ── CO-ESTELAR (mediano) ──
-    if (coestelar) {
-      const p1 = coestelar.peleador1, p2 = coestelar.peleador2
-      html += `
-      <div class="fight-co">
-        <div class="fight-badge-main" style="color:var(--muted)">🥈 Co-Estelar · ${coestelar.rounds} Rounds · ${coestelar.peso_lbs} lbs</div>
-        <div class="matchup">
-          <div class="fc">
-            ${avatarHtml(p1, 'md', 'red')}
-            <div class="flag-md">${p1?.pais||'🏳️'}</div>
-            <div class="fn-md">${p1?.nombre||'TBA'}</div>
-            <div class="rec">${p1 ? `${p1.record_g}-${p1.record_p}-${p1.record_e}` : '—'}</div>
-          </div>
-          <div class="vs-col"><div class="vs-md">VS</div><div class="wt">${coestelar.rounds} rounds</div></div>
-          <div class="fc">
-            ${avatarHtml(p2, 'md', '')}
-            <div class="flag-md">${p2?.pais||'🏳️'}</div>
-            <div class="fn-md">${p2?.nombre||'TBA'}</div>
-            <div class="rec">${p2 ? `${p2.record_g}-${p2.record_p}-${p2.record_e}` : '—'}</div>
-          </div>
-        </div>
-      </div>`
-    }
-
-    // ── RESTO (pequeños con avatar + bandera) ──
-    resto.forEach(p => {
-      const p1 = p.peleador1, p2 = p.peleador2
-      html += `
-      <div class="fight-sm" style="padding:14px 20px;">
-        <div class="tr" style="display:flex;align-items:center;gap:10px;justify-content:flex-end;">
-          <div>
-            <div class="fn-sm-home">${p1?.nombre||'TBA'}</div>
-            <div class="fr-sm">${p1 ? `${p1.record_g}-${p1.record_p}-${p1.record_e}` : ''} ${p1?.pais||''}</div>
-          </div>
-          ${avatarHtml(p1, 'sm', 'red')}
-        </div>
-        <div style="text-align:center;">
-          <div class="vs-tiny">VS</div>
-          <span class="wt-sm">${p.peso_lbs} lbs</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;">
-          ${avatarHtml(p2, 'sm', '')}
-          <div>
-            <div class="fn-sm-home">${p2?.nombre||'TBA'}</div>
-            <div class="fr-sm">${p2 ? `${p2.record_g}-${p2.record_p}-${p2.record_e}` : ''} ${p2?.pais||''}</div>
-          </div>
-        </div>
-      </div>`
+    sorted.forEach((p, i) => {
+      const label = tipoBadge(p.tipo)
+      if (i === 0) {
+        html += cardGrande(p, label)       // 1ª siempre GRANDE
+      } else if (i === 1) {
+        html += cardMediana(p, label)      // 2ª siempre MEDIANA
+      } else {
+        html += cardPequena(p)             // resto PEQUEÑAS con avatar + bandera
+      }
     })
 
     wrap.innerHTML = html
