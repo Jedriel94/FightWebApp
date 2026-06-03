@@ -192,11 +192,11 @@ function toggleMenu(){
   }
 
   async function loadEventos() {
-    const { data: todos } = await db.from('eventos').select('*').order('fecha', { ascending: false })
+    const { data: todos } = await db.from('eventos').select('*').order('fecha', { ascending: true })
     if (!todos) return
 
-    const proximos = todos.filter(e => e.status === 'upcoming' || e.status === 'live')
-    const pasados  = todos.filter(e => e.status === 'done')
+    const proximos = todos.filter(e => e.status === 'upcoming' || e.status === 'live')  // ya vienen asc por fecha
+    const pasados  = todos.filter(e => e.status === 'done').reverse()  // más reciente primero
 
     // Banner — primer upcoming/live
     const primero = proximos[0]
