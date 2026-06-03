@@ -131,14 +131,14 @@ function toggleMenu(){
 
 
   <!-- BANNER PRÓXIMO -->
-  <div class="event-banner">
+  <div class="event-banner" id="banner-proximo">
     <div class="banner-bg"></div>
     <div class="banner-accent"></div>
     <div class="banner-content">
-      <div class="banner-tag">Próximo Evento</div>
-      <div class="banner-title">MFL <span>8</span></div>
-      <div class="banner-fight">Carlos "El Toro" Reyes vs Diego "La Cobra" Torres</div>
-      <div class="banner-meta">Sáb 14 Jun 2026 · Arena Ciudad de México · CDMX</div>
+      <div class="banner-tag" id="banner-tag">Próximo Evento</div>
+      <div class="banner-title" id="banner-title">MFL <span id="banner-num">—</span></div>
+      <div class="banner-fight" id="banner-fight">Cargando...</div>
+      <div class="banner-meta" id="banner-meta"></div>
       <div class="banner-btns">
         <a href="evento-proximo.html" class="btn">Ver Cartelera</a>
         <a href="#" class="btn-ghost">Boletos</a>
@@ -154,158 +154,15 @@ function toggleMenu(){
 
   <!-- PRÓXIMOS -->
   <div class="tab-content active" id="tab-proximos">
-    <div class="events-grid">
-
-      <a href="evento-proximo.html" class="event-card featured">
-        <div class="event-card-img">
-          <div class="event-card-img-bg"></div>
-          <div class="event-fighters">
-            <div class="ef-avatar">CR</div>
-            <div class="ef-vs">VS</div>
-            <div class="ef-avatar">DT</div>
-          </div>
-        </div>
-        <div class="event-card-info">
-          <div class="ec-num">⭐ Próximo · Main Event</div>
-          <div class="ec-name">MFL 8</div>
-          <div class="ec-fight">Reyes vs Torres · Peso Welter</div>
-          <div class="ec-meta">Sáb 14 Jun 2026 · Arena Ciudad de México</div>
-          <div class="ec-btn">Ver cartelera completa →</div>
-        </div>
-      </a>
-
-      <a href="#" class="event-card">
-        <div class="event-card-img">
-          <div class="event-card-img-bg"></div>
-          <div class="event-fighters">
-            <div class="ef-avatar">??</div>
-            <div class="ef-vs">VS</div>
-            <div class="ef-avatar">??</div>
-          </div>
-        </div>
-        <div class="event-card-info">
-          <div class="ec-num">Por confirmar</div>
-          <div class="ec-name">MFL 9</div>
-          <div class="ec-fight">Cartelera por anunciar</div>
-          <div class="ec-meta">Ago 2026 · CDMX</div>
-        </div>
-      </a>
-
-      <a href="#" class="event-card">
-        <div class="event-card-img">
-          <div class="event-card-img-bg"></div>
-          <div class="event-fighters">
-            <div class="ef-avatar">??</div>
-            <div class="ef-vs">VS</div>
-            <div class="ef-avatar">??</div>
-          </div>
-        </div>
-        <div class="event-card-info">
-          <div class="ec-num">Por confirmar</div>
-          <div class="ec-name">MFL 10</div>
-          <div class="ec-fight">Cartelera por anunciar</div>
-          <div class="ec-meta">Oct 2026 · CDMX</div>
-        </div>
-      </a>
-
+    <div class="events-grid" id="proximos-grid">
+      <div style="grid-column:span 2;color:var(--muted);font-family:'Barlow Condensed',sans-serif;padding:20px;text-align:center;letter-spacing:1px;">Cargando eventos...</div>
     </div>
   </div>
 
   <!-- PASADOS -->
   <div class="tab-content" id="tab-pasados">
-    <div class="past-list">
-
-      <a href="evento.html" class="past-item">
-        <div class="past-num">07</div>
-        <div>
-          <div class="past-name">MFL 7 — Night of Champions</div>
-          <div class="past-fight">Reyes vs Torres · Main Event</div>
-          <div class="past-meta">12 Abr 2026 · Foro Deportivo Norte · CDMX</div>
-        </div>
-        <div class="past-right">
-          <div class="past-result"><span class="check">✓</span> Resultados</div>
-          <div class="past-fights">8 peleas</div>
-        </div>
-      </a>
-
-      <a href="evento.html" class="past-item">
-        <div class="past-num">06</div>
-        <div>
-          <div class="past-name">MFL 6 — Collision</div>
-          <div class="past-fight">Villanueva vs Gutiérrez · Main Event</div>
-          <div class="past-meta">15 Feb 2026 · Gimnasio Olímpico · CDMX</div>
-        </div>
-        <div class="past-right">
-          <div class="past-result"><span class="check">✓</span> Resultados</div>
-          <div class="past-fights">7 peleas</div>
-        </div>
-      </a>
-
-      <a href="evento.html" class="past-item">
-        <div class="past-num">05</div>
-        <div>
-          <div class="past-name">MFL 5 — Rising</div>
-          <div class="past-fight">Mendoza vs Peralta · Main Event</div>
-          <div class="past-meta">10 Nov 2025 · Arena Norte · CDMX</div>
-        </div>
-        <div class="past-right">
-          <div class="past-result"><span class="check">✓</span> Resultados</div>
-          <div class="past-fights">6 peleas</div>
-        </div>
-      </a>
-
-      <a href="evento.html" class="past-item">
-        <div class="past-num">04</div>
-        <div>
-          <div class="past-name">MFL 4 — Warfare</div>
-          <div class="past-fight">Ruiz vs Salinas · Main Event</div>
-          <div class="past-meta">20 Sep 2025 · Foro Deportivo Norte · CDMX</div>
-        </div>
-        <div class="past-right">
-          <div class="past-result"><span class="check">✓</span> Resultados</div>
-          <div class="past-fights">6 peleas</div>
-        </div>
-      </a>
-
-      <a href="evento.html" class="past-item">
-        <div class="past-num">03</div>
-        <div>
-          <div class="past-name">MFL 3 — Underground</div>
-          <div class="past-fight">Mora vs Cruz · Main Event</div>
-          <div class="past-meta">14 Jul 2025 · Arena Norte · CDMX</div>
-        </div>
-        <div class="past-right">
-          <div class="past-result"><span class="check">✓</span> Resultados</div>
-          <div class="past-fights">5 peleas</div>
-        </div>
-      </a>
-
-      <a href="evento.html" class="past-item">
-        <div class="past-num">02</div>
-        <div>
-          <div class="past-name">MFL 2 — Debut</div>
-          <div class="past-fight">Ríos vs Niño · Main Event</div>
-          <div class="past-meta">10 May 2025 · Gimnasio Olímpico · CDMX</div>
-        </div>
-        <div class="past-right">
-          <div class="past-result"><span class="check">✓</span> Resultados</div>
-          <div class="past-fights">5 peleas</div>
-        </div>
-      </a>
-
-      <a href="evento.html" class="past-item">
-        <div class="past-num">01</div>
-        <div>
-          <div class="past-name">MFL 1 — The Beginning</div>
-          <div class="past-fight">Reyes vs Castillo · Main Event</div>
-          <div class="past-meta">15 Mar 2025 · Foro Deportivo Norte · CDMX</div>
-        </div>
-        <div class="past-right">
-          <div class="past-result"><span class="check">✓</span> Resultados</div>
-          <div class="past-fights">4 peleas</div>
-        </div>
-      </a>
-
+    <div class="past-list" id="pasados-list">
+      <div style="color:var(--muted);font-family:'Barlow Condensed',sans-serif;padding:20px;text-align:center;letter-spacing:1px;">Cargando eventos pasados...</div>
     </div>
   </div>
 
@@ -321,12 +178,87 @@ function toggleMenu(){
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="supabase-client.js"></script>
 <script>
   function switchTab(tab) {
     document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', (tab==='proximos'&&i===0)||(tab==='pasados'&&i===1)));
     document.getElementById('tab-proximos').classList.toggle('active', tab==='proximos');
     document.getElementById('tab-pasados').classList.toggle('active', tab==='pasados');
   }
+
+  function initiales(nombre) {
+    return (nombre||'?').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase()
+  }
+
+  async function loadEventos() {
+    const { data: todos } = await db.from('eventos').select('*').order('fecha', { ascending: false })
+    if (!todos) return
+
+    const proximos = todos.filter(e => e.status === 'upcoming' || e.status === 'live')
+    const pasados  = todos.filter(e => e.status === 'done')
+
+    // Banner — primer upcoming/live
+    const primero = proximos[0]
+    if (primero) {
+      const num = primero.nombre.replace(/[^0-9]/g,'')
+      document.getElementById('banner-num').textContent = num || primero.nombre
+      document.getElementById('banner-tag').textContent = primero.status === 'live' ? '🔴 EN VIVO' : 'Próximo Evento'
+      const fechaStr = primero.fecha
+        ? new Date(primero.fecha+'T12:00:00').toLocaleDateString('es-MX',{weekday:'short',day:'numeric',month:'short',year:'numeric'})
+        : ''
+      document.getElementById('banner-fight').textContent = primero.subtitulo || ''
+      document.getElementById('banner-meta').textContent = `${fechaStr}${primero.lugar?' · '+primero.lugar:''}`
+    }
+
+    // Grid próximos
+    const gridP = document.getElementById('proximos-grid')
+    if (!proximos.length) {
+      gridP.innerHTML = '<div style="grid-column:span 2;color:var(--muted);font-family:\'Barlow Condensed\',sans-serif;padding:20px;text-align:center;letter-spacing:1px;">No hay eventos próximos.</div>'
+    } else {
+      gridP.innerHTML = proximos.map((ev, i) => {
+        const featured = i === 0 ? ' featured' : ''
+        return `
+        <a href="evento-proximo.html" class="event-card${featured}">
+          <div class="event-card-img">
+            <div class="event-card-img-bg"></div>
+            <div class="event-fighters">
+              <div class="ef-avatar">??</div>
+              <div class="ef-vs">VS</div>
+              <div class="ef-avatar">??</div>
+            </div>
+          </div>
+          <div class="event-card-info">
+            <div class="ec-num">${ev.status==='live'?'🔴 EN VIVO':'⭐ Próximo'}</div>
+            <div class="ec-name">${ev.nombre}</div>
+            ${ev.subtitulo?`<div class="ec-fight">${ev.subtitulo}</div>`:''}
+            <div class="ec-meta">${ev.fecha||''} · ${ev.lugar||''}</div>
+            ${featured?'<div class="ec-btn">Ver cartelera completa →</div>':''}
+          </div>
+        </a>`
+      }).join('')
+    }
+
+    // Lista pasados
+    const listP = document.getElementById('pasados-list')
+    if (!pasados.length) {
+      listP.innerHTML = '<div style="color:var(--muted);font-family:\'Barlow Condensed\',sans-serif;padding:20px;text-align:center;letter-spacing:1px;">Sin eventos pasados aún.</div>'
+    } else {
+      listP.innerHTML = pasados.map((ev, i) => `
+        <a href="evento.html" class="past-item">
+          <div class="past-num" style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:#1e1e1e;">${String(pasados.length - i).padStart(2,'0')}</div>
+          <div>
+            <div class="past-name">${ev.nombre}${ev.subtitulo?' — '+ev.subtitulo:''}</div>
+            <div class="past-meta">${ev.fecha||''} · ${ev.lugar||''}</div>
+          </div>
+          <div class="past-right">
+            <div class="past-result"><span class="check">✓</span> Resultados</div>
+          </div>
+        </a>`).join('')
+    }
+  }
+
+  loadEventos()
 </script>
 
 

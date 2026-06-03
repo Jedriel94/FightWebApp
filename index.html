@@ -146,127 +146,40 @@ function toggleMenu(){
     </video>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <div class="hero-tag">Próximo Evento</div>
-      <div class="hero-title">MFL <span>8</span></div>
-      <div class="hero-date">Sáb 14 Jun 2026 · Arena Ciudad de México</div>
+      <div class="hero-tag" id="hero-tag">Próximo Evento</div>
+      <div class="hero-title" id="hero-title">MFL <span id="hero-num">—</span></div>
+      <div class="hero-date" id="hero-date">Cargando...</div>
       <div class="btns">
         <a href="evento-proximo.html" class="btn">Ver Cartelera</a>
         <a href="#" class="btn-ghost">Boletos</a>
       </div>
-      <div class="countdown">
-        <div class="cd-block"><div class="cd-num" id="cd-d">13</div><div class="cd-label">Días</div></div>
+      <div class="countdown" id="countdown-wrap">
+        <div class="cd-block"><div class="cd-num" id="cd-d">--</div><div class="cd-label">Días</div></div>
         <div class="cd-sep">:</div>
-        <div class="cd-block"><div class="cd-num" id="cd-h">00</div><div class="cd-label">Horas</div></div>
+        <div class="cd-block"><div class="cd-num" id="cd-h">--</div><div class="cd-label">Horas</div></div>
         <div class="cd-sep">:</div>
-        <div class="cd-block"><div class="cd-num" id="cd-m">00</div><div class="cd-label">Min</div></div>
+        <div class="cd-block"><div class="cd-num" id="cd-m">--</div><div class="cd-label">Min</div></div>
         <div class="cd-sep">:</div>
-        <div class="cd-block"><div class="cd-num" id="cd-s">00</div><div class="cd-label">Seg</div></div>
+        <div class="cd-block"><div class="cd-num" id="cd-s">--</div><div class="cd-label">Seg</div></div>
       </div>
     </div>
   </div>
 
   <!-- CARTELERA -->
-  <div class="section-label">Cartelera Principal — MFL 8</div>
-
-  <div class="fight-main">
-    <div class="fight-badge-main">⭐ Pelea Estelar · 5 Rounds · Peso Welter 170 lbs</div>
-    <div class="matchup">
-      <div class="fc">
-        <div class="av-lg w">CR</div>
-        <div class="flag-lg">🇲🇽</div>
-        <div class="fn-lg">Carlos "El Toro" Reyes</div>
-        <div class="rec">12-3-0</div>
-      </div>
-      <div class="vs-col"><div class="vs-lg">VS</div><div class="wt">5 rounds</div></div>
-      <div class="fc">
-        <div class="av-lg">DT</div>
-        <div class="flag-lg">🇲🇽</div>
-        <div class="fn-lg">Diego "La Cobra" Torres</div>
-        <div class="rec">9-2-0</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="fight-co">
-    <div class="fight-badge-main" style="color:var(--muted)">Co-Estelar · 3 Rounds · Peso Ligero 155 lbs</div>
-    <div class="matchup">
-      <div class="fc">
-        <div class="av-md">AV</div>
-        <div class="flag-md">🇲🇽</div>
-        <div class="fn-md">Andrés Villanueva</div>
-        <div class="rec">7-1-0</div>
-      </div>
-      <div class="vs-col"><div class="vs-md">VS</div><div class="wt">3 rounds</div></div>
-      <div class="fc">
-        <div class="av-md">RG</div>
-        <div class="flag-md">🇲🇽</div>
-        <div class="fn-md">Ramón Gutiérrez</div>
-        <div class="rec">6-2-0</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="fight-sm">
-    <div class="tr"><div class="fn-sm-home">José Mendoza</div><div class="fr-sm">5-0-0 · 🇲🇽</div></div>
-    <div><div class="vs-tiny">VS</div><span class="wt-sm">145 lbs</span></div>
-    <div><div class="fn-sm-home">Luis Peralta</div><div class="fr-sm">4-1-0 · 🇲🇽</div></div>
-  </div>
-
-  <div class="fight-sm">
-    <div class="tr"><div class="fn-sm-home">Marco Salinas</div><div class="fr-sm">3-1-0 · 🇲🇽</div></div>
-    <div><div class="vs-tiny">VS</div><span class="wt-sm">135 lbs</span></div>
-    <div><div class="fn-sm-home">Héctor Ruiz</div><div class="fr-sm">4-0-0 · 🇲🇽</div></div>
+  <div class="section-label" id="cartelera-label">Cartelera Principal</div>
+  <div id="cartelera-content">
+    <div style="color:var(--muted);font-family:'Barlow Condensed',sans-serif;padding:20px;text-align:center;letter-spacing:1px;">Cargando cartelera...</div>
   </div>
 
   <!-- NOTICIAS -->
   <div class="section-label">Noticias</div>
-  <div class="news-grid">
-    <a href="noticia.html" class="news-feat" style="text-decoration:none;color:inherit;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;cursor:pointer;">
-      <div>
-        <div class="news-tag-n">Post-pelea · MFL 7</div>
-        <div class="news-title-n">"Soy el mejor welter de México, que vengan todos"</div>
-        <div class="news-date">Hace 3 días</div>
-      </div>
-      <div>
-        <div class="news-quote">"Entrené 12 semanas para esta pelea. No vine a participar, vine a ganar. Quiero al campeón."</div>
-        <div class="news-author">— Carlos "El Toro" Reyes</div>
-      </div>
-    </a>
-    <a href="noticia.html" class="news-card">
-      <div class="news-tag-n">Confirmado</div>
-      <div class="news-title-n">MFL 8 ya tiene sede: Arena CDMX</div>
-      <div class="news-date">Hace 5 días</div>
-    </a>
-    <a href="noticia.html" class="news-card">
-      <div class="news-tag-n">Reto</div>
-      <div class="news-title-n">Villanueva reta a Gutiérrez: "Te espero en el octágono"</div>
-      <div class="news-date">Hace 1 semana</div>
-    </a>
+  <div class="news-grid" id="noticias-content">
+    <div style="color:var(--muted);font-family:'Barlow Condensed',sans-serif;padding:20px;text-align:center;letter-spacing:1px;grid-column:span 2;">Cargando noticias...</div>
   </div>
 
   <!-- ULTIMOS RESULTADOS -->
-  <div class="section-label">Últimos Resultados — MFL 7</div>
-  <div class="results-wrap">
-    <div class="results-header">
-      <div class="results-event">MFL 7 — Night of Champions</div>
-      <div class="results-date">12 Abr 2026 · CDMX</div>
-    </div>
-    <div class="result-row">
-      <div style="display:flex;align-items:center;gap:12px"><div class="r-av-w">CR</div><div><div class="r-win-tag">Ganador</div><div class="r-winner">Carlos Reyes</div></div></div>
-      <div class="r-center"><div class="r-method-c">TKO</div><div class="r-detail-c">R2 · 3:42</div></div>
-      <div style="display:flex;align-items:center;gap:12px;justify-content:flex-end"><div class="r-loser">Diego Torres</div><div class="r-av-l">DT</div></div>
-    </div>
-    <div class="result-row">
-      <div style="display:flex;align-items:center;gap:12px"><div class="r-av-w">AV</div><div><div class="r-win-tag">Ganador</div><div class="r-winner">Andrés Villanueva</div></div></div>
-      <div class="r-center"><div class="r-method-c">SUB</div><div class="r-detail-c">R1 · 4:15</div></div>
-      <div style="display:flex;align-items:center;gap:12px;justify-content:flex-end"><div class="r-loser">Ramón Gutiérrez</div><div class="r-av-l">RG</div></div>
-    </div>
-    <div class="result-row">
-      <div style="display:flex;align-items:center;gap:12px"><div class="r-av-w">JM</div><div><div class="r-win-tag">Ganador</div><div class="r-winner">José Mendoza</div></div></div>
-      <div class="r-center"><div class="r-method-c">DEC</div><div class="r-detail-c">R3 · Unánime</div></div>
-      <div style="display:flex;align-items:center;gap:12px;justify-content:flex-end"><div class="r-loser">Luis Peralta</div><div class="r-av-l">LP</div></div>
-    </div>
-  </div>
+  <div class="section-label" id="resultados-label" style="display:none">Últimos Resultados</div>
+  <div id="resultados-content"></div>
 
   <!-- EVENTOS PASADOS -->
   <div class="section-label">Eventos Pasados</div>
@@ -298,18 +211,232 @@ function toggleMenu(){
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="supabase-client.js"></script>
 <script>
-  const target = new Date('2026-06-14T20:00:00');
-  function tick() {
-    const diff = target - new Date();
-    if (diff <= 0) return;
-    document.getElementById('cd-d').textContent = String(Math.floor(diff/86400000)).padStart(2,'0');
-    document.getElementById('cd-h').textContent = String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
-    document.getElementById('cd-m').textContent = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
-    document.getElementById('cd-s').textContent = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+  // ── Helpers ──────────────────────────────────────────────
+  function initiales(nombre) {
+    return (nombre || '?').split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase()
   }
-  tick();
-  setInterval(tick, 1000);
+  function timeAgo(dateStr) {
+    const diff = Date.now() - new Date(dateStr)
+    const d = Math.floor(diff/86400000)
+    if (d === 0) return 'Hoy'
+    if (d === 1) return 'Ayer'
+    if (d < 7) return `Hace ${d} días`
+    return new Date(dateStr).toLocaleDateString('es-MX',{day:'numeric',month:'short'})
+  }
+  function metodoCort(m) {
+    if (!m) return '—'
+    if (m.includes('Unánime')) return 'DEC'
+    if (m.includes('Dividida') || m.includes('Mayoritaria')) return 'DEC'
+    return m.substring(0,3).toUpperCase()
+  }
+
+  // ── Countdown ────────────────────────────────────────────
+  let cdInterval
+  function startCountdown(fechaStr, horaStr) {
+    const target = new Date(`${fechaStr}T${horaStr || '20:00'}`)
+    function tick() {
+      const diff = target - new Date()
+      if (diff <= 0) {
+        document.getElementById('countdown-wrap').style.display = 'none'
+        return
+      }
+      document.getElementById('cd-d').textContent = String(Math.floor(diff/86400000)).padStart(2,'0')
+      document.getElementById('cd-h').textContent = String(Math.floor((diff%86400000)/3600000)).padStart(2,'0')
+      document.getElementById('cd-m').textContent = String(Math.floor((diff%3600000)/60000)).padStart(2,'0')
+      document.getElementById('cd-s').textContent = String(Math.floor((diff%60000)/1000)).padStart(2,'0')
+    }
+    tick()
+    if (cdInterval) clearInterval(cdInterval)
+    cdInterval = setInterval(tick, 1000)
+  }
+
+  // ── Render cartelera ─────────────────────────────────────
+  function renderCartelera(peleas, eventoNombre) {
+    document.getElementById('cartelera-label').textContent = `Cartelera Principal — ${eventoNombre}`
+    const wrap = document.getElementById('cartelera-content')
+    if (!peleas.length) {
+      wrap.innerHTML = '<div style="color:var(--muted);font-family:\'Barlow Condensed\',sans-serif;padding:24px;text-align:center;letter-spacing:1px;border:1px solid var(--border);background:var(--mid)">Cartelera por anunciar</div>'
+      return
+    }
+    const estelar = peleas.find(p => p.tipo === 'estelar')
+    const coestelar = peleas.find(p => p.tipo === 'coestelar')
+    const resto = peleas.filter(p => p.tipo !== 'estelar' && p.tipo !== 'coestelar')
+    let html = ''
+    if (estelar) {
+      const p1 = estelar.peleador1, p2 = estelar.peleador2
+      html += `
+      <div class="fight-main">
+        <div class="fight-badge-main">⭐ Pelea Estelar · ${estelar.rounds} Rounds · ${estelar.peso_lbs} lbs</div>
+        <div class="matchup">
+          <div class="fc">
+            <div class="av-lg w">${initiales(p1?.nombre)}</div>
+            <div class="flag-lg">${p1?.pais||'🇲🇽'}</div>
+            <div class="fn-lg">${p1?.nombre||'—'} ${p1?.apodo?`"${p1.apodo}"`:''}  </div>
+            <div class="rec">${p1?.record_g||0}-${p1?.record_p||0}-${p1?.record_e||0}</div>
+          </div>
+          <div class="vs-col"><div class="vs-lg">VS</div><div class="wt">${estelar.rounds} rounds</div></div>
+          <div class="fc">
+            <div class="av-lg">${initiales(p2?.nombre)}</div>
+            <div class="flag-lg">${p2?.pais||'🇲🇽'}</div>
+            <div class="fn-lg">${p2?.nombre||'—'} ${p2?.apodo?`"${p2.apodo}"`:''}  </div>
+            <div class="rec">${p2?.record_g||0}-${p2?.record_p||0}-${p2?.record_e||0}</div>
+          </div>
+        </div>
+      </div>`
+    }
+    if (coestelar) {
+      const p1 = coestelar.peleador1, p2 = coestelar.peleador2
+      html += `
+      <div class="fight-co">
+        <div class="fight-badge-main" style="color:var(--muted)">Co-Estelar · ${coestelar.rounds} Rounds · ${coestelar.peso_lbs} lbs</div>
+        <div class="matchup">
+          <div class="fc">
+            <div class="av-md">${initiales(p1?.nombre)}</div>
+            <div class="flag-md">${p1?.pais||'🇲🇽'}</div>
+            <div class="fn-md">${p1?.nombre||'—'}</div>
+            <div class="rec">${p1?.record_g||0}-${p1?.record_p||0}-${p1?.record_e||0}</div>
+          </div>
+          <div class="vs-col"><div class="vs-md">VS</div><div class="wt">${coestelar.rounds} rounds</div></div>
+          <div class="fc">
+            <div class="av-md">${initiales(p2?.nombre)}</div>
+            <div class="flag-md">${p2?.pais||'🇲🇽'}</div>
+            <div class="fn-md">${p2?.nombre||'—'}</div>
+            <div class="rec">${p2?.record_g||0}-${p2?.record_p||0}-${p2?.record_e||0}</div>
+          </div>
+        </div>
+      </div>`
+    }
+    resto.forEach(p => {
+      const p1 = p.peleador1, p2 = p.peleador2
+      html += `
+      <div class="fight-sm">
+        <div class="tr"><div class="fn-sm-home">${p1?.nombre||'—'}</div><div class="fr-sm">${p1?.record_g||0}-${p1?.record_p||0}-${p1?.record_e||0} · ${p1?.pais||''}</div></div>
+        <div><div class="vs-tiny">VS</div><span class="wt-sm">${p.peso_lbs} lbs</span></div>
+        <div><div class="fn-sm-home">${p2?.nombre||'—'}</div><div class="fr-sm">${p2?.record_g||0}-${p2?.record_p||0}-${p2?.record_e||0} · ${p2?.pais||''}</div></div>
+      </div>`
+    })
+    wrap.innerHTML = html
+  }
+
+  // ── Render noticias ───────────────────────────────────────
+  function renderNoticias(noticias) {
+    const wrap = document.getElementById('noticias-content')
+    if (!noticias.length) {
+      wrap.innerHTML = '<div style="grid-column:span 2;color:var(--muted);font-family:\'Barlow Condensed\',sans-serif;padding:20px;text-align:center;">Sin noticias publicadas aún.</div>'
+      return
+    }
+    const [first, ...rest] = noticias.slice(0, 3)
+    let html = `
+    <a href="noticias.html" class="news-feat" style="text-decoration:none;color:inherit;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;cursor:pointer;">
+      <div>
+        <div class="news-tag-n">${first.categoria||'MFL'}</div>
+        <div class="news-title-n">${first.titulo}</div>
+        <div class="news-date">${timeAgo(first.created_at)}</div>
+      </div>
+      <div>
+        ${first.contenido ? `<div class="news-quote">${first.contenido.substring(0,160)}${first.contenido.length>160?'...':''}</div>` : ''}
+      </div>
+    </a>`
+    rest.forEach(n => {
+      html += `
+    <a href="noticias.html" class="news-card">
+      <div class="news-tag-n">${n.categoria||'MFL'}</div>
+      <div class="news-title-n">${n.titulo}</div>
+      <div class="news-date">${timeAgo(n.created_at)}</div>
+    </a>`
+    })
+    wrap.innerHTML = html
+  }
+
+  // ── Render resultados ─────────────────────────────────────
+  function renderResultados(evento, peleas) {
+    document.getElementById('resultados-label').style.display = ''
+    document.getElementById('resultados-label').textContent = `Últimos Resultados — ${evento.nombre}`
+    const terminadas = peleas.filter(p => p.status === 'terminada')
+    if (!terminadas.length) return
+    let rows = terminadas.map(p => {
+      const ganador = p.ganador_id === p.peleador1_id ? p.peleador1 : p.peleador2
+      const perdedor = p.ganador_id === p.peleador1_id ? p.peleador2 : p.peleador1
+      const metCort = metodoCort(p.metodo)
+      return `
+      <div class="result-row">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="r-av-w">${initiales(ganador?.nombre)}</div>
+          <div><div class="r-win-tag">Ganador</div><div class="r-winner">${ganador?.nombre||'—'}</div></div>
+        </div>
+        <div class="r-center">
+          <div class="r-method-c">${metCort}</div>
+          <div class="r-detail-c">R${p.round_final} · ${p.tiempo||''}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;justify-content:flex-end">
+          <div class="r-loser">${perdedor?.nombre||'—'}</div>
+          <div class="r-av-l">${initiales(perdedor?.nombre)}</div>
+        </div>
+      </div>`
+    }).join('')
+    document.getElementById('resultados-content').innerHTML = `
+    <div class="results-wrap">
+      <div class="results-header">
+        <div class="results-event">${evento.nombre}${evento.subtitulo?' — '+evento.subtitulo:''}</div>
+        <div class="results-date">${evento.fecha||''} · ${evento.lugar||''}</div>
+      </div>
+      ${rows}
+    </div>`
+  }
+
+  // ── Main ──────────────────────────────────────────────────
+  async function main() {
+    // Próximo evento (upcoming) o live
+    const { data: eventos } = await db.from('eventos').select('*')
+      .in('status', ['live','upcoming']).order('fecha').limit(1)
+    const proximo = eventos?.[0]
+
+    if (proximo) {
+      // Hero
+      const num = proximo.nombre.replace(/[^0-9]/g,'')
+      document.getElementById('hero-num').textContent = num || proximo.nombre
+      document.getElementById('hero-tag').textContent = proximo.status === 'live' ? '🔴 EN VIVO' : 'Próximo Evento'
+      const fechaFormato = proximo.fecha
+        ? new Date(proximo.fecha+'T12:00:00').toLocaleDateString('es-MX',{weekday:'short',day:'numeric',month:'short',year:'numeric'})
+        : ''
+      document.getElementById('hero-date').textContent = `${fechaFormato}${proximo.lugar?' · '+proximo.lugar:''}`
+
+      if (proximo.status === 'upcoming' && proximo.fecha) {
+        startCountdown(proximo.fecha, proximo.hora)
+      } else {
+        document.getElementById('countdown-wrap').style.display = 'none'
+      }
+
+      // Cartelera del próximo evento
+      const { data: peleas } = await db.from('peleas')
+        .select('*, peleador1:peleador1_id(*), peleador2:peleador2_id(*), ganador:ganador_id(*)')
+        .eq('evento_id', proximo.id).order('orden')
+      renderCartelera(peleas || [], proximo.nombre)
+    }
+
+    // Noticias
+    const { data: noticias } = await db.from('noticias')
+      .select('*').eq('publicado', true).order('created_at', { ascending: false }).limit(3)
+    renderNoticias(noticias || [])
+
+    // Últimos resultados (evento terminado más reciente)
+    const { data: terminados } = await db.from('eventos').select('*')
+      .eq('status','done').order('fecha', { ascending: false }).limit(1)
+    const ultimo = terminados?.[0]
+    if (ultimo) {
+      const { data: peleasT } = await db.from('peleas')
+        .select('*, peleador1:peleador1_id(*), peleador2:peleador2_id(*), ganador:ganador_id(*)')
+        .eq('evento_id', ultimo.id).order('orden')
+      if (peleasT?.some(p => p.status === 'terminada')) {
+        renderResultados(ultimo, peleasT)
+      }
+    }
+  }
+
+  main()
 </script>
 
 

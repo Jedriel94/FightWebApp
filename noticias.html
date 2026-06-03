@@ -124,6 +124,12 @@ function toggleMenu(){
 
 
 
+  <!-- NOTICIAS DINÁMICAS DEL ADMIN -->
+  <div id="admin-noticias-wrap" style="display:none">
+    <div class="section-label" style="margin-top:24px">Últimas Noticias</div>
+    <div id="admin-noticias-grid" class="news-grid-main"></div>
+  </div>
+
   <!-- NOTICIA DESTACADA -->
   <a href="noticia.html" class="news-hero">
     <div class="news-hero-bg" style="background:url('https://cdn.prod.website-files.com/68cdee54e314bf9f0d540fb1/6a0f50a5674d03a02a9cfce9_MFL%20and%20Ring%20Kong%20Webflow%20Banner.png') center/cover no-repeat;"></div>
@@ -260,6 +266,8 @@ function toggleMenu(){
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="supabase-client.js"></script>
 <script>
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -267,6 +275,36 @@ function toggleMenu(){
       btn.classList.add('active');
     });
   });
+
+  function timeAgo(dateStr) {
+    const diff = Date.now() - new Date(dateStr)
+    const d = Math.floor(diff/86400000)
+    if (d === 0) return 'Hoy'
+    if (d === 1) return 'Ayer'
+    if (d < 7) return `Hace ${d} días`
+    return new Date(dateStr).toLocaleDateString('es-MX',{day:'numeric',month:'short',year:'numeric'})
+  }
+
+  async function loadNoticias() {
+    const { data } = await db.from('noticias')
+      .select('*').eq('publicado', true)
+      .order('created_at', { ascending: false }).limit(9)
+    if (!data || !data.length) return
+    const grid = document.getElementById('admin-noticias-grid')
+    grid.innerHTML = data.map(n => `
+      <a class="ncard" style="text-decoration:none;color:inherit;">
+        ${n.imagen_url ? `<div class="ncard-img" style="position:relative;overflow:hidden;"><img src="${n.imagen_url}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" alt=""></div>` : `<div class="ncard-img"><div class="ncard-img-pattern"></div><div class="ncard-avatar" style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#333;">${n.categoria?.[0]||'📋'}</div></div>`}
+        <div class="ncard-body">
+          <div class="ncard-cat">${n.categoria||'MFL'}</div>
+          <div class="ncard-title">${n.titulo}</div>
+          ${n.contenido ? `<div class="ncard-excerpt">${n.contenido.substring(0,100)}${n.contenido.length>100?'...':''}</div>` : ''}
+          <div class="ncard-meta">${timeAgo(n.created_at)}</div>
+        </div>
+      </a>`).join('')
+    document.getElementById('admin-noticias-wrap').style.display = 'block'
+  }
+
+  loadNoticias()
 </script>
 
 
