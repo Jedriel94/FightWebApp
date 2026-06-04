@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito | FightMFL</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .cart-wrap { display:grid; grid-template-columns:1fr 360px; gap:16px; margin:24px 0; align-items:start; }
+    .cart-items { background:var(--mid); border:1px solid var(--border); }
+    .cart-header { padding:18px 24px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+    .cart-header-title { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:1px; }
+    .cart-clear { font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); cursor:pointer; background:none; border:none; }
+    .cart-clear:hover { color:var(--red); }
+    .cart-item { display:grid; grid-template-columns:80px 1fr auto; gap:16px; padding:16px 24px; border-bottom:1px solid var(--border); align-items:center; }
+    .cart-item:last-child { border-bottom:none; }
+    .ci-img { width:80px; height:80px; background:linear-gradient(135deg,#1a0005,#111); overflow:hidden; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+    .ci-img img { width:100%; height:100%; object-fit:cover; }
+    .ci-img-ph { font-family:'Bebas Neue',sans-serif; font-size:20px; color:rgba(232,0,29,0.3); }
+    .ci-info { }
+    .ci-name { font-family:'Barlow Condensed',sans-serif; font-size:16px; font-weight:700; text-transform:uppercase; margin-bottom:4px; }
+    .ci-vars { font-size:12px; color:var(--muted); margin-bottom:8px; }
+    .ci-qty { display:flex; align-items:center; gap:0; border:1px solid var(--border); width:fit-content; }
+    .cq-btn { width:32px; height:32px; background:none; border:none; color:white; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+    .cq-btn:hover { background:rgba(255,255,255,0.06); }
+    .cq-val { width:32px; height:32px; border-left:1px solid var(--border); border-right:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:700; }
+    .ci-price { text-align:right; }
+    .ci-price-val { font-family:'Bebas Neue',sans-serif; font-size:22px; }
+    .ci-remove { font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); cursor:pointer; background:none; border:none; margin-top:4px; display:block; }
+    .ci-remove:hover { color:var(--red); }
+    .cart-empty { padding:60px 24px; text-align:center; }
+    .cart-empty-icon { font-size:48px; margin-bottom:16px; }
+    .cart-empty-text { font-family:'Barlow Condensed',sans-serif; font-size:18px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); margin-bottom:20px; }
+    .cart-summary { background:var(--mid); border:1px solid var(--border); padding:24px; position:sticky; top:80px; }
+    .cs-title { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:1px; margin-bottom:20px; border-bottom:1px solid var(--border); padding-bottom:14px; }
+    .cs-row { display:flex; justify-content:space-between; font-size:14px; color:var(--muted); margin-bottom:10px; }
+    .cs-row.total { color:white; font-family:'Bebas Neue',sans-serif; font-size:24px; border-top:1px solid var(--border); padding-top:14px; margin-top:8px; }
+    .cs-free-ship { background:rgba(22,163,74,0.12); border:1px solid rgba(22,163,74,0.3); color:#4ade80; font-family:'Barlow Condensed',sans-serif; font-size:12px; letter-spacing:1px; text-transform:uppercase; padding:8px 12px; margin:12px 0; text-align:center; }
+    .cs-ship-progress { background:#1a1a1a; height:4px; border-radius:2px; margin:8px 0 16px; }
+    .cs-ship-bar { background:var(--red); height:4px; border-radius:2px; transition:width .5s; }
+    .btn-checkout { display:block; width:100%; background:var(--red); color:white; border:none; padding:16px; font-family:'Barlow Condensed',sans-serif; font-size:14px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; text-align:center; text-decoration:none; margin-bottom:10px; transition:background .2s; }
+    .btn-checkout:hover { background:#c0001a; }
+    .btn-continue { display:block; width:100%; background:transparent; color:var(--muted); border:1px solid var(--border); padding:14px; font-family:'Barlow Condensed',sans-serif; font-size:12px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; text-align:center; text-decoration:none; transition:all .2s; }
+    .btn-continue:hover { border-color:var(--red); color:var(--red); }
+    .cart-nav { position:relative; display:flex; align-items:center; text-decoration:none; color:white; font-size:20px; }
+    .cart-nav-count { position:absolute; top:-8px; right:-8px; background:#E8001D; color:white; font-size:10px; font-weight:700; width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+    @media(max-width:768px){ .cart-wrap{grid-template-columns:1fr;} .cart-summary{position:static;} }
+  </style>
+</head>
+<body>
+<header style="background:#0D0F14;border-bottom:1px solid #232830;position:sticky;top:0;z-index:200;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 16px;">
+    <nav style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;">
+      <a href="index.html" style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:white;text-decoration:none;">FIGHT<span style="color:#E8001D;">MFL</span></a>
+      <div id="nav-desktop" style="display:flex;gap:28px;align-items:center;">
+        <a href="index.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888;text-decoration:none;">Inicio</a>
+        <a href="tienda.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888;text-decoration:none;">Tienda</a>
+        <a href="carrito.html" class="cart-nav">🛍️<span class="cart-nav-count" id="cart-count" style="display:none">0</span></a>
+      </div>
+    </nav>
+  </div>
+</header>
+<style>@media(max-width:768px){#nav-desktop{display:none!important;}}</style>
+
+<div class="page">
+  <div style="margin:24px 0 16px;display:flex;align-items:center;gap:12px;">
+    <a href="tienda.html" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-decoration:none;">← Seguir comprando</a>
+    <span style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px;">Mi Carrito</span>
+  </div>
+
+  <div class="cart-wrap">
+    <!-- Items -->
+    <div class="cart-items" id="cart-items-wrap">
+      <div class="cart-empty">
+        <div class="cart-empty-icon">🛍️</div>
+        <div class="cart-empty-text">Tu carrito está vacío</div>
+        <a href="tienda.html" class="btn">Ver productos</a>
+      </div>
+    </div>
+
+    <!-- Resumen -->
+    <div class="cart-summary">
+      <div class="cs-title">Resumen del pedido</div>
+      <div class="cs-row"><span>Subtotal</span><span id="cs-subtotal">$0.00</span></div>
+      <div class="cs-row" id="cs-ship-row"><span>Envío</span><span id="cs-ship">$0.00</span></div>
+      <div id="cs-free-msg" style="display:none" class="cs-free-ship">🚚 ¡Envío gratis aplicado!</div>
+      <div id="cs-ship-prog-wrap">
+        <div style="font-size:12px;color:var(--muted);margin-bottom:4px;" id="cs-prog-label"></div>
+        <div class="cs-ship-progress"><div class="cs-ship-bar" id="cs-ship-bar" style="width:0%"></div></div>
+      </div>
+      <div class="cs-row total"><span>Total</span><span id="cs-total">$0.00</span></div>
+      <a href="checkout.html" class="btn-checkout" id="btn-checkout">Proceder al pago →</a>
+      <a href="tienda.html" class="btn-continue">← Seguir comprando</a>
+    </div>
+  </div>
+
+  <footer>
+    <a class="footer-logo" href="index.html">FIGHT<span>MFL</span></a>
+    <div class="footer-links"><a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Contacto</a></div>
+    <div class="footer-copy">© 2026 FightMFL</div>
+  </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="supabase-client.js"></script>
+<script>
+let cfg = {}
+
+function getCart(){ return JSON.parse(localStorage.getItem('mfl_cart')||'[]') }
+function saveCart(c){ localStorage.setItem('mfl_cart', JSON.stringify(c)); render() }
+
+async function loadConfig(){
+  const {data} = await db.from('tienda_config').select('*')
+  if(data) data.forEach(r => cfg[r.clave] = r.valor)
+}
+
+function render(){
+  const cart = getCart()
+  const sym = cfg.simbolo || '$'
+  const costoEnvio = +(cfg.costo_envio || 99)
+  const freeFrom = +(cfg.envio_gratis_desde || 999)
+
+  // Count badge
+  const n = cart.reduce((s,i) => s+i.cantidad, 0)
+  const el = document.getElementById('cart-count')
+  if(el){ el.textContent=n; el.style.display=n>0?'flex':'none' }
+
+  const wrap = document.getElementById('cart-items-wrap')
+
+  if(!cart.length){
+    wrap.innerHTML=`<div class="cart-empty">
+      <div class="cart-empty-icon">🛍️</div>
+      <div class="cart-empty-text">Tu carrito está vacío</div>
+      <a href="tienda.html" class="btn">Ver productos</a>
+    </div>`
+    updateSummary(0, costoEnvio, freeFrom, sym)
+    document.getElementById('btn-checkout').style.opacity='0.4'
+    document.getElementById('btn-checkout').style.pointerEvents='none'
+    return
+  }
+
+  document.getElementById('btn-checkout').style.opacity='1'
+  document.getElementById('btn-checkout').style.pointerEvents='auto'
+
+  wrap.innerHTML=`
+  <div class="cart-header">
+    <div class="cart-header-title">${cart.length} producto${cart.length>1?'s':''}</div>
+    <button class="cart-clear" onclick="clearCart()">Vaciar carrito</button>
+  </div>
+  ${cart.map((item,i) => `
+  <div class="cart-item">
+    <div class="ci-img">
+      ${item.imagen ? `<img src="${item.imagen}" alt="${item.nombre}">` : `<div class="ci-img-ph">MFL</div>`}
+    </div>
+    <div class="ci-info">
+      <div class="ci-name">${item.nombre}</div>
+      <div class="ci-vars">
+        ${item.talla?`Talla: ${item.talla}`:''}${item.talla&&item.color?' · ':''}${item.color?`Color: ${item.color}`:''}
+        ${item.color_hex?`<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${item.color_hex};margin-left:4px;border:1px solid rgba(255,255,255,0.2);"></span>`:''}
+      </div>
+      <div class="ci-qty">
+        <button class="cq-btn" onclick="changeQty(${i},-1)">−</button>
+        <div class="cq-val">${item.cantidad}</div>
+        <button class="cq-btn" onclick="changeQty(${i},1)">+</button>
+      </div>
+    </div>
+    <div class="ci-price">
+      <div class="ci-price-val">${sym}${(item.precio*item.cantidad).toFixed(2)}</div>
+      <div style="font-size:11px;color:var(--muted);">${sym}${item.precio.toFixed(2)} c/u</div>
+      <button class="ci-remove" onclick="removeItem(${i})">Eliminar</button>
+    </div>
+  </div>`).join('')}`
+
+  const subtotal = cart.reduce((s,i) => s + i.precio*i.cantidad, 0)
+  updateSummary(subtotal, costoEnvio, freeFrom, sym)
+}
+
+function updateSummary(subtotal, costoEnvio, freeFrom, sym){
+  const freeShip = subtotal >= freeFrom
+  const envio = freeShip ? 0 : (subtotal > 0 ? costoEnvio : 0)
+  const total = subtotal + envio
+
+  document.getElementById('cs-subtotal').textContent = `${sym}${subtotal.toFixed(2)}`
+  document.getElementById('cs-ship').textContent = freeShip ? 'GRATIS' : `${sym}${envio.toFixed(2)}`
+  document.getElementById('cs-total').textContent = `${sym}${total.toFixed(2)}`
+  document.getElementById('cs-free-msg').style.display = freeShip ? 'block' : 'none'
+  document.getElementById('cs-ship-row').style.display = subtotal > 0 ? 'flex' : 'none'
+
+  if(!freeShip && subtotal > 0){
+    const pct = Math.min(100, (subtotal/freeFrom)*100)
+    const falta = freeFrom - subtotal
+    document.getElementById('cs-ship-bar').style.width = pct+'%'
+    document.getElementById('cs-prog-label').textContent = `Te faltan ${sym}${falta.toFixed(2)} para envío gratis`
+    document.getElementById('cs-ship-prog-wrap').style.display='block'
+  } else {
+    document.getElementById('cs-ship-prog-wrap').style.display='none'
+  }
+}
+
+function changeQty(i, d){
+  const cart = getCart()
+  cart[i].cantidad = Math.max(1, Math.min(10, cart[i].cantidad + d))
+  saveCart(cart)
+}
+
+function removeItem(i){
+  const cart = getCart()
+  cart.splice(i,1)
+  saveCart(cart)
+}
+
+function clearCart(){
+  if(!confirm('¿Vaciar el carrito?')) return
+  localStorage.removeItem('mfl_cart')
+  render()
+}
+
+async function main(){
+  await loadConfig()
+  render()
+}
+main()
+</script>
+</body>
+</html>

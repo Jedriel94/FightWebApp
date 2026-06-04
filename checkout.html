@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | FightMFL</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .checkout-wrap { display:grid; grid-template-columns:1fr 380px; gap:16px; margin:24px 0; align-items:start; }
+    .checkout-form { background:var(--mid); border:1px solid var(--border); padding:32px; }
+    .cf-section { margin-bottom:28px; }
+    .cf-section-title { font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:1px; margin-bottom:16px; padding-bottom:10px; border-bottom:1px solid var(--border); color:var(--red); }
+    .cf-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
+    .cf-field { display:flex; flex-direction:column; gap:4px; margin-bottom:12px; }
+    .cf-label { font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); }
+    .cf-input { background:#0a0a0a; border:1px solid var(--border); color:white; padding:12px 14px; font-size:14px; outline:none; transition:border-color .2s; font-family:inherit; }
+    .cf-input:focus { border-color:var(--red); }
+    .cf-input::placeholder { color:#333; }
+    .cf-select { background:#0a0a0a; border:1px solid var(--border); color:white; padding:12px 14px; font-size:14px; outline:none; width:100%; cursor:pointer; }
+    .cf-textarea { background:#0a0a0a; border:1px solid var(--border); color:white; padding:12px 14px; font-size:14px; outline:none; width:100%; resize:none; height:80px; font-family:inherit; }
+    .cf-textarea:focus,.cf-input:focus,.cf-select:focus { border-color:var(--red); }
+    /* Métodos de pago */
+    .pay-methods { display:flex; flex-direction:column; gap:8px; }
+    .pay-method { border:1px solid var(--border); padding:14px 16px; cursor:pointer; display:flex; align-items:center; gap:12px; transition:border-color .2s; }
+    .pay-method.active { border-color:var(--red); background:rgba(232,0,29,0.05); }
+    .pay-method input[type=radio] { accent-color:var(--red); }
+    .pay-method-label { font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:700; text-transform:uppercase; }
+    .pay-method-desc { font-size:12px; color:var(--muted); margin-top:2px; }
+    .pay-detail { background:#0a0a0a; border:1px solid var(--border); border-top:none; padding:14px 16px; font-size:13px; color:var(--muted); line-height:1.8; }
+    /* Resumen */
+    .order-summary { background:var(--mid); border:1px solid var(--border); padding:24px; position:sticky; top:80px; }
+    .os-title { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:1px; margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid var(--border); }
+    .os-item { display:flex; gap:12px; margin-bottom:14px; align-items:center; }
+    .os-item-img { width:52px; height:52px; background:linear-gradient(135deg,#1a0005,#111); flex-shrink:0; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+    .os-item-img img { width:100%; height:100%; object-fit:cover; }
+    .os-item-info { flex:1; }
+    .os-item-name { font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:700; text-transform:uppercase; }
+    .os-item-vars { font-size:11px; color:var(--muted); margin-top:2px; }
+    .os-item-price { font-family:'Bebas Neue',sans-serif; font-size:18px; }
+    .os-divider { border:none; border-top:1px solid var(--border); margin:16px 0; }
+    .os-row { display:flex; justify-content:space-between; font-size:13px; color:var(--muted); margin-bottom:8px; }
+    .os-total { display:flex; justify-content:space-between; font-family:'Bebas Neue',sans-serif; font-size:24px; padding-top:12px; border-top:1px solid var(--border); margin-top:8px; }
+    .btn-place { display:block; width:100%; background:var(--red); color:white; border:none; padding:16px; font-family:'Barlow Condensed',sans-serif; font-size:14px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; margin-top:16px; transition:background .2s; }
+    .btn-place:hover { background:#c0001a; }
+    .btn-place:disabled { opacity:0.5; cursor:not-allowed; }
+    /* Confirmación */
+    .confirm-box { background:var(--mid); border:1px solid var(--border); border-top:3px solid #16a34a; padding:40px; text-align:center; margin:24px 0; }
+    .confirm-icon { font-size:56px; margin-bottom:16px; }
+    .confirm-title { font-family:'Bebas Neue',sans-serif; font-size:36px; letter-spacing:1px; margin-bottom:8px; }
+    .confirm-sub { font-size:14px; color:var(--muted); line-height:1.7; max-width:500px; margin:0 auto 24px; }
+    .confirm-order { font-family:'Barlow Condensed',sans-serif; font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--red); margin-bottom:24px; }
+    .bank-info { background:#0a0a0a; border:1px solid var(--border); padding:20px; text-align:left; max-width:400px; margin:0 auto 24px; }
+    .bank-row { display:flex; justify-content:space-between; font-size:13px; margin-bottom:8px; }
+    .bank-label { color:var(--muted); }
+    .bank-val { font-weight:700; }
+    .wa-btn { display:inline-flex; align-items:center; gap:8px; background:#25d366; color:white; padding:12px 24px; font-family:'Barlow Condensed',sans-serif; font-size:14px; letter-spacing:1px; text-transform:uppercase; text-decoration:none; }
+    @media(max-width:768px){ .checkout-wrap{grid-template-columns:1fr;} .order-summary{position:static;} .cf-grid{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+<header style="background:#0D0F14;border-bottom:1px solid #232830;position:sticky;top:0;z-index:200;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 16px;">
+    <nav style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;">
+      <a href="index.html" style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:white;text-decoration:none;">FIGHT<span style="color:#E8001D;">MFL</span></a>
+      <div style="display:flex;gap:24px;align-items:center;">
+        <a href="tienda.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888;text-decoration:none;">← Tienda</a>
+        <a href="carrito.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888;text-decoration:none;">Carrito</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="page">
+  <div style="margin:24px 0 16px;">
+    <span style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px;">Finalizar Pedido</span>
+  </div>
+
+  <div id="checkout-view">
+    <div class="checkout-wrap">
+
+      <!-- Formulario -->
+      <div class="checkout-form">
+
+        <!-- Datos personales -->
+        <div class="cf-section">
+          <div class="cf-section-title">01 — Datos de contacto</div>
+          <div class="cf-grid">
+            <div class="cf-field">
+              <label class="cf-label">Nombre completo *</label>
+              <input class="cf-input" id="f-nombre" placeholder="Carlos Reyes" required>
+            </div>
+            <div class="cf-field">
+              <label class="cf-label">Email *</label>
+              <input class="cf-input" id="f-email" type="email" placeholder="correo@ejemplo.com" required>
+            </div>
+          </div>
+          <div class="cf-field">
+            <label class="cf-label">Teléfono *</label>
+            <input class="cf-input" id="f-telefono" placeholder="+52 55 1234 5678" required>
+          </div>
+        </div>
+
+        <!-- Dirección de envío -->
+        <div class="cf-section">
+          <div class="cf-section-title">02 — Dirección de envío</div>
+          <div class="cf-field">
+            <label class="cf-label">Dirección *</label>
+            <input class="cf-input" id="f-direccion" placeholder="Calle, número, colonia" required>
+          </div>
+          <div class="cf-grid">
+            <div class="cf-field">
+              <label class="cf-label">Ciudad *</label>
+              <input class="cf-input" id="f-ciudad" placeholder="Ciudad de México" required>
+            </div>
+            <div class="cf-field">
+              <label class="cf-label">Estado *</label>
+              <input class="cf-input" id="f-estado" placeholder="CDMX" required>
+            </div>
+          </div>
+          <div class="cf-grid">
+            <div class="cf-field">
+              <label class="cf-label">Código postal *</label>
+              <input class="cf-input" id="f-cp" placeholder="06600" required>
+            </div>
+            <div class="cf-field">
+              <label class="cf-label">País</label>
+              <input class="cf-input" id="f-pais" value="México">
+            </div>
+          </div>
+        </div>
+
+        <!-- Método de pago -->
+        <div class="cf-section">
+          <div class="cf-section-title">03 — Método de pago</div>
+          <div class="pay-methods" id="pay-methods">
+            <div style="color:var(--muted);font-family:'Barlow Condensed',sans-serif;font-size:13px;">Cargando opciones de pago...</div>
+          </div>
+        </div>
+
+        <!-- Notas -->
+        <div class="cf-section">
+          <div class="cf-section-title">04 — Notas adicionales</div>
+          <textarea class="cf-textarea" id="f-notas" placeholder="Instrucciones especiales, referencias de entrega..."></textarea>
+        </div>
+
+        <div id="form-error" style="color:#ef4444;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;margin-bottom:12px;display:none;"></div>
+      </div>
+
+      <!-- Resumen del pedido -->
+      <div class="order-summary">
+        <div class="os-title">Tu pedido</div>
+        <div id="os-items"></div>
+        <hr class="os-divider">
+        <div class="os-row"><span>Subtotal</span><span id="os-subtotal">$0.00</span></div>
+        <div class="os-row" id="os-ship-row"><span>Envío</span><span id="os-ship">$0.00</span></div>
+        <div id="os-free-msg" style="display:none;color:#4ade80;font-size:12px;font-family:'Barlow Condensed',sans-serif;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">🚚 ¡Envío gratis!</div>
+        <div class="os-total"><span>Total</span><span id="os-total">$0.00</span></div>
+        <button class="btn-place" id="btn-place" onclick="placeOrder()">Confirmar pedido →</button>
+        <div style="font-size:11px;color:var(--muted);text-align:center;margin-top:10px;font-family:'Barlow Condensed',sans-serif;letter-spacing:1px;">🔒 Tus datos están seguros</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirmación -->
+  <div id="confirm-view" style="display:none">
+    <div class="confirm-box">
+      <div class="confirm-icon">✅</div>
+      <div class="confirm-title">¡Pedido confirmado!</div>
+      <div class="confirm-order" id="conf-order-num"></div>
+      <div class="confirm-sub" id="conf-message"></div>
+      <div id="conf-bank" style="display:none">
+        <div class="bank-info" id="conf-bank-info"></div>
+      </div>
+      <div id="conf-wa" style="display:none;margin-bottom:24px;">
+        <a href="#" id="conf-wa-link" class="wa-btn" target="_blank">💬 Contactar por WhatsApp</a>
+      </div>
+      <a href="tienda.html" class="btn">Seguir comprando</a>
+    </div>
+  </div>
+
+  <footer>
+    <a class="footer-logo" href="index.html">FIGHT<span>MFL</span></a>
+    <div class="footer-links"><a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Contacto</a></div>
+    <div class="footer-copy">© 2026 FightMFL</div>
+  </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="supabase-client.js"></script>
+<script>
+let cfg = {}, metodoPago = 'pendiente'
+
+function getCart(){ return JSON.parse(localStorage.getItem('mfl_cart')||'[]') }
+
+function val(id){ return document.getElementById(id)?.value?.trim()||'' }
+
+// ── Cargar config y renderizar ───────────────────────────
+async function main(){
+  const cart = getCart()
+  if(!cart.length){ window.location.href='carrito.html'; return }
+
+  const {data} = await db.from('tienda_config').select('*')
+  if(data) data.forEach(r => cfg[r.clave] = r.valor)
+
+  renderSummary(cart)
+  renderPayMethods()
+}
+
+function renderSummary(cart){
+  const sym = cfg.simbolo||'$'
+  const costoEnvio = +(cfg.costo_envio||99)
+  const freeFrom = +(cfg.envio_gratis_desde||999)
+  const subtotal = cart.reduce((s,i)=>s+i.precio*i.cantidad,0)
+  const freeShip = subtotal >= freeFrom
+  const envio = freeShip ? 0 : costoEnvio
+  const total = subtotal + envio
+
+  document.getElementById('os-items').innerHTML = cart.map(i=>`
+  <div class="os-item">
+    <div class="os-item-img">
+      ${i.imagen?`<img src="${i.imagen}" alt="">`:`<span style="font-family:'Bebas Neue',sans-serif;font-size:16px;color:rgba(232,0,29,0.3);">MFL</span>`}
+    </div>
+    <div class="os-item-info">
+      <div class="os-item-name">${i.nombre}</div>
+      <div class="os-item-vars">${i.talla?'T: '+i.talla:''}${i.talla&&i.color?' · ':''}${i.color||''} x${i.cantidad}</div>
+    </div>
+    <div class="os-item-price">${sym}${(i.precio*i.cantidad).toFixed(2)}</div>
+  </div>`).join('')
+
+  document.getElementById('os-subtotal').textContent = sym+subtotal.toFixed(2)
+  document.getElementById('os-ship').textContent = freeShip?'GRATIS':sym+envio.toFixed(2)
+  document.getElementById('os-total').textContent = sym+total.toFixed(2)
+  document.getElementById('os-free-msg').style.display = freeShip?'block':'none'
+  document.getElementById('os-ship-row').style.display = 'flex'
+}
+
+function renderPayMethods(){
+  const metodo = cfg.metodos_pago || 'pendiente'
+  metodoPago = metodo
+
+  const labels = {
+    pendiente:   { label:'Pago pendiente', desc:'Confirma tu pedido y te contactaremos para coordinar el pago.' },
+    whatsapp:    { label:'WhatsApp', desc:'Confirma tu pedido y te enviamos los detalles por WhatsApp.' },
+    transferencia:{ label:'Transferencia bancaria', desc:'Recibirás los datos bancarios al confirmar tu pedido.' },
+    ecartpay:    { label:'Tarjeta / Pago en línea', desc:'Pago seguro con tarjeta de crédito o débito.' },
+  }
+
+  const info = labels[metodo] || labels.pendiente
+  document.getElementById('pay-methods').innerHTML = `
+  <div class="pay-method active">
+    <input type="radio" checked readonly>
+    <div>
+      <div class="pay-method-label">${info.label}</div>
+      <div class="pay-method-desc">${info.desc}</div>
+    </div>
+  </div>`
+}
+
+// ── Crear pedido ──────────────────────────────────────────
+async function placeOrder(){
+  const btn = document.getElementById('btn-place')
+  const errEl = document.getElementById('form-error')
+  errEl.style.display='none'
+
+  // Validar
+  const nombre=val('f-nombre'), email=val('f-email'), tel=val('f-telefono')
+  const dir=val('f-direccion'), ciudad=val('f-ciudad'), estado=val('f-estado'), cp=val('f-cp')
+
+  if(!nombre||!email||!tel||!dir||!ciudad||!estado||!cp){
+    errEl.textContent='Por favor completa todos los campos obligatorios (*).'
+    errEl.style.display='block'
+    return
+  }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    errEl.textContent='El email no es válido.'
+    errEl.style.display='block'
+    return
+  }
+
+  btn.disabled=true; btn.textContent='Procesando...'
+
+  const cart = getCart()
+  const sym = cfg.simbolo||'$'
+  const costoEnvio = +(cfg.costo_envio||99)
+  const freeFrom = +(cfg.envio_gratis_desde||999)
+  const subtotal = cart.reduce((s,i)=>s+i.precio*i.cantidad,0)
+  const freeShip = subtotal >= freeFrom
+  const envio = freeShip?0:costoEnvio
+  const total = subtotal + envio
+  const numPedido = 'MFL-'+Date.now().toString(36).toUpperCase()
+
+  // Insertar pedido
+  const {data:pedido, error:pe} = await db.from('pedidos').insert([{
+    numero_pedido: numPedido,
+    status: 'pendiente',
+    subtotal, envio, impuesto:0, total,
+    cliente_nombre: nombre,
+    cliente_email: email,
+    cliente_telefono: tel,
+    envio_direccion: dir,
+    envio_ciudad: ciudad,
+    envio_estado: estado,
+    envio_cp: cp,
+    envio_pais: val('f-pais')||'México',
+    notas: val('f-notas'),
+    metodo_pago: metodoPago,
+    pago_status: 'pendiente'
+  }]).select().single()
+
+  if(pe||!pedido){ btn.disabled=false; btn.textContent='Confirmar pedido →'; errEl.textContent='Error al procesar el pedido. Intenta de nuevo.'; errEl.style.display='block'; return }
+
+  // Insertar items
+  const items = cart.map(i=>({
+    pedido_id: pedido.id,
+    producto_id: i.id,
+    producto_nombre: i.nombre,
+    talla: i.talla||'',
+    color: i.color||'',
+    cantidad: i.cantidad,
+    precio: i.precio,
+    subtotal: i.precio*i.cantidad
+  }))
+  await db.from('pedido_items').insert(items)
+
+  // Limpiar carrito
+  localStorage.removeItem('mfl_cart')
+
+  // Mostrar confirmación
+  showConfirm(pedido, nombre, total, sym, cart)
+}
+
+function showConfirm(pedido, nombre, total, sym, cart){
+  document.getElementById('checkout-view').style.display='none'
+  document.getElementById('confirm-view').style.display='block'
+  document.getElementById('conf-order-num').textContent='Pedido #'+pedido.numero_pedido
+
+  const mensajes = {
+    pendiente: `Gracias ${nombre}. Hemos recibido tu pedido por ${sym}${total.toFixed(2)}. Nos comunicaremos contigo para coordinar el pago y envío.`,
+    whatsapp: `Gracias ${nombre}. Tu pedido #${pedido.numero_pedido} ha sido registrado. Haz click en el botón para enviarnos un mensaje y coordinar todo.`,
+    transferencia: `Gracias ${nombre}. Realiza la transferencia con los datos a continuación y envíanos el comprobante. Tu pedido se activará al confirmar el pago.`,
+    ecartpay: `Gracias ${nombre}. Tu pedido ha sido registrado. Te contactaremos para procesar el pago.`,
+  }
+  document.getElementById('conf-message').textContent = mensajes[metodoPago] || mensajes.pendiente
+
+  // WhatsApp
+  if(metodoPago==='whatsapp' && cfg.whatsapp){
+    const wa = cfg.whatsapp.replace(/\s+/g,'')
+    const items = cart.map(i=>`• ${i.nombre}${i.talla?' T:'+i.talla:''}${i.color?' C:'+i.color:''} x${i.cantidad}`).join('\n')
+    const msg = encodeURIComponent(`Hola! Quiero completar mi pedido #${pedido.numero_pedido}\n\nProductos:\n${items}\n\nTotal: ${sym}${total.toFixed(2)}`)
+    document.getElementById('conf-wa-link').href=`https://wa.me/${wa}?text=${msg}`
+    document.getElementById('conf-wa').style.display='block'
+  }
+
+  // Transferencia
+  if(metodoPago==='transferencia' && (cfg.banco_nombre||cfg.banco_clabe)){
+    document.getElementById('conf-bank').style.display='block'
+    document.getElementById('conf-bank-info').innerHTML=`
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Datos bancarios</div>
+    ${cfg.banco_nombre?`<div class="bank-row"><span class="bank-label">Banco</span><span class="bank-val">${cfg.banco_nombre}</span></div>`:''}
+    ${cfg.banco_titular?`<div class="bank-row"><span class="bank-label">Titular</span><span class="bank-val">${cfg.banco_titular}</span></div>`:''}
+    ${cfg.banco_cuenta?`<div class="bank-row"><span class="bank-label">Cuenta</span><span class="bank-val">${cfg.banco_cuenta}</span></div>`:''}
+    ${cfg.banco_clabe?`<div class="bank-row"><span class="bank-label">CLABE</span><span class="bank-val">${cfg.banco_clabe}</span></div>`:''}
+    <div class="bank-row" style="margin-top:10px;border-top:1px solid var(--border);padding-top:10px;"><span class="bank-label">Total</span><span class="bank-val" style="color:var(--red);font-size:18px;">${sym}${total.toFixed(2)}</span></div>`
+  }
+
+  window.scrollTo({top:0,behavior:'smooth'})
+}
+
+main()
+</script>
+</body>
+</html>
