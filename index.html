@@ -564,56 +564,75 @@ function toggleMenu(){
 
   // ── Main ──────────────────────────────────────────────────
   async function main() {
-    // Próximo evento (upcoming) o live
-    const { data: eventos } = await db.from('eventos').select('*')
-      .in('status', ['live','upcoming']).order('fecha').limit(1)
-    const proximo = eventos?.[0]
+    try {
+      // Próximo evento (upcoming) o live
+      const { data: eventos, error: evErr } = await db.from('eventos').select('*')
+        .in('status', ['live','upcoming']).order('fecha').limit(1)
+      const proximo = eventos?.[0]
 
-    if (proximo) {
-      // Hero
-      const num = proximo.nombre.replace(/[^0-9]/g,'')
-      document.getElementById('hero-num').textContent = num || proximo.nombre
-      document.getElementById('hero-tag').textContent = proximo.status === 'live' ? '🔴 EN VIVO' : 'Próximo Evento'
-      const fechaFormato = proximo.fecha
-        ? new Date(proximo.fecha+'T12:00:00').toLocaleDateString('es-MX',{weekday:'short',day:'numeric',month:'short',year:'numeric'})
-        : ''
-      document.getElementById('hero-date').textContent = `${fechaFormato}${proximo.lugar?' · '+proximo.lugar:''}`
+      if (proximo) {
+        // Hero
+        const num = proximo.nombre.replace(/[^0-9]/g,'')
+        document.getElementById('hero-num').textContent = num || proximo.nombre
+        document.getElementById('hero-tag').textContent = proximo.status === 'live' ? '🔴 EN VIVO' : 'Próximo Evento'
+        const fechaFormato = proximo.fecha
+          ? new Date(proximo.fecha+'T12:00:00').toLocaleDateString('es-MX',{weekday:'short',day:'numeric',month:'short',year:'numeric'})
+          : ''
+        document.getElementById('hero-date').textContent = `${fechaFormato}${proximo.lugar?' · '+proximo.lugar:''}`
 
-      if (proximo.status === 'upcoming' && proximo.fecha) {
-        startCountdown(proximo.fecha, proximo.hora)
-      } else {
-        document.getElementById('countdown-wrap').style.display = 'none'
+        if (proximo.status === 'upcoming' && proximo.fecha) {
+          // Normalizar hora: puede venir "20:00" o "20:00:00"
+          const hora = (proximo.hora || '20:00').substring(0, 5)
+          startCountdown(proximo.fecha, hora)
+        } else {
+          document.getElementById('countdown-wrap').style.display = 'none'
+        }
+
+        // Cartelera del próximo evento
+        try {
+          const { data: peleas } = await db.from('peleas')
+            .select('*, peleador1:peleador1_id(*), peleador2:peleador2_id(*), ganador:ganador_id(*)')
+            .eq('evento_id', proximo.id).order('orden')
+          renderCartelera(peleas || [], proximo.nombre)
+        } catch(e) {
+          document.getElementById('cartelera-content').innerHTML =
+            '<div style="color:var(--muted);font-family:\'Barlow Condensed\',sans-serif;padding:24px;text-align:center;letter-spacing:1px;border:1px solid var(--border);background:var(--mid)">Cartelera por anunciar</div>'
+        }
       }
-
-      // Cartelera del próximo evento
-      const { data: peleas } = await db.from('peleas')
-        .select('*, peleador1:peleador1_id(*), peleador2:peleador2_id(*), ganador:ganador_id(*)')
-        .eq('evento_id', proximo.id).order('orden')
-      renderCartelera(peleas || [], proximo.nombre)
+    } catch(e) {
+      console.error('Error cargando evento:', e)
     }
 
-    // Highlights para el carrusel
-    const { data: highlights } = await db.from('highlights')
-      .select('*').eq('en_home', true).order('orden').order('created_at', { ascending: false }).limit(12)
-    renderHighlights(highlights || [])
-
-    // Noticias — sin filtro de publicado para evitar problemas de RLS
-    const { data: noticias } = await db.from('noticias')
-      .select('*').order('created_at', { ascending: false }).limit(3)
-    renderNoticias(noticias || [])
-
-    // Últimos resultados (evento terminado más reciente)
-    const { data: terminados } = await db.from('eventos').select('*')
-      .eq('status','done').order('fecha', { ascending: false }).limit(1)
-    const ultimo = terminados?.[0]
-    if (ultimo) {
-      const { data: peleasT } = await db.from('peleas')
-        .select('*, peleador1:peleador1_id(*), peleador2:peleador2_id(*), ganador:ganador_id(*)')
-        .eq('evento_id', ultimo.id).order('orden')
-      if (peleasT?.some(p => p.status === 'terminada')) {
-        renderResultados(ultimo, peleasT)
-      }
+    // Highlights para el carrusel — independiente del bloque anterior
+    try {
+      const { data: highlights } = await db.from('highlights')
+        .select('*').eq('en_home', true).order('orden').limit(12)
+      renderHighlights(highlights || [])
+    } catch(e) {
+      console.error('Error cargando highlights:', e)
     }
+
+    // Noticias
+    try {
+      const { data: noticias } = await db.from('noticias')
+        .select('*').order('created_at', { ascending: false }).limit(3)
+      renderNoticias(noticias || [])
+    } catch(e) { console.error('Error noticias:', e) }
+
+    // Últimos resultados
+    try {
+      const { data: terminados } = await db.from('eventos').select('*')
+        .eq('status','done').order('fecha', { ascending: false }).limit(1)
+      const ultimo = terminados?.[0]
+      if (ultimo) {
+        const { data: peleasT } = await db.from('peleas')
+          .select('*, peleador1:peleador1_id(*), peleador2:peleador2_id(*), ganador:ganador_id(*)')
+          .eq('evento_id', ultimo.id).order('orden')
+        if (peleasT?.some(p => p.status === 'terminada')) {
+          renderResultados(ultimo, peleasT)
+        }
+      }
+    } catch(e) { console.error('Error resultados:', e) }
   }
 
   main()
