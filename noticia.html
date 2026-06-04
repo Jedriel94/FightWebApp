@@ -649,5 +649,38 @@ function toggleMenu(){
 
 
 
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="supabase-client.js"></script>
+<script>
+async function loadNoticia() {
+  const id = new URLSearchParams(location.search).get('id')
+  if (!id) return
+  const { data: n } = await db.from('noticias').select('*').eq('id', id).single()
+  if (!n) {
+    document.querySelector('.page').innerHTML = '<div style="text-align:center;padding:80px 20px;font-family:Barlow Condensed,sans-serif;color:var(--muted);letter-spacing:1px;">Noticia no encontrada. <a href="noticias.html" style="color:var(--red)">← Volver</a></div>'
+    return
+  }
+  document.title = n.titulo + ' | FightMFL'
+  const bg = document.querySelector('.article-hero-bg')
+  if (bg && n.imagen_url) bg.style.background = 'url("' + n.imagen_url + '") center/cover no-repeat'
+  const cat = document.querySelector('.article-cat')
+  if (cat) cat.textContent = n.categoria || 'MFL'
+  const title = document.querySelector('.article-title')
+  if (title) title.innerHTML = n.titulo
+  const deck = document.querySelector('.article-deck')
+  if (deck) deck.textContent = n.contenido ? n.contenido.substring(0, 200) : ''
+  const meta = document.querySelector('.article-meta')
+  if (meta) meta.innerHTML = '<span>' + new Date(n.created_at).toLocaleDateString('es-MX',{day:'numeric',month:'long',year:'numeric'}) + '</span>'
+  const body = document.querySelector('.article-body')
+  if (body) body.innerHTML =
+    '<a href="noticias.html" style="display:inline-block;margin-bottom:24px;font-family:Barlow Condensed,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-decoration:none;">← Volver a Noticias</a>' +
+    (n.imagen_url ? '<div style="margin-bottom:24px;"><img src="' + n.imagen_url + '" style="width:100%;max-height:480px;object-fit:cover;"></div>' : '') +
+    '<div style="font-size:16px;line-height:1.9;color:#ccc;white-space:pre-line;">' + (n.contenido || '') + '</div>' +
+    '<div style="margin-top:32px;padding-top:20px;border-top:1px solid var(--border);font-family:Barlow Condensed,sans-serif;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);">' +
+    new Date(n.created_at).toLocaleDateString('es-MX',{day:'numeric',month:'long',year:'numeric'}) + ' · ' + (n.categoria||'MFL') + '</div>'
+}
+loadNoticia()
+</script>
 </body>
 </html>
