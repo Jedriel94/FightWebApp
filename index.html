@@ -239,21 +239,22 @@ function toggleMenu(){
   /* Avatar pequeño para cartelera */
   .av-sm { width:38px; height:38px; border-radius:50%; background:#1a1a1a; border:2px solid #252525; display:flex; align-items:center; justify-content:center; font-family:'Bebas Neue',sans-serif; font-size:12px; color:#444; flex-shrink:0; }
   .av-sm.w { border-color:rgba(232,0,29,0.4); }
-  /* Carrusel highlights */
-  .hl-card { flex-shrink:0; width:260px; cursor:pointer; background:var(--mid); border:1px solid var(--border); transition:border-color .2s; }
-  .hl-card:hover { border-color:#333; }
-  .hl-img { position:relative; height:148px; overflow:hidden; background:#0a0a0a; }
-  .hl-img img { width:100%; height:100%; object-fit:cover; transition:transform .3s; }
-  .hl-card:hover .hl-img img { transform:scale(1.04); }
+  /* Carrusel highlights — cards verticales estilo Shorts */
+  .hl-card { flex-shrink:0; width:180px; cursor:pointer; background:var(--mid); border:1px solid var(--border); transition:border-color .2s; border-radius:4px; overflow:hidden; }
+  .hl-card:hover { border-color:var(--red); }
+  .hl-img { position:relative; height:320px; overflow:hidden; background:#0a0a0a; }
+  .hl-img img { width:100%; height:100%; object-fit:cover; transition:transform .4s; }
+  .hl-card:hover .hl-img img { transform:scale(1.05); }
   .hl-play { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0); transition:background .2s; }
-  .hl-card:hover .hl-play { background:rgba(0,0,0,0.35); }
-  .hl-play-btn { width:44px; height:44px; background:rgba(232,0,29,0.9); border-radius:50%; display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .2s; }
+  .hl-card:hover .hl-play { background:rgba(0,0,0,0.4); }
+  .hl-play-btn { width:48px; height:48px; background:rgba(232,0,29,0.95); border-radius:50%; display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .2s; box-shadow:0 4px 16px rgba(232,0,29,0.5); }
   .hl-card:hover .hl-play-btn { opacity:1; }
-  .hl-play-btn::after { content:''; border-left:14px solid white; border-top:8px solid transparent; border-bottom:8px solid transparent; margin-left:3px; }
+  .hl-play-btn::after { content:''; border-left:16px solid white; border-top:9px solid transparent; border-bottom:9px solid transparent; margin-left:4px; }
   .hl-tag { position:absolute; top:8px; left:8px; background:var(--red); font-family:'Barlow Condensed',sans-serif; font-size:9px; letter-spacing:2px; text-transform:uppercase; padding:3px 8px; font-weight:700; }
-  .hl-tipo { position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.75); font-family:'Barlow Condensed',sans-serif; font-size:9px; letter-spacing:1px; text-transform:uppercase; padding:2px 6px; color:#ccc; }
-  .hl-info { padding:12px 14px; }
-  .hl-title { font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:700; text-transform:uppercase; line-height:1.3; color:white; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .hl-tipo { position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.8); font-family:'Barlow Condensed',sans-serif; font-size:9px; letter-spacing:1px; text-transform:uppercase; padding:2px 6px; color:#ccc; border-radius:2px; }
+  .hl-slot5 { position:absolute; top:8px; right:8px; background:rgba(147,51,234,0.85); font-family:'Barlow Condensed',sans-serif; font-size:9px; letter-spacing:1px; text-transform:uppercase; padding:2px 6px; color:white; border-radius:2px; }
+  .hl-info { padding:10px 12px; }
+  .hl-title { font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700; text-transform:uppercase; line-height:1.3; color:white; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
   /* Avatares con foto */
   .av-foto { padding:0!important; overflow:hidden; }
   .av-foto img { width:100%; height:100%; object-fit:cover; object-position:top center; display:block; }
@@ -303,33 +304,32 @@ function toggleMenu(){
   }
 
   // ── Highlights carrusel ───────────────────────────────────
-  let hlOffset = 0, hlItems = 0, hlCardW = 268 // 260 + 8 gap
+  let hlOffset = 0, hlItems = 0, hlCardW = 188 // 180 + 8 gap
 
   function getYtId(url) {
     const m = url.match(/(?:v=|\/shorts\/|youtu\.be\/)([^?&\s]+)/)
     return m ? m[1] : null
   }
 
-  function renderHighlights(highlights) {
-    if (!highlights.length) return
+  function renderHighlights(slots) {
+    const activos = slots.filter(s => s.highlights)
+    if (!activos.length) return
     document.getElementById('highlights-section').style.display = 'block'
     const track = document.getElementById('highlights-track')
-    hlItems = highlights.length
-    track.innerHTML = highlights.map(h => {
+    hlItems = activos.length
+    track.innerHTML = activos.map((s, idx) => {
+      const h = s.highlights
       const ytId = getYtId(h.video_url)
       const thumb = h.imagen_url || (ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : '')
-      const embedUrl = ytId
-        ? (h.video_url.includes('/shorts/')
-          ? `https://www.youtube.com/embed/${ytId}?autoplay=1`
-          : `https://www.youtube.com/embed/${ytId}?autoplay=1`)
-        : h.video_url
+      const embedUrl = ytId ? `https://www.youtube.com/embed/${ytId}?autoplay=1` : h.video_url
+      const isWild = idx === 4 // slot 5 = wildcard
       return `
       <div class="hl-card" onclick="openModal('${embedUrl}')">
         <div class="hl-img">
-          ${thumb ? `<img src="${thumb}" alt="${h.titulo}" loading="lazy">` : '<div style="width:100%;height:100%;background:#111;"></div>'}
+          ${thumb ? `<img src="${thumb}" alt="" loading="lazy">` : '<div style="width:100%;height:100%;background:#111;display:flex;align-items:center;justify-content:center;font-size:40px;">🎬</div>'}
           <div class="hl-play"><div class="hl-play-btn"></div></div>
           ${h.evento_nombre ? `<div class="hl-tag">${h.evento_nombre}</div>` : ''}
-          <div class="hl-tipo">${h.tipo||'Highlight'}</div>
+          ${isWild ? '<div class="hl-slot5">🃏 Pick</div>' : `<div class="hl-tipo">${h.tipo||'Highlight'}</div>`}
         </div>
         <div class="hl-info">
           <div class="hl-title">${h.titulo}</div>
@@ -603,11 +603,12 @@ function toggleMenu(){
       console.error('Error cargando evento:', e)
     }
 
-    // Highlights para el carrusel — independiente del bloque anterior
+    // Highlights — cargar desde home_slots con el highlight asociado
     try {
-      const { data: highlights } = await db.from('highlights')
-        .select('*').eq('en_home', true).order('orden').limit(12)
-      renderHighlights(highlights || [])
+      const { data: slots } = await db.from('home_slots')
+        .select('slot, highlights(*)')
+        .order('slot')
+      renderHighlights(slots || [])
     } catch(e) {
       console.error('Error cargando highlights:', e)
     }
