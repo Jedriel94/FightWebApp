@@ -497,7 +497,6 @@ function toggleMenu(){
     const wrap  = document.getElementById('noticias-content')
     const label = document.getElementById('noticias-label')
     if (!noticias.length) {
-      // Ocultar sección completa — no mostrar mensaje vacío
       wrap.style.display  = 'none'
       label.style.display = 'none'
       return
@@ -505,22 +504,28 @@ function toggleMenu(){
     label.style.display = ''
     const [first, ...rest] = noticias.slice(0, 3)
     let html = `
-    <a href="noticias.html" class="news-feat" style="text-decoration:none;color:inherit;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;cursor:pointer;">
-      <div>
+    <a href="noticia.html?id=${first.id}" class="news-feat" style="text-decoration:none;color:inherit;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;cursor:pointer;position:relative;overflow:hidden;">
+      ${first.imagen_url ? `<div style="position:absolute;inset:0;background:url('${first.imagen_url}') center/cover no-repeat;opacity:0.15;"></div>` : ''}
+      <div style="position:relative;z-index:1;">
         <div class="news-tag-n">${first.categoria||'MFL'}</div>
         <div class="news-title-n">${first.titulo}</div>
         <div class="news-date">${timeAgo(first.created_at)}</div>
       </div>
-      <div>
-        ${first.contenido ? `<div class="news-quote">${first.contenido.substring(0,200)}${first.contenido.length>200?'...':''}</div>` : ''}
+      <div style="position:relative;z-index:1;">
+        ${first.imagen_url
+          ? `<img src="${first.imagen_url}" style="width:100%;height:160px;object-fit:cover;border:1px solid rgba(232,0,29,0.2);" alt="">`
+          : first.contenido ? `<div class="news-quote">${first.contenido.substring(0,200)}${first.contenido.length>200?'...':''}</div>` : ''}
       </div>
     </a>`
     rest.forEach(n => {
       html += `
-    <a href="noticias.html" class="news-card">
-      <div class="news-tag-n">${n.categoria||'MFL'}</div>
-      <div class="news-title-n">${n.titulo}</div>
-      <div class="news-date">${timeAgo(n.created_at)}</div>
+    <a href="noticia.html?id=${n.id}" class="news-card" style="text-decoration:none;color:inherit;">
+      ${n.imagen_url ? `<div style="height:120px;overflow:hidden;"><img src="${n.imagen_url}" style="width:100%;height:100%;object-fit:cover;" alt=""></div>` : ''}
+      <div style="padding:${n.imagen_url?'12px 16px':'0'};">
+        <div class="news-tag-n">${n.categoria||'MFL'}</div>
+        <div class="news-title-n">${n.titulo}</div>
+        <div class="news-date">${timeAgo(n.created_at)}</div>
+      </div>
     </a>`
     })
     wrap.innerHTML = html
@@ -608,6 +613,7 @@ function toggleMenu(){
       const { data: slots } = await db.from('home_slots')
         .select('slot, highlights(*)')
         .order('slot')
+        .limit(10)
       renderHighlights(slots || [])
     } catch(e) {
       console.error('Error cargando highlights:', e)
