@@ -174,15 +174,11 @@ function toggleMenu(){
   <!-- NOTICIAS -->
   <!-- HIGHLIGHTS CARRUSEL -->
   <div id="highlights-section" style="display:none">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin:28px 0 16px;">
+    <div style="margin:28px 0 16px;">
       <div class="section-label" style="margin:0;border:none;">No te puedes perder</div>
-      <div style="display:flex;gap:6px;">
-        <button id="hl-prev" onclick="scrollCarrusel(-1)" style="width:36px;height:36px;background:var(--mid);border:1px solid var(--border);color:white;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s;" onmouseover="this.style.borderColor='var(--red)'" onmouseout="this.style.borderColor='var(--border)'">‹</button>
-        <button id="hl-next" onclick="scrollCarrusel(1)"  style="width:36px;height:36px;background:var(--mid);border:1px solid var(--border);color:white;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s;" onmouseover="this.style.borderColor='var(--red)'" onmouseout="this.style.borderColor='var(--border)'">›</button>
-      </div>
     </div>
-    <div id="highlights-track-wrap" style="overflow:hidden;position:relative;">
-      <div id="highlights-track" style="display:flex;gap:8px;transition:transform .35s ease;"></div>
+    <div id="highlights-track-wrap" class="hl-scroll" style="overflow-x:scroll;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;cursor:grab;">
+      <div id="highlights-track" style="display:flex;gap:8px;padding-bottom:4px;"></div>
     </div>
   </div>
 
@@ -239,6 +235,11 @@ function toggleMenu(){
   /* Avatar pequeño para cartelera */
   .av-sm { width:38px; height:38px; border-radius:50%; background:#1a1a1a; border:2px solid #252525; display:flex; align-items:center; justify-content:center; font-family:'Bebas Neue',sans-serif; font-size:12px; color:#444; flex-shrink:0; }
   .av-sm.w { border-color:rgba(232,0,29,0.4); }
+  /* Ocultar scrollbar del carrusel */
+  .hl-scroll { scrollbar-width:none; -ms-overflow-style:none; }
+  .hl-scroll::-webkit-scrollbar { display:none; height:0; }
+  .hl-card { user-select:none; }
+  .hl-card img { pointer-events:none; }
   /* Carrusel highlights — cards verticales estilo Shorts */
   .hl-card { flex-shrink:0; width:180px; cursor:pointer; background:var(--mid); border:1px solid var(--border); transition:border-color .2s; border-radius:4px; overflow:hidden; }
   .hl-card:hover { border-color:var(--red); }
@@ -303,8 +304,10 @@ function toggleMenu(){
     cdInterval = setInterval(tick, 1000)
   }
 
-  // ── Highlights carrusel ───────────────────────────────────
-  let hlOffset = 0, hlItems = 0, hlCardW = 188 // 180 + 8 gap
+  // ── Highlights carrusel táctil ─────────────────────────────
+  let hlCardW = 188 // 180 + 8 gap
+  let autoScrollTimer = null
+  let userInteracting = false
 
   function getYtId(url) {
     const m = url.match(/(?:v=|\/shorts\/|youtu\.be\/)([^?&\s]+)/)
@@ -316,7 +319,6 @@ function toggleMenu(){
     if (!activos.length) return
     document.getElementById('highlights-section').style.display = 'block'
     const track = document.getElementById('highlights-track')
-    hlItems = activos.length
     track.innerHTML = activos.map((s, idx) => {
       const h = s.highlights
       const ytId = getYtId(h.video_url)
@@ -324,9 +326,9 @@ function toggleMenu(){
       const embedUrl = ytId ? `https://www.youtube.com/embed/${ytId}?autoplay=1` : h.video_url
       const isWild = idx === 4 // slot 5 = wildcard
       return `
-      <div class="hl-card" onclick="openModal('${embedUrl}')">
+      <div class="hl-card" style="scroll-snap-align:start;" onclick="openModal('${embedUrl}')">
         <div class="hl-img">
-          ${thumb ? `<img src="${thumb}" alt="" loading="lazy">` : '<div style="width:100%;height:100%;background:#111;display:flex;align-items:center;justify-content:center;font-size:40px;">🎬</div>'}
+          ${thumb ? `<img src="${thumb}" alt="" loading="lazy" draggable="false">` : '<div style="width:100%;height:100%;background:#111;display:flex;align-items:center;justify-content:center;font-size:40px;">🎬</div>'}
           <div class="hl-play"><div class="hl-play-btn"></div></div>
           ${h.evento_nombre ? `<div class="hl-tag">${h.evento_nombre}</div>` : ''}
           ${isWild ? '<div class="hl-slot5">🃏 Pick</div>' : `<div class="hl-tipo">${h.tipo||'Highlight'}</div>`}
@@ -336,15 +338,59 @@ function toggleMenu(){
         </div>
       </div>`
     }).join('')
+
+    setupCarrusel()
+    startAutoScroll()
   }
 
-  function scrollCarrusel(dir) {
+  // Arrastre con mouse (desktop) — en móvil el scroll táctil es nativo
+  function setupCarrusel() {
     const wrap = document.getElementById('highlights-track-wrap')
-    const maxOffset = Math.max(0, hlItems - Math.floor(wrap.offsetWidth / hlCardW))
-    hlOffset = Math.max(0, Math.min(maxOffset, hlOffset + dir))
-    document.getElementById('highlights-track').style.transform = `translateX(-${hlOffset * hlCardW}px)`
-    document.getElementById('hl-prev').style.opacity = hlOffset === 0 ? '0.3' : '1'
-    document.getElementById('hl-next').style.opacity = hlOffset >= maxOffset ? '0.3' : '1'
+    let isDown = false, startX = 0, scrollStart = 0, moved = false
+
+    wrap.addEventListener('mousedown', e => {
+      isDown = true; moved = false
+      wrap.style.cursor = 'grabbing'
+      startX = e.pageX
+      scrollStart = wrap.scrollLeft
+    })
+    wrap.addEventListener('mouseleave', () => { isDown = false; wrap.style.cursor = 'grab' })
+    wrap.addEventListener('mouseup', () => { isDown = false; wrap.style.cursor = 'grab' })
+    wrap.addEventListener('mousemove', e => {
+      if (!isDown) return
+      e.preventDefault()
+      const dx = e.pageX - startX
+      if (Math.abs(dx) > 5) moved = true
+      wrap.scrollLeft = scrollStart - dx
+    })
+    // Evitar que un drag dispare el click del video
+    wrap.addEventListener('click', e => {
+      if (moved) { e.stopPropagation(); e.preventDefault() }
+    }, true)
+
+    // Pausar auto-scroll cuando el usuario interactúa
+    ;['mousedown','touchstart','wheel'].forEach(ev =>
+      wrap.addEventListener(ev, () => { userInteracting = true; stopAutoScroll() }, { passive: true })
+    )
+  }
+
+  function startAutoScroll() {
+    stopAutoScroll()
+    if (userInteracting) return
+    const wrap = document.getElementById('highlights-track-wrap')
+    autoScrollTimer = setInterval(() => {
+      if (userInteracting) return
+      const maxScroll = wrap.scrollWidth - wrap.clientWidth
+      if (wrap.scrollLeft >= maxScroll - 2) {
+        wrap.scrollTo({ left: 0, behavior: 'smooth' }) // vuelve al inicio
+      } else {
+        wrap.scrollBy({ left: hlCardW, behavior: 'smooth' })
+      }
+    }, 3000)
+  }
+
+  function stopAutoScroll() {
+    if (autoScrollTimer) { clearInterval(autoScrollTimer); autoScrollTimer = null }
   }
 
   function openModal(embedUrl) {
