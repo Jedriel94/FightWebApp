@@ -172,14 +172,12 @@ function toggleMenu(){
   </div>
 
   <!-- NOTICIAS -->
-  <!-- HIGHLIGHTS CARRUSEL -->
+  <!-- HIGHLIGHTS — Destacado + grid -->
   <div id="highlights-section" style="display:none">
     <div style="margin:28px 0 16px;">
       <div class="section-label" style="margin:0;border:none;">No te puedes perder</div>
     </div>
-    <div id="highlights-track-wrap" class="hl-scroll" style="overflow-x:scroll;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;cursor:grab;">
-      <div id="highlights-track" style="display:flex;gap:8px;padding-bottom:4px;"></div>
-    </div>
+    <div id="highlights-grid" class="hl-grid"></div>
   </div>
 
   <!-- MODAL VIDEO -->
@@ -235,27 +233,35 @@ function toggleMenu(){
   /* Avatar pequeño para cartelera */
   .av-sm { width:38px; height:38px; border-radius:50%; background:#1a1a1a; border:2px solid #252525; display:flex; align-items:center; justify-content:center; font-family:'Bebas Neue',sans-serif; font-size:12px; color:#444; flex-shrink:0; }
   .av-sm.w { border-color:rgba(232,0,29,0.4); }
-  /* Ocultar scrollbar del carrusel */
-  .hl-scroll { scrollbar-width:none; -ms-overflow-style:none; }
-  .hl-scroll::-webkit-scrollbar { display:none; height:0; }
-  .hl-card { user-select:none; }
-  .hl-card img { pointer-events:none; }
-  /* Carrusel highlights — cards verticales estilo Shorts */
-  .hl-card { flex-shrink:0; width:180px; cursor:pointer; background:var(--mid); border:1px solid var(--border); transition:border-color .2s; border-radius:4px; overflow:hidden; }
+  /* Highlights — Destacado + grid */
+  .hl-grid { display:grid; grid-template-columns:2fr 1fr 1fr; grid-template-rows:1fr 1fr; gap:8px; height:520px; }
+  .hl-card { position:relative; cursor:pointer; overflow:hidden; background:#0a0a0a; border:1px solid var(--border); transition:border-color .2s; }
   .hl-card:hover { border-color:var(--red); }
-  .hl-img { position:relative; height:320px; overflow:hidden; background:#0a0a0a; }
-  .hl-img img { width:100%; height:100%; object-fit:cover; transition:transform .4s; }
-  .hl-card:hover .hl-img img { transform:scale(1.05); }
-  .hl-play { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0); transition:background .2s; }
-  .hl-card:hover .hl-play { background:rgba(0,0,0,0.4); }
-  .hl-play-btn { width:48px; height:48px; background:rgba(232,0,29,0.95); border-radius:50%; display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .2s; box-shadow:0 4px 16px rgba(232,0,29,0.5); }
-  .hl-card:hover .hl-play-btn { opacity:1; }
-  .hl-play-btn::after { content:''; border-left:16px solid white; border-top:9px solid transparent; border-bottom:9px solid transparent; margin-left:4px; }
-  .hl-tag { position:absolute; top:8px; left:8px; background:var(--red); font-family:'Barlow Condensed',sans-serif; font-size:9px; letter-spacing:2px; text-transform:uppercase; padding:3px 8px; font-weight:700; }
-  .hl-tipo { position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.8); font-family:'Barlow Condensed',sans-serif; font-size:9px; letter-spacing:1px; text-transform:uppercase; padding:2px 6px; color:#ccc; border-radius:2px; }
-  .hl-slot5 { position:absolute; top:8px; right:8px; background:rgba(147,51,234,0.85); font-family:'Barlow Condensed',sans-serif; font-size:9px; letter-spacing:1px; text-transform:uppercase; padding:2px 6px; color:white; border-radius:2px; }
-  .hl-info { padding:10px 12px; }
-  .hl-title { font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700; text-transform:uppercase; line-height:1.3; color:white; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+  /* La primera card ocupa 2 columnas y 2 filas (grande) */
+  .hl-card.feat { grid-row:span 2; }
+  .hl-img { position:absolute; inset:0; }
+  .hl-img img { width:100%; height:100%; object-fit:cover; transition:transform .5s; }
+  .hl-card:hover .hl-img img { transform:scale(1.06); }
+  /* Degradado para legibilidad del título */
+  .hl-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.1) 55%, transparent 100%); z-index:1; }
+  .hl-play { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:2; transition:background .2s; }
+  .hl-card:hover .hl-play { background:rgba(0,0,0,0.25); }
+  .hl-play-btn { width:54px; height:54px; background:rgba(232,0,29,0.95); border-radius:50%; display:flex; align-items:center; justify-content:center; opacity:0; transform:scale(.8); transition:all .25s; box-shadow:0 4px 20px rgba(232,0,29,0.6); }
+  .hl-card:hover .hl-play-btn { opacity:1; transform:scale(1); }
+  .hl-card.feat .hl-play-btn { width:68px; height:68px; }
+  .hl-play-btn::after { content:''; border-left:18px solid white; border-top:11px solid transparent; border-bottom:11px solid transparent; margin-left:5px; }
+  .hl-tag { position:absolute; top:12px; left:12px; z-index:3; background:var(--red); font-family:'Barlow Condensed',sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase; padding:4px 10px; font-weight:700; }
+  .hl-tipo { position:absolute; top:12px; right:12px; z-index:3; background:rgba(0,0,0,0.7); font-family:'Barlow Condensed',sans-serif; font-size:10px; letter-spacing:1px; text-transform:uppercase; padding:3px 8px; color:#ddd; }
+  .hl-info { position:absolute; left:0; right:0; bottom:0; z-index:3; padding:16px; }
+  .hl-title { font-family:'Barlow Condensed',sans-serif; font-weight:700; text-transform:uppercase; line-height:1.2; color:white; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .hl-card:not(.feat) .hl-title { font-size:14px; }
+  .hl-card.feat .hl-title { font-size:26px; }
+  @media(max-width:768px){
+    .hl-grid { grid-template-columns:1fr 1fr; grid-template-rows:auto; height:auto; }
+    .hl-card { aspect-ratio:16/10; }
+    .hl-card.feat { grid-column:span 2; grid-row:span 1; aspect-ratio:16/9; }
+    .hl-card.feat .hl-title { font-size:20px; }
+  }
   /* Avatares con foto */
   .av-foto { padding:0!important; overflow:hidden; }
   .av-foto img { width:100%; height:100%; object-fit:cover; object-position:top center; display:block; }
@@ -304,93 +310,37 @@ function toggleMenu(){
     cdInterval = setInterval(tick, 1000)
   }
 
-  // ── Highlights carrusel táctil ─────────────────────────────
-  let hlCardW = 188 // 180 + 8 gap
-  let autoScrollTimer = null
-  let userInteracting = false
-
+  // ── Highlights — Destacado + grid (5 videos) ───────────────
   function getYtId(url) {
     const m = url.match(/(?:v=|\/shorts\/|youtu\.be\/)([^?&\s]+)/)
     return m ? m[1] : null
   }
 
   function renderHighlights(slots) {
-    const activos = slots.filter(s => s.highlights)
+    const activos = slots.filter(s => s.highlights).slice(0, 5) // máximo 5: 1 grande + 4 chicos
     if (!activos.length) return
     document.getElementById('highlights-section').style.display = 'block'
-    const track = document.getElementById('highlights-track')
-    track.innerHTML = activos.map((s, idx) => {
+    const grid = document.getElementById('highlights-grid')
+    grid.innerHTML = activos.map((s, idx) => {
       const h = s.highlights
       const ytId = getYtId(h.video_url)
       const thumb = h.imagen_url || (ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : '')
       const embedUrl = ytId ? `https://www.youtube.com/embed/${ytId}?autoplay=1` : h.video_url
-      const isWild = idx === 4 // slot 5 = wildcard
+      const feat = idx === 0 ? ' feat' : ''
       return `
-      <div class="hl-card" style="scroll-snap-align:start;" onclick="openModal('${embedUrl}')">
+      <div class="hl-card${feat}" onclick="openModal('${embedUrl}')">
         <div class="hl-img">
-          ${thumb ? `<img src="${thumb}" alt="" loading="lazy" draggable="false">` : '<div style="width:100%;height:100%;background:#111;display:flex;align-items:center;justify-content:center;font-size:40px;">🎬</div>'}
-          <div class="hl-play"><div class="hl-play-btn"></div></div>
-          ${h.evento_nombre ? `<div class="hl-tag">${h.evento_nombre}</div>` : ''}
-          ${isWild ? '<div class="hl-slot5">🃏 Pick</div>' : `<div class="hl-tipo">${h.tipo||'Highlight'}</div>`}
+          ${thumb ? `<img src="${thumb}" alt="" loading="lazy">` : '<div style="width:100%;height:100%;background:#111;display:flex;align-items:center;justify-content:center;font-size:40px;">🎬</div>'}
         </div>
+        <div class="hl-overlay"></div>
+        <div class="hl-play"><div class="hl-play-btn"></div></div>
+        ${h.evento_nombre ? `<div class="hl-tag">${h.evento_nombre}</div>` : ''}
+        <div class="hl-tipo">${h.tipo||'Highlight'}</div>
         <div class="hl-info">
           <div class="hl-title">${h.titulo}</div>
         </div>
       </div>`
     }).join('')
-
-    setupCarrusel()
-    startAutoScroll()
-  }
-
-  // Arrastre con mouse (desktop) — en móvil el scroll táctil es nativo
-  function setupCarrusel() {
-    const wrap = document.getElementById('highlights-track-wrap')
-    let isDown = false, startX = 0, scrollStart = 0, moved = false
-
-    wrap.addEventListener('mousedown', e => {
-      isDown = true; moved = false
-      wrap.style.cursor = 'grabbing'
-      startX = e.pageX
-      scrollStart = wrap.scrollLeft
-    })
-    wrap.addEventListener('mouseleave', () => { isDown = false; wrap.style.cursor = 'grab' })
-    wrap.addEventListener('mouseup', () => { isDown = false; wrap.style.cursor = 'grab' })
-    wrap.addEventListener('mousemove', e => {
-      if (!isDown) return
-      e.preventDefault()
-      const dx = e.pageX - startX
-      if (Math.abs(dx) > 5) moved = true
-      wrap.scrollLeft = scrollStart - dx
-    })
-    // Evitar que un drag dispare el click del video
-    wrap.addEventListener('click', e => {
-      if (moved) { e.stopPropagation(); e.preventDefault() }
-    }, true)
-
-    // Pausar auto-scroll cuando el usuario interactúa
-    ;['mousedown','touchstart','wheel'].forEach(ev =>
-      wrap.addEventListener(ev, () => { userInteracting = true; stopAutoScroll() }, { passive: true })
-    )
-  }
-
-  function startAutoScroll() {
-    stopAutoScroll()
-    if (userInteracting) return
-    const wrap = document.getElementById('highlights-track-wrap')
-    autoScrollTimer = setInterval(() => {
-      if (userInteracting) return
-      const maxScroll = wrap.scrollWidth - wrap.clientWidth
-      if (wrap.scrollLeft >= maxScroll - 2) {
-        wrap.scrollTo({ left: 0, behavior: 'smooth' }) // vuelve al inicio
-      } else {
-        wrap.scrollBy({ left: hlCardW, behavior: 'smooth' })
-      }
-    }, 3000)
-  }
-
-  function stopAutoScroll() {
-    if (autoScrollTimer) { clearInterval(autoScrollTimer); autoScrollTimer = null }
   }
 
   function openModal(embedUrl) {
