@@ -9,35 +9,35 @@
     .prod-wrap { display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--border); background:var(--mid); margin:24px 0; }
     .prod-gallery { position:relative; min-height:480px; background:linear-gradient(135deg,#1a0005,#111); border-right:1px solid var(--border); overflow:hidden; display:flex; align-items:center; justify-content:center; }
     .prod-gallery img { width:100%; height:100%; object-fit:cover; position:absolute; inset:0; }
-    .prod-gallery-ph { font-family:'Bebas Neue',sans-serif; font-size:80px; color:rgba(232,0,29,0.15); letter-spacing:4px; }
-    .prod-badge-sale { position:absolute; top:16px; left:16px; background:var(--red); font-family:'Barlow Condensed',sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase; padding:4px 12px; z-index:2; }
+    .prod-gallery-ph { font-family:'Anton',sans-serif; font-size:80px; color:rgba(232,0,29,0.15); letter-spacing:4px; }
+    .prod-badge-sale { position:absolute; top:16px; left:16px; background:var(--red); font-family:'Oswald',sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase; padding:4px 12px; z-index:2; }
     .prod-info { padding:40px; display:flex; flex-direction:column; }
-    .prod-breadcrumb { font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:16px; }
+    .prod-breadcrumb { font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:16px; }
     .prod-breadcrumb a { color:var(--muted); text-decoration:none; }
     .prod-breadcrumb a:hover { color:var(--red); }
-    .prod-cat { font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--red); margin-bottom:8px; }
-    .prod-name { font-family:'Bebas Neue',sans-serif; font-size:48px; line-height:1; letter-spacing:1px; margin-bottom:12px; }
+    .prod-cat { font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--red); margin-bottom:8px; }
+    .prod-name { font-family:'Anton',sans-serif; font-size:48px; line-height:1; letter-spacing:1px; margin-bottom:12px; }
     .prod-desc { font-size:14px; color:var(--muted); line-height:1.8; margin-bottom:24px; }
-    .prod-price { font-family:'Bebas Neue',sans-serif; font-size:42px; color:white; display:flex; align-items:baseline; gap:12px; margin-bottom:6px; }
+    .prod-price { font-family:'Anton',sans-serif; font-size:42px; color:white; display:flex; align-items:baseline; gap:12px; margin-bottom:6px; }
     .prod-price-old { font-size:22px; color:var(--muted); text-decoration:line-through; }
     .prod-ship { font-size:13px; color:#16a34a; margin-bottom:24px; }
-    .prod-label { font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
+    .prod-label { font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
     .tallas-grid { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:24px; }
-    .talla-btn { min-width:48px; height:48px; padding:0 10px; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:700; cursor:pointer; transition:all .2s; }
+    .talla-btn { min-width:48px; height:48px; padding:0 10px; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-family:'Oswald',sans-serif; font-size:14px; font-weight:700; cursor:pointer; transition:all .2s; }
     .talla-btn:hover,.talla-btn.active { border-color:var(--red); color:var(--red); background:rgba(232,0,29,0.05); }
     .colores-grid { display:flex; gap:10px; margin-bottom:24px; flex-wrap:wrap; }
     .color-opt { display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer; }
     .color-swatch { width:32px; height:32px; border-radius:50%; border:2px solid rgba(255,255,255,0.15); transition:all .2s; }
     .color-opt.active .color-swatch { border-color:white; transform:scale(1.15); }
-    .color-opt-label { font-family:'Barlow Condensed',sans-serif; font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); }
+    .color-opt-label { font-family:'Oswald',sans-serif; font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); }
     .prod-qty { display:flex; align-items:center; gap:0; margin-bottom:24px; border:1px solid var(--border); width:fit-content; }
     .qty-btn { width:44px; height:44px; background:transparent; border:none; color:white; font-size:20px; cursor:pointer; transition:background .2s; display:flex; align-items:center; justify-content:center; }
     .qty-btn:hover { background:rgba(255,255,255,0.08); }
-    .qty-val { width:44px; height:44px; border-left:1px solid var(--border); border-right:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-family:'Barlow Condensed',sans-serif; font-size:16px; font-weight:700; }
+    .qty-val { width:44px; height:44px; border-left:1px solid var(--border); border-right:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-family:'Oswald',sans-serif; font-size:16px; font-weight:700; }
     .prod-actions { display:flex; gap:10px; flex-direction:column; }
-    .btn-add { background:var(--red); color:white; border:none; padding:16px 32px; font-family:'Barlow Condensed',sans-serif; font-size:14px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:background .2s; }
+    .btn-add { background:var(--red); color:white; border:none; padding:16px 32px; font-family:'Oswald',sans-serif; font-size:14px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:background .2s; }
     .btn-add:hover { background:#c0001a; }
-    .btn-cart { background:transparent; color:white; border:1px solid var(--border); padding:16px 32px; font-family:'Barlow Condensed',sans-serif; font-size:14px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all .2s; text-decoration:none; display:block; text-align:center; }
+    .btn-cart { background:transparent; color:white; border:1px solid var(--border); padding:16px 32px; font-family:'Oswald',sans-serif; font-size:14px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all .2s; text-decoration:none; display:block; text-align:center; }
     .btn-cart:hover { border-color:var(--red); color:var(--red); }
     .prod-details { border-top:1px solid var(--border); padding-top:20px; margin-top:auto; }
     .prod-detail-row { display:flex; gap:8px; font-size:13px; color:var(--muted); margin-bottom:6px; }
@@ -54,16 +54,17 @@
   </style>
 </head>
 <body>
-<header style="background:#0D0F14;border-bottom:1px solid #232830;position:sticky;top:0;z-index:200;">
+<header style="background:#000000;border-bottom:1px solid #1E1E1E;position:sticky;top:0;z-index:200;">
   <div style="max-width:1200px;margin:0 auto;padding:0 16px;">
     <nav style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;">
-      <a href="index.html" style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:white;text-decoration:none;">FIGHT<span style="color:#E8001D;">MFL</span></a>
+      <a href="index.html" style="display:flex;align-items:center;text-decoration:none;"><img src="logo.svg" alt="FightMFL" style="height:30px;width:auto;display:block;"></a>
       <div id="nav-desktop" style="display:flex;gap:28px;align-items:center;">
-        <a href="index.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888;text-decoration:none;">Inicio</a>
-        <a href="eventos.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888;text-decoration:none;">Eventos</a>
-        <a href="noticias.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888;text-decoration:none;">Noticias</a>
-        <a href="tienda.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888;text-decoration:none;">Tienda</a>
-        <a href="carrito.html" class="cart-nav">🛍️<span class="cart-nav-count" id="cart-count" style="display:none">0</span></a>
+        <a href="index.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888;text-decoration:none;">Inicio</a>
+        <a href="eventos.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888;text-decoration:none;">Eventos</a>
+        <a href="noticias.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888;text-decoration:none;">Noticias</a>
+        <a href="tienda.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888;text-decoration:none;">Tienda</a>
+        <a href="pelear.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#FF0A2A;text-decoration:none;font-weight:700;">Quiero Pelear</a>
+        <a href="carrito.html" class="cart-nav"><span class="cart-nav-count" id="cart-count" style="display:none">0</span></a>
       </div>
       <button id="hamburger-btn" style="display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:transparent;border:none;" onclick="toggleMenu()">
         <span style="width:24px;height:2px;background:white;display:block;"></span>
@@ -77,7 +78,7 @@
 <script>function toggleMenu(){}</script>
 
 <div class="page" id="page-content">
-  <div style="color:var(--muted);font-family:'Barlow Condensed',sans-serif;text-align:center;padding:80px;letter-spacing:1px;">Cargando producto...</div>
+  <div style="color:var(--muted);font-family:'Oswald',sans-serif;text-align:center;padding:80px;letter-spacing:1px;">Cargando producto...</div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
@@ -132,7 +133,7 @@ async function main(){
         ${sym}${prec.toFixed(2)}
         ${prod.precio_oferta?`<span class="prod-price-old">${sym}${(+prod.precio).toFixed(2)}</span>`:''}
       </div>
-      ${prod.envio_gratis?'<div class="prod-ship">🚚 Este producto incluye envío gratis</div>':''}
+      ${prod.envio_gratis?'<div class="prod-ship">Este producto incluye envío gratis</div>':''}
 
       ${prod.tallas?.length?`
       <div class="prod-label">Talla — <span id="talla-sel" style="color:white">Selecciona</span></div>
@@ -170,7 +171,7 @@ async function main(){
   <div class="products-grid" id="relacionados" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;"></div>
 
   <footer>
-    <a class="footer-logo" href="index.html">FIGHT<span>MFL</span></a>
+    <a class="footer-logo" href="index.html" style="display:inline-flex;align-items:center;"><img src="logo.svg" alt="FightMFL" style="height:22px;width:auto;display:block;"></a>
     <div class="footer-links"><a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Contacto</a></div>
     <div class="footer-copy">© 2026 FightMFL</div>
   </footer>`
@@ -183,11 +184,11 @@ async function main(){
       const pr=p.precio_oferta?+p.precio_oferta:+p.precio
       return `<a href="producto.html?id=${p.id}" style="background:var(--mid);border:1px solid var(--border);text-decoration:none;color:var(--light);display:block;">
         <div style="height:160px;background:linear-gradient(135deg,#1a0005,#111);overflow:hidden;display:flex;align-items:center;justify-content:center;">
-          ${p.imagen?`<img src="${p.imagen}" style="width:100%;height:100%;object-fit:cover;" alt="">`:`<span style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:rgba(232,0,29,0.2);">MFL</span>`}
+          ${p.imagen?`<img src="${p.imagen}" style="width:100%;height:100%;object-fit:cover;" alt="">`:`<span style="font-family:'Anton',sans-serif;font-size:40px;color:rgba(232,0,29,0.2);">MFL</span>`}
         </div>
         <div style="padding:12px 14px;">
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;text-transform:uppercase;">${p.nombre}</div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;margin-top:4px;">${sym2}${pr.toFixed(2)}</div>
+          <div style="font-family:'Oswald',sans-serif;font-size:15px;font-weight:700;text-transform:uppercase;">${p.nombre}</div>
+          <div style="font-family:'Anton',sans-serif;font-size:20px;margin-top:4px;">${sym2}${pr.toFixed(2)}</div>
         </div>
       </a>`
     }).join('')
@@ -208,7 +209,7 @@ function addCart(){
   if(ex)ex.cantidad+=qty
   else cart.push({key,id:prod.id,nombre:prod.nombre,precio:+(prod.precio_oferta||prod.precio),imagen:prod.imagen||'',talla:talla||'',color:color?.nombre||'',color_hex:color?.hex||'',cantidad:qty})
   saveCart(cart)
-  toast('✓ '+prod.nombre+' agregado al carrito')
+  toast(''+prod.nombre+' agregado al carrito')
 }
 
 main()

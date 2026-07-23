@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiero Pelear en MFL | FightMFL</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .apply-hero { position: relative; border: 1px solid var(--border); border-left: 3px solid var(--red); background: linear-gradient(135deg,#000000,#1a0005); margin: 24px 0 0; padding: 48px 40px; }
+    .ah-tag { font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
+    .ah-title { font-family: 'Anton', sans-serif; font-size: 62px; line-height: 1; letter-spacing: 2px; }
+    .ah-sub { font-family: 'Inter', sans-serif; font-size: 16px; color: var(--muted); margin-top: 14px; max-width: 620px; line-height: 1.6; }
+
+    .form-wrap { background: var(--mid); border: 1px solid var(--border); padding: 32px 36px; margin-top: 6px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 22px; }
+    .field { display: flex; flex-direction: column; }
+    .field.full { grid-column: span 2; }
+    .field label { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 7px; }
+    .field label .req { color: var(--red); }
+    .field input, .field textarea, .field select {
+      background: #000000; border: 1px solid var(--border); color: var(--light);
+      font-family: 'Inter', sans-serif; font-size: 15px; padding: 12px 14px; width: 100%;
+      outline: none; transition: border-color .2s;
+    }
+    .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--red); }
+    .field textarea { resize: vertical; min-height: 96px; }
+    .field .hint { font-size: 12px; color: #555; margin-top: 5px; }
+
+    .form-actions { margin-top: 26px; display: flex; align-items: center; gap: 16px; }
+    .form-msg { font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }
+    .form-msg.ok { color: #22c55e; }
+    .form-msg.err { color: var(--red); }
+
+    .success-box { background: var(--mid); border: 1px solid var(--border); border-left: 3px solid #22c55e; padding: 48px 40px; margin-top: 6px; text-align: center; }
+    .success-box h2 { font-family: 'Anton', sans-serif; font-size: 40px; letter-spacing: 1px; margin-bottom: 12px; }
+    .success-box p { font-family: 'Inter', sans-serif; color: var(--muted); font-size: 16px; line-height: 1.6; }
+
+    .why { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 6px; }
+    .why-item { background: var(--mid); border: 1px solid var(--border); padding: 22px 24px; }
+    .why-num { font-family: 'Anton', sans-serif; font-size: 26px; color: var(--red); }
+    .why-t { font-family: 'Oswald', sans-serif; font-size: 14px; font-weight: 700; text-transform: uppercase; margin-top: 6px; }
+    .why-d { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--muted); margin-top: 5px; line-height: 1.5; }
+
+    @media (max-width: 768px) {
+      .apply-hero { padding: 28px 18px; }
+      .ah-title { font-size: 40px; }
+      .form-wrap { padding: 22px 18px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .field.full { grid-column: span 1; }
+      .why { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<header style="background:#000000;border-bottom:1px solid #1E1E1E;position:sticky;top:0;z-index:200;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 16px;">
+    <nav style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;">
+      <a href="index.html" style="display:flex;align-items:center;text-decoration:none;"><img src="logo.svg" alt="FightMFL" style="height:30px;width:auto;display:block;"></a>
+      <div id="nav-desktop" style="display:flex;gap:28px;">
+        <a href="index.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888888;text-decoration:none;">Inicio</a>
+        <a href="eventos.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888888;text-decoration:none;">Eventos</a>
+        <a href="noticias.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888888;text-decoration:none;">Noticias</a>
+        <a href="tienda.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888888;text-decoration:none;">Tienda</a>
+        <a href="pelear.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#FF0A2A;text-decoration:none;font-weight:700;">Quiero Pelear</a>
+      </div>
+      <button id="hamburger-btn" style="display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:transparent;border:none;" onclick="toggleMenu()">
+        <span style="width:24px;height:2px;background:white;display:block;"></span>
+        <span style="width:24px;height:2px;background:white;display:block;"></span>
+        <span style="width:24px;height:2px;background:white;display:block;"></span>
+      </button>
+    </nav>
+  </div>
+  <div id="mobile-menu" style="display:none;flex-direction:column;background:#000000;border-top:1px solid #1E1E1E;">
+    <a href="index.html" style="font-family:'Oswald',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666666;text-decoration:none;padding:18px 20px;border-bottom:1px solid #1E1E1E;display:block;">Inicio</a>
+    <a href="eventos.html" style="font-family:'Oswald',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666666;text-decoration:none;padding:18px 20px;border-bottom:1px solid #1E1E1E;display:block;">Eventos</a>
+    <a href="noticias.html" style="font-family:'Oswald',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666666;text-decoration:none;padding:18px 20px;border-bottom:1px solid #1E1E1E;display:block;">Noticias</a>
+    <a href="tienda.html" style="font-family:'Oswald',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666666;text-decoration:none;padding:18px 20px;border-bottom:1px solid #1E1E1E;display:block;">Tienda</a>
+    <a href="pelear.html" style="font-family:'Oswald',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#ffffff;text-decoration:none;padding:18px 20px;border-bottom:1px solid #1E1E1E;display:block;border-left:3px solid #FF0A2A;">Quiero Pelear</a>
+  </div>
+</header>
+<style>
+@media(max-width:768px){
+  #nav-desktop{display:none!important;}
+  #hamburger-btn{display:flex!important;}
+}
+@media(min-width:769px){
+  #mobile-menu{display:none!important;}
+}
+</style>
+<script>
+function toggleMenu(){
+  var m=document.getElementById('mobile-menu');
+  m.style.display=m.style.display==='flex'?'none':'flex';
+  m.style.flexDirection='column';
+}
+</script>
+
+<div class="page">
+
+  <div class="apply-hero">
+    <div class="ah-tag">Convocatoria Abierta</div>
+    <div class="ah-title">QUIERO PELEAR<br>EN <span style="color:var(--red)">MFL</span></div>
+    <div class="ah-sub">¿Entrenas y estás listo para el siguiente nivel? México Fight League busca peleadores. Llena el formulario y nuestro equipo de matchmaking revisará tu perfil.</div>
+  </div>
+
+  <div class="why">
+    <div class="why-item"><div class="why-num">01</div><div class="why-t">Pelea en el escenario</div><div class="why-d">Eventos profesionales, jaula oficial y transmisión en vivo.</div></div>
+    <div class="why-item"><div class="why-num">02</div><div class="why-t">Hazte ver</div><div class="why-d">Tu perfil, tu récord y tus highlights frente a miles de fans.</div></div>
+    <div class="why-item"><div class="why-num">03</div><div class="why-t">Construye tu carrera</div><div class="why-d">MFL es la plataforma para la siguiente generación mexicana.</div></div>
+  </div>
+
+  <div class="section-label" style="margin-top:28px">Formulario de Registro</div>
+
+  <div class="form-wrap" id="form-wrap">
+    <form id="apply-form" novalidate>
+      <div class="form-grid">
+        <div class="field">
+          <label>Nombre completo <span class="req">*</span></label>
+          <input type="text" name="nombre" required maxlength="80" placeholder="Tu nombre">
+        </div>
+        <div class="field">
+          <label>Correo electrónico <span class="req">*</span></label>
+          <input type="email" name="email" required maxlength="120" placeholder="tucorreo@ejemplo.com">
+        </div>
+        <div class="field">
+          <label>Teléfono / WhatsApp</label>
+          <input type="tel" name="telefono" maxlength="30" placeholder="55 1234 5678">
+        </div>
+        <div class="field">
+          <label>Ciudad</label>
+          <input type="text" name="ciudad" maxlength="60" placeholder="CDMX, Monterrey...">
+        </div>
+        <div class="field">
+          <label>Edad</label>
+          <input type="number" name="edad" min="16" max="60" placeholder="24">
+        </div>
+        <div class="field">
+          <label>Peso (lbs)</label>
+          <input type="number" name="peso_lbs" min="100" max="300" placeholder="155">
+        </div>
+        <div class="field">
+          <label>Gimnasio / Equipo</label>
+          <input type="text" name="gimnasio" maxlength="80" placeholder="Nombre de tu gimnasio">
+        </div>
+        <div class="field">
+          <label>Récord (G-P-E)</label>
+          <input type="text" name="record" maxlength="20" placeholder="5-1-0">
+          <div class="hint">Si eres amateur, escríbelo aquí.</div>
+        </div>
+        <div class="field full">
+          <label>Video de tus peleas</label>
+          <input type="url" name="video_url" maxlength="300" placeholder="https://youtube.com/...">
+          <div class="hint">Un enlace de YouTube, Drive o Instagram. Es lo que más peso tiene.</div>
+        </div>
+        <div class="field full">
+          <label>Instagram</label>
+          <input type="text" name="instagram" maxlength="60" placeholder="@tu_usuario">
+        </div>
+        <div class="field full">
+          <label>Experiencia</label>
+          <textarea name="experiencia" maxlength="600" placeholder="Años entrenando, disciplinas, torneos, logros..."></textarea>
+        </div>
+        <div class="field full">
+          <label>Mensaje para MFL</label>
+          <textarea name="mensaje" maxlength="600" placeholder="¿Por qué quieres pelear en MFL?"></textarea>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn" id="submit-btn">Enviar solicitud</button>
+        <div class="form-msg" id="form-msg"></div>
+      </div>
+    </form>
+  </div>
+
+  <div class="success-box" id="success-box" style="display:none">
+    <h2>¡SOLICITUD ENVIADA!</h2>
+    <p>Gracias por querer subirte a la jaula de MFL.<br>Nuestro equipo revisará tu perfil y te contactará si encajas en una cartelera.</p>
+    <div style="margin-top:24px"><a href="index.html" class="btn">Volver al inicio</a></div>
+  </div>
+
+  <footer>
+    <a class="footer-logo" href="index.html" style="display:inline-flex;align-items:center;"><img src="logo.svg" alt="FightMFL" style="height:22px;width:auto;display:block;"></a>
+    <div class="footer-links">
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
+      <a href="#">Contacto</a>
+    </div>
+    <div class="footer-copy">© 2026 FightMFL</div>
+  </footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="supabase-client.js"></script>
+<script>
+  const form = document.getElementById('apply-form');
+  const msg = document.getElementById('form-msg');
+  const btn = document.getElementById('submit-btn');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    msg.textContent = ''; msg.className = 'form-msg';
+
+    const fd = new FormData(form);
+    const nombre = (fd.get('nombre') || '').toString().trim();
+    const email = (fd.get('email') || '').toString().trim();
+
+    if (!nombre) { msg.textContent = 'Escribe tu nombre'; msg.className = 'form-msg err'; return; }
+    if (!email || !/^\S+@\S+\.\S+$/.test(email)) { msg.textContent = 'Escribe un correo válido'; msg.className = 'form-msg err'; return; }
+
+    const num = v => { const n = parseInt(v, 10); return Number.isFinite(n) ? n : null; };
+    const txt = v => { const s = (v || '').toString().trim(); return s || null; };
+
+    const payload = {
+      nombre,
+      email,
+      telefono:    txt(fd.get('telefono')),
+      ciudad:      txt(fd.get('ciudad')),
+      edad:        num(fd.get('edad')),
+      peso_lbs:    num(fd.get('peso_lbs')),
+      gimnasio:    txt(fd.get('gimnasio')),
+      record:      txt(fd.get('record')),
+      video_url:   txt(fd.get('video_url')),
+      instagram:   txt(fd.get('instagram')),
+      experiencia: txt(fd.get('experiencia')),
+      mensaje:     txt(fd.get('mensaje')),
+    };
+
+    btn.disabled = true;
+    const original = btn.textContent;
+    btn.textContent = 'Enviando...';
+
+    const { error } = await db.from('solicitudes').insert(payload);
+
+    btn.disabled = false;
+    btn.textContent = original;
+
+    if (error) {
+      console.error(error);
+      msg.textContent = 'No se pudo enviar. Intenta de nuevo.';
+      msg.className = 'form-msg err';
+      return;
+    }
+
+    document.getElementById('form-wrap').style.display = 'none';
+    document.querySelector('.section-label').style.display = 'none';
+    document.getElementById('success-box').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>

@@ -7,13 +7,13 @@
   <link rel="stylesheet" href="styles.css">
   <style>
     .event-header { background: linear-gradient(135deg,#0A0A0A,#1a0005); border: 1px solid var(--border); border-left: 3px solid var(--red); margin: 20px 0; padding: 24px 28px; }
-    .event-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
-    .event-title { font-family: 'Bebas Neue', sans-serif; font-size: 46px; letter-spacing: 2px; line-height: 1; }
-    .event-subtitle { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; color: var(--muted); letter-spacing: 1px; margin-top: 4px; }
-    .event-meta { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 10px; }
+    .event-tag { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
+    .event-title { font-family: 'Anton', sans-serif; font-size: 46px; letter-spacing: 2px; line-height: 1; }
+    .event-subtitle { font-family: 'Oswald', sans-serif; font-size: 20px; color: var(--muted); letter-spacing: 1px; margin-top: 4px; }
+    .event-meta { font-family: 'Oswald', sans-serif; font-size: 13px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 10px; }
     .event-meta span { color: #444; margin: 0 8px; }
     .tabs { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
-    .tab { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; padding: 12px 20px; cursor: pointer; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px; }
+    .tab { font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; padding: 12px 20px; cursor: pointer; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px; }
     .tab.active { color: white; border-bottom-color: var(--red); }
   </style>
 
@@ -35,15 +35,16 @@
   </style>
 </head>
 <body>
-<header style="background:#0D0F14;border-bottom:1px solid #232830;position:sticky;top:0;z-index:200;">
+<header style="background:#000000;border-bottom:1px solid #1E1E1E;position:sticky;top:0;z-index:200;">
   <div style="max-width:1200px;margin:0 auto;padding:0 16px;">
     <nav style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;">
-      <a href="index.html" style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:white;text-decoration:none;">FIGHT<span style="color:#E8001D;">MFL</span></a>
+      <a href="index.html" style="display:flex;align-items:center;text-decoration:none;"><img src="logo.svg" alt="FightMFL" style="height:30px;width:auto;display:block;"></a>
       <div id="nav-desktop" style="display:flex;gap:28px;">
-        <a href="index.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888888;text-decoration:none;">Inicio</a>
-        <a href="eventos.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#ffffff;text-decoration:none;font-weight:700;">Eventos</a>
-        <a href="noticias.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888888;text-decoration:none;">Noticias</a>
-        <a href="tienda.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888888;text-decoration:none;">Tienda</a>
+        <a href="index.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888888;text-decoration:none;">Inicio</a>
+        <a href="eventos.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#ffffff;text-decoration:none;font-weight:700;">Eventos</a>
+        <a href="noticias.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888888;text-decoration:none;">Noticias</a>
+        <a href="tienda.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888888;text-decoration:none;">Tienda</a>
+        <a href="pelear.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#FF0A2A;text-decoration:none;font-weight:700;">Quiero Pelear</a>
       </div>
       <button id="hamburger-btn" style="display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:transparent;border:none;" onclick="toggleMenu()">
         <span style="width:24px;height:2px;background:white;display:block;"></span>
@@ -52,11 +53,12 @@
       </button>
     </nav>
   </div>
-  <div id="mobile-menu" style="display:none;flex-direction:column;background:#0D0F14;border-top:1px solid #232830;">
-    <a href="index.html" style="font-family:'Barlow Condensed',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666666;text-decoration:none;padding:18px 20px;border-bottom:1px solid #232830;display:block;">Inicio</a>
-    <a href="eventos.html" style="font-family:'Barlow Condensed',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#ffffff;text-decoration:none;padding:18px 20px;border-bottom:1px solid #232830;display:block;border-left:3px solid #E8001D;">Eventos</a>
-    <a href="noticias.html" style="font-family:'Barlow Condensed',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666666;text-decoration:none;padding:18px 20px;border-bottom:1px solid #232830;display:block;">Noticias</a>
-    <a href="tienda.html" style="font-family:'Barlow Condensed',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666666;text-decoration:none;padding:18px 20px;border-bottom:1px solid #232830;display:block;">Tienda</a>
+  <div id="mobile-menu" style="display:none;flex-direction:column;background:#000000;border-top:1px solid #1E1E1E;">
+    <a href="index.html" style="font-family:'Oswald',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666666;text-decoration:none;padding:18px 20px;border-bottom:1px solid #1E1E1E;display:block;">Inicio</a>
+    <a href="eventos.html" style="font-family:'Oswald',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#ffffff;text-decoration:none;padding:18px 20px;border-bottom:1px solid #1E1E1E;display:block;border-left:3px solid #E8001D;">Eventos</a>
+    <a href="noticias.html" style="font-family:'Oswald',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666666;text-decoration:none;padding:18px 20px;border-bottom:1px solid #1E1E1E;display:block;">Noticias</a>
+    <a href="tienda.html" style="font-family:'Oswald',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666666;text-decoration:none;padding:18px 20px;border-bottom:1px solid #1E1E1E;display:block;">Tienda</a>
+    <a href="pelear.html" style="font-family:'Oswald',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#FF0A2A;text-decoration:none;padding:18px 20px;border-bottom:1px solid #1E1E1E;display:block;font-weight:700;">Quiero Pelear</a>
   </div>
 </header>
 <style>
@@ -78,168 +80,10 @@ function toggleMenu(){
 
 <div class="page">
 
-
-
-
-  <div class="event-header">
-    <div class="event-tag">Evento Pasado · Resultados Oficiales</div>
-    <div class="event-title">MFL 7</div>
-    <div class="event-subtitle">Night of Champions</div>
-    <div class="event-meta">12 Abr 2026 <span>·</span> Foro Deportivo Norte <span>·</span> CDMX, México <span>·</span> 8 Peleas</div>
-  </div>
-
-  <div class="tabs">
-    <div class="tab active">Cartelera Estelar</div>
-    <div class="tab">Preliminares</div>
-  </div>
-
-  <!-- ESTELAR -->
-  <div class="section-label">Pelea Estelar</div>
-  <a href="pelea.html" style="text-decoration:none;color:inherit;display:block;"><div class="fight-card main">
-    <div class="fight-inner">
-      <div class="fight-badge">⭐ Main Event · Peso Welter · 170 lbs · 5 Rounds</div>
-      <div class="matchup">
-        <div class="fc">
-          <div class="av-lg w">CR</div>
-          <div class="flag-lg">🇲🇽</div>
-          <div class="fn-lg">Carlos "El Toro" Reyes</div>
-          <div class="rec">12-3-0</div>
-        </div>
-        <div class="vs-col"><div class="vs-lg">VS</div><div class="wt">170 lbs</div></div>
-        <div class="fc">
-          <div class="av-lg">DT</div>
-          <div class="flag-lg">🇲🇽</div>
-          <div class="fn-lg dim">Diego "La Cobra" Torres</div>
-          <div class="rec">9-3-0</div>
-        </div>
-      </div>
-    </div>
-    <div class="result-bar">
-      <div class="win-tag">Ganador</div>
-      <div><span class="r-method">TKO</span> <span class="r-detail">Round 2 · 3:42</span></div>
-      <div class="r-name">Carlos Reyes</div>
-    </div>
-</a>
-  </div>
-
-  <!-- CO-ESTELAR -->
-  <div class="section-label" style="margin-top:18px">Co-Estelar</div>
-  <a href="pelea.html" style="text-decoration:none;color:inherit;display:block;"><div class="fight-card">
-    <div class="fight-inner">
-      <div class="fight-badge co">Co-Main Event · Peso Ligero · 155 lbs · 3 Rounds</div>
-      <div class="matchup">
-        <div class="fc">
-          <div class="av-md w">AV</div>
-          <div class="flag-md">🇲🇽</div>
-          <div class="fn-md">Andrés Villanueva</div>
-          <div class="rec">7-1-0</div>
-        </div>
-        <div class="vs-col"><div class="vs-md">VS</div><div class="wt">155 lbs</div></div>
-        <div class="fc">
-          <div class="av-md">RG</div>
-          <div class="flag-md">🇲🇽</div>
-          <div class="fn-md dim">Ramón Gutiérrez</div>
-          <div class="rec">6-3-0</div>
-        </div>
-      </div>
-    </div>
-    <div class="result-bar">
-      <div class="win-tag">Ganador</div>
-      <div><span class="r-method">Sumisión</span> <span class="r-detail">R1 · 4:15 · Rear Naked Choke</span></div>
-      <div class="r-name">Andrés Villanueva</div>
-    </div>
-</a>
-  </div>
-
-  <!-- CARTELERA PRINCIPAL -->
-  <div class="section-label" style="margin-top:18px">Cartelera Principal</div>
-
-  <a href="pelea.html" style="text-decoration:none;color:inherit;display:block;"><div class="fight-card">
-    <div class="fight-inner">
-      <div class="fight-badge co">Peso Pluma · 145 lbs · 3 Rounds</div>
-      <div class="matchup">
-        <div class="fc"><div class="av-sm w">JM</div><div class="flag-sm">🇲🇽</div><div class="fn-sm">José Mendoza</div><div class="rec">5-0-0</div></div>
-        <div class="vs-col"><div class="vs-sm">VS</div><div class="wt">145 lbs</div></div>
-        <div class="fc"><div class="av-sm">LP</div><div class="flag-sm">🇲🇽</div><div class="fn-sm dim">Luis Peralta</div><div class="rec">4-2-0</div></div>
-      </div>
-    </div>
-    <div class="result-bar">
-      <div class="win-tag">Ganador</div>
-      <div><span class="r-method">Decisión Unánime</span> <span class="r-detail">R3</span></div>
-      <div class="r-name">José Mendoza</div>
-    </div>
-  </div>
-
-  <a href="pelea.html" style="text-decoration:none;color:inherit;display:block;"><div class="fight-card">
-    <div class="fight-inner">
-      <div class="fight-badge co">Peso Gallo · 135 lbs · 3 Rounds</div>
-      <div class="matchup">
-        <div class="fc"><div class="av-sm">MS</div><div class="flag-sm">🇲🇽</div><div class="fn-sm dim">Marco Salinas</div><div class="rec">3-2-0</div></div>
-        <div class="vs-col"><div class="vs-sm">VS</div><div class="wt">135 lbs</div></div>
-        <div class="fc"><div class="av-sm w">HR</div><div class="flag-sm">🇲🇽</div><div class="fn-sm">Héctor Ruiz</div><div class="rec">4-0-0</div></div>
-      </div>
-    </div>
-    <div class="result-bar">
-      <div class="win-tag">Ganador</div>
-      <div><span class="r-method">KO</span> <span class="r-detail">R1 · 2:18</span></div>
-      <div class="r-name">Héctor Ruiz</div>
-    </div>
-</a>
-  </div>
-
-  <!-- PRELIMS -->
-  <div class="section-label" style="margin-top:18px">Preliminares</div>
-
-  <a href="pelea.html" style="text-decoration:none;color:inherit;display:block;"><div class="fight-card">
-    <div class="fight-inner">
-      <div class="fight-badge pre">Preliminar · Peso Pluma · 145 lbs</div>
-      <div class="matchup">
-        <div class="fc"><div class="av-sm w">RM</div><div class="flag-sm">🇲🇽</div><div class="fn-sm">Ricardo Mora</div><div class="rec">1-0-0</div></div>
-        <div class="vs-col"><div class="vs-sm">VS</div><div class="wt">145 lbs</div></div>
-        <div class="fc"><div class="av-sm">PV</div><div class="flag-sm">🇲🇽</div><div class="fn-sm dim">Pablo Vega</div><div class="rec">0-2-0</div></div>
-      </div>
-    </div>
-    <div class="result-bar">
-      <div class="win-tag">Ganador</div>
-      <div><span class="r-method">TKO</span> <span class="r-detail">R1 · 1:55</span></div>
-      <div class="r-name">Ricardo Mora</div>
-    </div>
-  </div>
-
-  <a href="pelea.html" style="text-decoration:none;color:inherit;display:block;"><div class="fight-card">
-    <div class="fight-inner">
-      <div class="fight-badge pre">Preliminar · Peso Gallo · 135 lbs</div>
-      <div class="matchup">
-        <div class="fc"><div class="av-sm">SL</div><div class="flag-sm">🇲🇽</div><div class="fn-sm dim">Samuel Lara</div><div class="rec">0-1-0</div></div>
-        <div class="vs-col"><div class="vs-sm">VS</div><div class="wt">135 lbs</div></div>
-        <div class="fc"><div class="av-sm w">EC</div><div class="flag-sm">🇲🇽</div><div class="fn-sm">Ernesto Cruz</div><div class="rec">1-0-0</div></div>
-      </div>
-    </div>
-    <div class="result-bar">
-      <div class="win-tag">Ganador</div>
-      <div><span class="r-method">Sumisión</span> <span class="r-detail">R2 · 3:10</span></div>
-      <div class="r-name">Ernesto Cruz</div>
-    </div>
-  </div>
-
-  <a href="pelea.html" style="text-decoration:none;color:inherit;display:block;"><div class="fight-card">
-    <div class="fight-inner">
-      <div class="fight-badge pre">Preliminar · Peso Welter · 170 lbs</div>
-      <div class="matchup">
-        <div class="fc"><div class="av-sm w">TR</div><div class="flag-sm">🇲🇽</div><div class="fn-sm">Tomás Ríos</div><div class="rec">2-1-0</div></div>
-        <div class="vs-col"><div class="vs-sm">VS</div><div class="wt">170 lbs</div></div>
-        <div class="fc"><div class="av-sm">GN</div><div class="flag-sm">🇲🇽</div><div class="fn-sm dim">Gerardo Niño</div><div class="rec">2-2-0</div></div>
-      </div>
-    </div>
-    <div class="result-bar">
-      <div class="win-tag">Ganador</div>
-      <div><span class="r-method">Decisión Dividida</span> <span class="r-detail">R3</span></div>
-      <div class="r-name">Tomás Ríos</div>
-    </div>
-  </div>
-
+  <!-- DETALLE DE EVENTO (DINÁMICO) -->
+  <div id="evento-root" style="padding:24px 0;color:var(--muted);font-family:'Oswald',sans-serif;letter-spacing:1px;">Cargando evento...</div>
   <footer>
-    <a class="footer-logo" href="index.html">FIGHT<span>MFL</span></a>
+    <a class="footer-logo" href="index.html" style="display:inline-flex;align-items:center;"><img src="logo.svg" alt="FightMFL" style="height:22px;width:auto;display:block;"></a>
     <div class="footer-links">
       <a href="#">Instagram</a>
       <a href="#">YouTube</a>
@@ -249,9 +93,93 @@ function toggleMenu(){
   </footer>
 
 </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="supabase-client.js"></script>
+<script>
+  const TIPO_LABEL = { estelar:'Pelea Estelar', coestelar:'Co-Estelar', principal:'Cartelera Principal', preliminar:'Preliminar' };
+  const PRIO = { estelar:0, coestelar:1, principal:2, preliminar:3 };
+  const ini = n => (n||'?').trim().split(/\s+/).slice(0,2).map(w=>w[0]||'').join('').toUpperCase();
+  const rec = p => p ? `${p.record_g}-${p.record_p}-${p.record_e}` : '—';
+  function flag(p, size){ return `<div class="flag-${size}">${p?.pais || '🏳️'}</div>`; }
+  function avatar(p, size, win){
+    const cls = { lg:'av-lg', md:'av-md', sm:'av-sm' }[size] + (win ? ' w' : '');
+    if (p && p.foto_url) return `<div class="${cls}" style="overflow:hidden;padding:0"><img src="${p.foto_url}" style="width:100%;height:100%;object-fit:cover" alt=""></div>`;
+    return `<div class="${cls}">${ini(p && p.nombre)}</div>`;
+  }
+  function fightCard(p){
+    const term = p.status === 'terminada';
+    const a = p.peleador1, b = p.peleador2;
+    const aWin = term && p.ganador_id === p.peleador1_id;
+    const bWin = term && p.ganador_id === p.peleador2_id;
+    const ganador = aWin ? a : (bWin ? b : null);
+    const dim1 = term && !aWin ? ' dim' : '';
+    const dim2 = term && !bWin ? ' dim' : '';
+    return `<div class="fight-card${p.tipo==='estelar'?' main':''}"><div class="fight-inner" style="padding:14px 20px">
+      <div class="fight-badge${p.tipo==='coestelar'?' co':''}${p.tipo==='preliminar'?' pre':''}">${TIPO_LABEL[p.tipo]||p.tipo} · ${p.peso_lbs||''} lbs · ${p.rounds||3} Rounds</div>
+      <div class="matchup">
+        <div class="fc">${avatar(a,'md',aWin)}${flag(a,'md')}<div class="fn-md${dim1}">${a?.nombre||'TBA'}</div><div class="rec">${rec(a)}</div></div>
+        <div class="vs-col"><div class="vs-md">VS</div><div class="wt">${p.peso_lbs||''} lbs</div></div>
+        <div class="fc">${avatar(b,'md',bWin)}${flag(b,'md')}<div class="fn-md${dim2}">${b?.nombre||'TBA'}</div><div class="rec">${rec(b)}</div></div>
+      </div></div>
+      ${ganador ? (bWin
+        ? `<div class="result-bar"><div class="r-name" style="margin-left:0;margin-right:auto">${ganador.nombre}</div><div><span class="r-method">${p.metodo||''}</span> <span class="r-detail">${p.round_final?`R${p.round_final}`:''}${p.tiempo?` · ${p.tiempo}`:''}</span></div><div class="win-tag">Ganador</div></div>`
+        : `<div class="result-bar"><div class="win-tag">Ganador</div><div><span class="r-method">${p.metodo||''}</span> <span class="r-detail">${p.round_final?`R${p.round_final}`:''}${p.tiempo?` · ${p.tiempo}`:''}</span></div><div class="r-name">${ganador.nombre}</div></div>`
+      ) : ''}
+    </div>`;
+  }
 
+  (async function(){
+    const root = document.getElementById('evento-root');
+    const id = new URLSearchParams(location.search).get('id');
+    try {
+      let ev;
+      if (id) {
+        ev = (await db.from('eventos').select('*').eq('id', id).single()).data;
+      } else {
+        const { data } = await db.from('eventos').select('*').order('fecha', { ascending: false }).limit(1);
+        ev = data && data[0];
+      }
+      if (!ev) {
+        root.innerHTML = '<div style="padding:48px 24px;text-align:center;border:1px solid var(--border);background:var(--mid);color:var(--muted);text-transform:uppercase;letter-spacing:1px;">Evento no encontrado.</div>';
+        return;
+      }
+      document.title = ev.nombre + ' | FightMFL';
+      const { data: peleas } = await db.from('peleas')
+        .select('*, peleador1:peleador1_id(*), peleador2:peleador2_id(*)')
+        .eq('evento_id', ev.id).order('orden');
+      const lista = (peleas || []).slice().sort((x,y) => (PRIO[x.tipo]??9)-(PRIO[y.tipo]??9) || (x.orden||0)-(y.orden||0));
 
+      const fecha = ev.fecha ? new Date(ev.fecha+'T12:00:00').toLocaleDateString('es-MX',{day:'numeric',month:'long',year:'numeric'}) : '';
+      const tag = ev.status === 'done' ? 'Evento Pasado · Resultados' : (ev.status === 'live' ? 'En Vivo' : 'Próximo Evento');
+      const metaParts = [fecha, ev.lugar, ev.canal, lista.length ? `${lista.length} Peleas` : ''].filter(Boolean);
+      const meta = metaParts.map(x => x).join(' · ');
 
+      let html = `
+      <div class="event-header">
+        <div class="event-tag">${tag}</div>
+        <div class="event-title">${ev.nombre}</div>
+        ${ev.subtitulo ? `<div class="event-subtitle">${ev.subtitulo}</div>` : ''}
+        <div class="event-meta">${meta}</div>
+      </div>`;
 
+      if (!lista.length) {
+        html += `<div style="padding:32px 24px;margin-top:8px;text-align:center;border:1px solid var(--border);background:var(--mid);color:var(--muted);text-transform:uppercase;letter-spacing:1px;">Cartelera por anunciar</div>`;
+      } else {
+        const estelares = lista.filter(p => p.tipo !== 'preliminar');
+        const prelims = lista.filter(p => p.tipo === 'preliminar');
+        html += `<div class="section-label" style="margin-top:8px">Cartelera Principal</div>`;
+        estelares.forEach(p => { html += fightCard(p); });
+        if (prelims.length) {
+          html += `<div class="section-label" style="margin-top:20px">Preliminares</div>`;
+          prelims.forEach(p => { html += fightCard(p); });
+        }
+      }
+      root.innerHTML = html;
+    } catch(e) {
+      console.error(e);
+      root.innerHTML = '<div style="padding:24px;color:var(--muted)">Error cargando el evento.</div>';
+    }
+  })();
+</script>
 </body>
 </html>

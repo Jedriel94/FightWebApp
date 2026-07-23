@@ -3,30 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MFL 8 — EN VIVO | FightMFL</title>
+  <title>Evento en Vivo | FightMFL</title>
   <link rel="stylesheet" href="styles.css">
   <style>
     .event-header { background: linear-gradient(135deg,#0A0A0A,#1a0005); border: 1px solid var(--border); border-left: 3px solid var(--red); margin: 20px 0; padding: 24px 28px; display: flex; justify-content: space-between; align-items: center; }
-    .event-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
-    .event-title { font-family: 'Bebas Neue', sans-serif; font-size: 42px; letter-spacing: 2px; line-height: 1; }
-    .event-meta { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 8px; }
-    .live-pill { display: flex; align-items: center; gap: 8px; background: rgba(232,0,29,0.12); border: 1px solid rgba(232,0,29,0.3); padding: 10px 18px; }
-    .live-text { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: var(--red); letter-spacing: 2px; }
-    .live-sub { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; text-align: center; }
+    .event-tag { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
+    .event-title { font-family: 'Anton', sans-serif; font-size: 42px; letter-spacing: 2px; line-height: 1; }
+    .event-meta { font-family: 'Oswald', sans-serif; font-size: 13px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 8px; }
+    .live-pill { display: flex; align-items: center; gap: 8px; background: rgba(232,0,29,0.12); border: 1px solid rgba(232,0,29,0.3); padding: 10px 18px; flex-shrink: 0; }
+    .live-text { font-family: 'Anton', sans-serif; font-size: 20px; color: var(--red); letter-spacing: 2px; }
+    .live-sub { font-family: 'Oswald', sans-serif; font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; text-align: center; }
 
     .fight-live { background: var(--mid); border: 1px solid rgba(232,0,29,0.3); border-left: 3px solid var(--red); margin-bottom: 6px; position: relative; overflow: hidden; }
     .fight-live-glow { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--red); opacity: 0.6; }
     .av-lg.live-av { border-color: rgba(232,0,29,0.5); animation: pulse-border 2s infinite; }
     @keyframes pulse-border { 0%,100%{border-color:rgba(232,0,29,0.5)} 50%{border-color:rgba(232,0,29,0.15)} }
-    .round-info { font-family: 'Bebas Neue', sans-serif; font-size: 13px; color: var(--red); letter-spacing: 1px; }
+    .round-info { font-family: 'Anton', sans-serif; font-size: 13px; color: var(--red); letter-spacing: 1px; }
 
-    .fight-next { background: #0d0d0d; border: 1px solid var(--border); margin-bottom: 4px; opacity: 0.6; }
-    .next-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #555; margin-bottom: 10px; }
+    .fight-next { background: #0d0d0d; border: 1px solid var(--border); margin-bottom: 4px; opacity: 0.7; }
+    .next-tag { font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #555; margin-bottom: 10px; }
+    .av-foto { overflow: hidden; padding: 0; }
+    .av-foto img { width: 100%; height: 100%; object-fit: cover; }
   </style>
 
   <style id="mobile-live">
   @media (max-width: 768px) {
-    .event-header { flex-direction: column; gap: 14px; padding: 16px; }
+    .event-header { flex-direction: column; gap: 14px; padding: 16px; align-items: flex-start; }
     .event-title { font-size: 36px; }
     .fight-inner { padding: 12px 14px; }
     .fn-lg { font-size: 13px; }
@@ -40,15 +42,16 @@
   </style>
 </head>
 <body>
-<header style="background:#0D0F14;border-bottom:1px solid #232830;position:sticky;top:0;z-index:200;">
+<header style="background:#000000;border-bottom:1px solid #1E1E1E;position:sticky;top:0;z-index:200;">
   <div style="max-width:1200px;margin:0 auto;padding:0 16px;">
     <nav style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;">
-      <a href="index.html" style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:white;text-decoration:none;">FIGHT<span style="color:#E8001D;">MFL</span></a>
+      <a href="index.html" style="display:flex;align-items:center;text-decoration:none;"><img src="logo.svg" alt="FightMFL" style="height:30px;width:auto;display:block;"></a>
       <div id="nav-desktop" style="display:flex;gap:28px;">
-        <a href="index.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888888;text-decoration:none;">Inicio</a>
-        <a href="eventos.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#ffffff;text-decoration:none;font-weight:700;">Eventos</a>
-        <a href="noticias.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888888;text-decoration:none;">Noticias</a>
-        <a href="tienda.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888888;text-decoration:none;">Tienda</a>
+        <a href="index.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888888;text-decoration:none;">Inicio</a>
+        <a href="eventos.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#ffffff;text-decoration:none;font-weight:700;">Eventos</a>
+        <a href="noticias.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888888;text-decoration:none;">Noticias</a>
+        <a href="tienda.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888888;text-decoration:none;">Tienda</a>
+        <a href="pelear.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#FF0A2A;text-decoration:none;font-weight:700;">Quiero Pelear</a>
       </div>
       <button id="hamburger-btn" style="display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:transparent;border:none;" onclick="toggleMenu()">
         <span style="width:24px;height:2px;background:white;display:block;"></span>
@@ -57,11 +60,12 @@
       </button>
     </nav>
   </div>
-  <div id="mobile-menu" style="display:none;flex-direction:column;background:#0D0F14;border-top:1px solid #232830;">
-    <a href="index.html" style="font-family:'Barlow Condensed',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666666;text-decoration:none;padding:18px 20px;border-bottom:1px solid #232830;display:block;">Inicio</a>
-    <a href="eventos.html" style="font-family:'Barlow Condensed',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#ffffff;text-decoration:none;padding:18px 20px;border-bottom:1px solid #232830;display:block;border-left:3px solid #E8001D;">Eventos</a>
-    <a href="noticias.html" style="font-family:'Barlow Condensed',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666666;text-decoration:none;padding:18px 20px;border-bottom:1px solid #232830;display:block;">Noticias</a>
-    <a href="tienda.html" style="font-family:'Barlow Condensed',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666666;text-decoration:none;padding:18px 20px;border-bottom:1px solid #232830;display:block;">Tienda</a>
+  <div id="mobile-menu" style="display:none;flex-direction:column;background:#000000;border-top:1px solid #1E1E1E;">
+    <a href="index.html" style="font-family:'Oswald',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666666;text-decoration:none;padding:18px 20px;border-bottom:1px solid #1E1E1E;display:block;">Inicio</a>
+    <a href="eventos.html" style="font-family:'Oswald',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#ffffff;text-decoration:none;padding:18px 20px;border-bottom:1px solid #1E1E1E;display:block;border-left:3px solid #E8001D;">Eventos</a>
+    <a href="noticias.html" style="font-family:'Oswald',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666666;text-decoration:none;padding:18px 20px;border-bottom:1px solid #1E1E1E;display:block;">Noticias</a>
+    <a href="tienda.html" style="font-family:'Oswald',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666666;text-decoration:none;padding:18px 20px;border-bottom:1px solid #1E1E1E;display:block;">Tienda</a>
+    <a href="pelear.html" style="font-family:'Oswald',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#FF0A2A;text-decoration:none;padding:18px 20px;border-bottom:1px solid #1E1E1E;display:block;font-weight:700;">Quiero Pelear</a>
   </div>
 </header>
 <style>
@@ -83,118 +87,10 @@ function toggleMenu(){
 
 <div class="page">
 
-
-
-
-  <div class="event-header">
-    <div>
-      <div class="event-tag">Evento en curso</div>
-      <div class="event-title">MFL 8</div>
-      <div class="event-meta">14 Jun 2026 · Arena Ciudad de México</div>
-    </div>
-    <div class="live-pill">
-      <div class="live-dot"></div>
-      <div>
-        <div class="live-text">EN VIVO</div>
-        <div class="live-sub">Pelea 4 de 8</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- PELEA EN CURSO -->
-  <div class="section-label">Ahora en el octágono</div>
-  <div class="fight-live">
-    <div class="fight-live-glow"></div>
-    <div class="fight-inner" style="padding:16px 20px">
-      <div class="live-badge"><div class="live-dot"></div>En vivo · Round 2 · Peso Welter · 170 lbs</div>
-      <div class="matchup">
-        <div class="fc">
-          <div class="av-lg live-av">CR</div>
-          <div class="flag-lg">🇲🇽</div>
-          <div class="fn-lg">Carlos "El Toro" Reyes</div>
-          <div class="rec">12-3-0</div>
-        </div>
-        <div class="vs-col">
-          <div class="vs-lg">VS</div>
-          <div class="wt">Main Event</div>
-          <div class="round-info">Round 2</div>
-        </div>
-        <div class="fc">
-          <div class="av-lg live-av">DT</div>
-          <div class="flag-lg">🇲🇽</div>
-          <div class="fn-lg">Diego "La Cobra" Torres</div>
-          <div class="rec">9-2-0</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SIGUIENTE -->
-  <div class="section-label">Siguiente pelea</div>
-  <div class="fight-next">
-    <div class="fight-inner" style="padding:14px 20px">
-      <div class="next-tag">⏳ Próxima · Co-Estelar · Peso Ligero · 155 lbs</div>
-      <div class="matchup">
-        <div class="fc"><div class="av-md">AV</div><div class="flag-md">🇲🇽</div><div class="fn-md">Andrés Villanueva</div><div class="rec">7-1-0</div></div>
-        <div class="vs-col"><div class="vs-md">VS</div><div class="wt">155 lbs</div></div>
-        <div class="fc"><div class="av-md">RG</div><div class="flag-md">🇲🇽</div><div class="fn-md">Ramón Gutiérrez</div><div class="rec">6-2-0</div></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- TERMINADAS -->
-  <div class="section-label">Peleas terminadas</div>
-
-  <div class="fight-card">
-    <div class="fight-inner" style="padding:12px 20px">
-      <div class="next-tag" style="color:#333">Peso Pluma · 145 lbs</div>
-      <div class="matchup">
-        <div class="fc"><div class="av-sm w">JM</div><div class="flag-sm">🇲🇽</div><div class="fn-sm">José Mendoza</div><div class="rec">5-0-0</div></div>
-        <div class="vs-col"><div class="vs-sm" style="color:#2a2a2a">VS</div><div class="wt">145 lbs</div></div>
-        <div class="fc"><div class="av-sm">LP</div><div class="flag-sm">🇲🇽</div><div class="fn-sm dim">Luis Peralta</div><div class="rec">4-2-0</div></div>
-      </div>
-    </div>
-    <div class="result-bar">
-      <div class="win-tag">Ganador</div>
-      <div><span class="r-method">Decisión Unánime</span> <span class="r-detail">R3</span></div>
-      <div class="r-name">José Mendoza</div>
-    </div>
-  </div>
-
-  <div class="fight-card">
-    <div class="fight-inner" style="padding:12px 20px">
-      <div class="next-tag" style="color:#333">Peso Gallo · 135 lbs</div>
-      <div class="matchup">
-        <div class="fc"><div class="av-sm">MS</div><div class="flag-sm">🇲🇽</div><div class="fn-sm dim">Marco Salinas</div><div class="rec">3-2-0</div></div>
-        <div class="vs-col"><div class="vs-sm" style="color:#2a2a2a">VS</div><div class="wt">135 lbs</div></div>
-        <div class="fc"><div class="av-sm w">HR</div><div class="flag-sm">🇲🇽</div><div class="fn-sm">Héctor Ruiz</div><div class="rec">4-0-0</div></div>
-      </div>
-    </div>
-    <div class="result-bar">
-      <div class="win-tag">Ganador</div>
-      <div><span class="r-method">KO</span> <span class="r-detail">R1 · 2:18</span></div>
-      <div class="r-name">Héctor Ruiz</div>
-    </div>
-  </div>
-
-  <div class="fight-card">
-    <div class="fight-inner" style="padding:12px 20px">
-      <div class="next-tag" style="color:#333">Preliminar · 170 lbs</div>
-      <div class="matchup">
-        <div class="fc"><div class="av-sm w">RM</div><div class="flag-sm">🇲🇽</div><div class="fn-sm">Ricardo Mora</div><div class="rec">1-0-0</div></div>
-        <div class="vs-col"><div class="vs-sm" style="color:#2a2a2a">VS</div><div class="wt">170 lbs</div></div>
-        <div class="fc"><div class="av-sm">PV</div><div class="flag-sm">🇲🇽</div><div class="fn-sm dim">Pablo Vega</div><div class="rec">0-2-0</div></div>
-      </div>
-    </div>
-    <div class="result-bar">
-      <div class="win-tag">Ganador</div>
-      <div><span class="r-method">TKO</span> <span class="r-detail">R1 · 1:55</span></div>
-      <div class="r-name">Ricardo Mora</div>
-    </div>
-  </div>
+  <div id="live-root" style="padding:24px 0;color:var(--muted);font-family:'Oswald',sans-serif;letter-spacing:1px;">Cargando evento en vivo...</div>
 
   <footer>
-    <a class="footer-logo" href="index.html">FIGHT<span>MFL</span></a>
+    <a class="footer-logo" href="index.html" style="display:inline-flex;align-items:center;"><img src="logo.svg" alt="FightMFL" style="height:22px;width:auto;display:block;"></a>
     <div class="footer-links">
       <a href="#">Instagram</a>
       <a href="#">YouTube</a>
@@ -205,8 +101,123 @@ function toggleMenu(){
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="supabase-client.js"></script>
+<script>
+  const TIPO_LABEL = { estelar:'Estelar · Main Event', coestelar:'Co-Estelar', principal:'Cartelera Principal', preliminar:'Preliminar' };
+  const ini = n => (n||'?').trim().split(/\s+/).slice(0,2).map(w=>w[0]||'').join('').toUpperCase();
+  const rec = p => p ? `${p.record_g}-${p.record_p}-${p.record_e}` : '—';
+  function flag(p, size){ return `<div class="flag-${size}">${p?.pais||'🏳️'}</div>`; }
+  function avatar(p, size, opts){
+    opts = opts || {};
+    const cls = { lg:'av-lg', md:'av-md', sm:'av-sm' }[size];
+    const extra = (opts.live ? ' live-av' : '') + (opts.win ? ' w' : '');
+    if (p && p.foto_url) return `<div class="${cls}${extra} av-foto"><img src="${p.foto_url}" alt="${p.nombre}"></div>`;
+    return `<div class="${cls}${extra}">${ini(p && p.nombre)}</div>`;
+  }
 
+  function renderLive(p){
+    const p1 = p.peleador1, p2 = p.peleador2;
+    return `
+    <div class="section-label">Ahora en el octágono</div>
+    <div class="fight-live">
+      <div class="fight-live-glow"></div>
+      <div class="fight-inner" style="padding:16px 20px">
+        <div class="live-badge"><div class="live-dot"></div>En vivo · ${TIPO_LABEL[p.tipo]||p.tipo} · ${p.peso_lbs} lbs</div>
+        <div class="matchup">
+          <div class="fc">${avatar(p1,'lg',{live:true})}${flag(p1,'lg')}<div class="fn-lg">${p1?.nombre||'TBA'}</div><div class="rec">${rec(p1)}</div></div>
+          <div class="vs-col"><div class="vs-lg">VS</div><div class="wt">${p.rounds} rounds</div></div>
+          <div class="fc">${avatar(p2,'lg',{live:true})}${flag(p2,'lg')}<div class="fn-lg">${p2?.nombre||'TBA'}</div><div class="rec">${rec(p2)}</div></div>
+        </div>
+      </div>
+    </div>`;
+  }
 
+  function renderNext(p){
+    const p1 = p.peleador1, p2 = p.peleador2;
+    return `
+    <div class="fight-next">
+      <div class="fight-inner" style="padding:14px 20px">
+        <div class="next-tag">Próxima · ${TIPO_LABEL[p.tipo]||p.tipo} · ${p.peso_lbs} lbs</div>
+        <div class="matchup">
+          <div class="fc">${avatar(p1,'md')}${flag(p1,'md')}<div class="fn-md">${p1?.nombre||'TBA'}</div><div class="rec">${rec(p1)}</div></div>
+          <div class="vs-col"><div class="vs-md">VS</div><div class="wt">${p.peso_lbs} lbs</div></div>
+          <div class="fc">${avatar(p2,'md')}${flag(p2,'md')}<div class="fn-md">${p2?.nombre||'TBA'}</div><div class="rec">${rec(p2)}</div></div>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function renderDone(p){
+    const p1 = p.peleador1, p2 = p.peleador2;
+    const p1win = p.ganador_id === p.peleador1_id;
+    const p2win = p.ganador_id === p.peleador2_id;
+    const ganador = p1win ? p1 : (p2win ? p2 : null);
+    const detalle = `R${p.round_final||'-'}${p.tiempo?(' · '+p.tiempo):''}`;
+    return `
+    <div class="fight-card">
+      <div class="fight-inner" style="padding:12px 20px">
+        <div class="next-tag" style="color:#333">${TIPO_LABEL[p.tipo]||p.tipo} · ${p.peso_lbs} lbs</div>
+        <div class="matchup">
+          <div class="fc">${avatar(p1,'sm',{win:p1win})}${flag(p1,'sm')}<div class="fn-sm${p1win?'':' dim'}">${p1?.nombre||'TBA'}</div><div class="rec">${rec(p1)}</div></div>
+          <div class="vs-col"><div class="vs-sm" style="color:#2a2a2a">VS</div><div class="wt">${p.peso_lbs} lbs</div></div>
+          <div class="fc">${avatar(p2,'sm',{win:p2win})}${flag(p2,'sm')}<div class="fn-sm${p2win?'':' dim'}">${p2?.nombre||'TBA'}</div><div class="rec">${rec(p2)}</div></div>
+        </div>
+      </div>
+      ${ganador ? `<div class="result-bar"><div class="win-tag">Ganador</div><div><span class="r-method">${p.metodo||''}</span> <span class="r-detail">${detalle}</span></div><div class="r-name">${ganador.nombre}</div></div>` : ''}
+    </div>`;
+  }
+
+  (async function(){
+    const root = document.getElementById('live-root');
+    try {
+      const { data: eventos } = await db.from('eventos').select('*').eq('status','live').order('fecha').limit(1);
+      const ev = eventos && eventos[0];
+      if (!ev) {
+        root.innerHTML = '<div style="padding:48px 24px;text-align:center;border:1px solid var(--border);background:var(--mid);color:var(--muted);font-family:\'Oswald\',sans-serif;letter-spacing:1px;text-transform:uppercase;">No hay ningún evento en vivo en este momento.</div>';
+        return;
+      }
+      document.title = ev.nombre + ' — EN VIVO | FightMFL';
+      const { data: peleas } = await db.from('peleas')
+        .select('*, peleador1:peleador1_id(*), peleador2:peleador2_id(*)')
+        .eq('evento_id', ev.id).order('orden');
+
+      const live = (peleas||[]).filter(p => p.status === 'live');
+      const next = (peleas||[]).filter(p => p.status === 'pendiente').sort((a,b) => b.orden - a.orden);
+      const done = (peleas||[]).filter(p => p.status === 'terminada').sort((a,b) => a.orden - b.orden);
+
+      const fechaFmt = ev.fecha
+        ? new Date(ev.fecha+'T12:00:00').toLocaleDateString('es-MX',{day:'numeric',month:'short',year:'numeric'})
+        : '';
+      const meta = [fechaFmt, ev.lugar, ev.canal].filter(Boolean).join(' · ');
+
+      let html = `
+      <div class="event-header">
+        <div>
+          <div class="event-tag">Evento en curso</div>
+          <div class="event-title">${ev.nombre}${ev.subtitulo?` <span style="color:var(--red)">${ev.subtitulo}</span>`:''}</div>
+          <div class="event-meta">${meta}</div>
+        </div>
+        <div class="live-pill">
+          <div class="live-dot"></div>
+          <div>
+            <div class="live-text">EN VIVO</div>
+            <div class="live-sub">${done.length} de ${peleas.length} terminadas</div>
+          </div>
+        </div>
+      </div>`;
+
+      if (live.length) html += live.map(renderLive).join('');
+      if (next.length) html += `<div class="section-label">Siguientes peleas</div>` + next.map(renderNext).join('');
+      if (done.length) html += `<div class="section-label">Peleas terminadas</div>` + done.map(renderDone).join('');
+
+      root.innerHTML = html;
+    } catch(e) {
+      console.error(e);
+      root.innerHTML = '<div style="padding:24px;color:var(--muted)">Error cargando el evento en vivo.</div>';
+    }
+  })();
+</script>
 
 </body>
 </html>

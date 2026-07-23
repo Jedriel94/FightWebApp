@@ -6,54 +6,55 @@
   <title>FightMFL — MMA México</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    .hero { position: relative; border: 1px solid var(--border); border-left: 3px solid var(--red); margin: 24px 0 0; padding: 48px 40px 36px; overflow: hidden; min-height: 340px; display: flex; align-items: flex-end; }
-    .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.55; z-index: 0; }
+    .hero { position: relative; border: 1px solid var(--border); border-left: 3px solid var(--red); margin: 24px 0 0; padding: 72px 56px 56px; overflow: hidden; min-height: 600px; display: flex; align-items: flex-end; }
+    .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.68; z-index: 0; }
     .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(10,10,10,0.5), rgba(26,0,5,0.4)); z-index: 1; }
     .hero-content { position: relative; z-index: 2; width: 100%; }
-    .hero-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
-    .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: 80px; line-height: 1; letter-spacing: 2px; }
+    .hero-tag { font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
+    .hero-title { font-family: 'Anton', sans-serif; font-size: 96px; line-height: 1; letter-spacing: 2px; }
     .hero-title span { color: var(--red); }
-    .hero-date { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin: 10px 0 20px; border-left: 2px solid var(--red); padding-left: 12px; }
+    .hero-date { font-family: 'Oswald', sans-serif; font-size: 15px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin: 10px 0 20px; border-left: 2px solid var(--red); padding-left: 12px; }
     .btns { display: flex; gap: 10px; margin-bottom: 24px; }
     .countdown { display: flex; gap: 20px; padding-top: 20px; border-top: 1px solid var(--border); }
     .cd-block { text-align: center; }
-    .cd-num { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: white; line-height: 1; }
-    .cd-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
-    .cd-sep { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--red); align-self: flex-start; margin-top: 4px; }
+    .cd-num { font-family: 'Anton', sans-serif; font-size: 42px; color: white; line-height: 1; }
+    .cd-label { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
+    .cd-sep { font-family: 'Anton', sans-serif; font-size: 36px; color: var(--red); align-self: flex-start; margin-top: 4px; }
 
     .fight-main { background: var(--mid); border: 1px solid var(--border); border-left: 3px solid var(--red); padding: 28px; margin-bottom: 8px; }
-    .fight-badge-main { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 20px; }
+    .fight-badge-main { font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 20px; }
     .fight-co { background: var(--mid); border: 1px solid var(--border); padding: 22px; margin-bottom: 8px; }
     .fight-sm { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; padding: 16px 20px; background: var(--mid); border: 1px solid var(--border); margin-bottom: 6px; }
-    .fn-sm-home { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 600; text-transform: uppercase; }
+    .fn-sm-home { font-family: 'Oswald', sans-serif; font-size: 16px; font-weight: 600; text-transform: uppercase; }
     .fr-sm { font-size: 12px; color: var(--muted); margin-top: 2px; }
     .tr { text-align: right; }
-    .vs-tiny { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: #2a2a2a; text-align: center; }
-    .wt-sm { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; text-align: center; display: block; }
+    .vs-tiny { font-family: 'Anton', sans-serif; font-size: 20px; color: #2a2a2a; text-align: center; }
+    .wt-sm { font-family: 'Oswald', sans-serif; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; text-align: center; display: block; }
 
     .results-wrap { background: var(--mid); border: 1px solid var(--border); }
     .results-header { padding: 18px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, #1a0005, #141414); }
-    .results-event { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; }
-    .results-date { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+    .results-event { font-family: 'Anton', sans-serif; font-size: 22px; letter-spacing: 1px; }
+    .results-date { font-family: 'Oswald', sans-serif; font-size: 12px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
     .result-row { display: grid; grid-template-columns: 1fr 110px 1fr; align-items: center; gap: 16px; padding: 14px 24px; border-bottom: 1px solid var(--border); transition: background .2s; }
     .result-row:last-child { border-bottom: none; }
     .result-row:hover { background: #171717; }
-    .r-av-w { width: 38px; height: 38px; border-radius: 50%; background: #1a1a1a; border: 2px solid rgba(232,0,29,0.3); display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 12px; color: #666; flex-shrink: 0; }
-    .r-av-l { width: 38px; height: 38px; border-radius: 50%; background: #1a1a1a; border: 2px solid #222; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 12px; color: #333; flex-shrink: 0; }
-    .r-win-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--red); }
-    .r-winner { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; text-transform: uppercase; color: white; }
-    .r-loser { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; text-transform: uppercase; color: #333; text-align: right; }
+    .r-av-w { width: 38px; height: 38px; border-radius: 50%; background: #1a1a1a; border: 2px solid rgba(232,0,29,0.3); display: flex; align-items: center; justify-content: center; font-family: 'Anton', sans-serif; font-size: 12px; color: #666; flex-shrink: 0; }
+    .r-av-l { width: 38px; height: 38px; border-radius: 50%; background: #1a1a1a; border: 2px solid #222; display: flex; align-items: center; justify-content: center; font-family: 'Anton', sans-serif; font-size: 12px; color: #333; flex-shrink: 0; }
+    .r-win-tag { font-family: 'Oswald', sans-serif; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--red); }
+    .r-winner { font-family: 'Oswald', sans-serif; font-size: 16px; font-weight: 700; text-transform: uppercase; color: white; }
+    .r-loser { font-family: 'Oswald', sans-serif; font-size: 16px; text-transform: uppercase; color: #333; text-align: right; }
     .r-center { text-align: center; }
-    .r-method-c { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--red); letter-spacing: 1px; line-height: 1; }
-    .r-detail-c { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; color: var(--muted); text-align: center; margin-top: 3px; letter-spacing: 1px; }
+    .r-tipo-c { font-family: 'Oswald', sans-serif; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #555; margin-bottom: 4px; }
+    .r-method-c { font-family: 'Anton', sans-serif; font-size: 22px; color: var(--red); letter-spacing: 1px; line-height: 1; }
+    .r-detail-c { font-family: 'Oswald', sans-serif; font-size: 11px; color: var(--muted); text-align: center; margin-top: 3px; letter-spacing: 1px; }
     .w-badge { display: none; }
 
     .news-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .news-feat { grid-column: span 2; background: var(--mid); border: 1px solid var(--border); border-left: 3px solid var(--red); padding: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center; }
     .news-card { background: var(--mid); border: 1px solid var(--border); padding: 20px; cursor: pointer; text-decoration: none; color: var(--light); display: block; }
     .news-card:hover { border-color: #333; }
-    .news-tag-n { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--red); margin-bottom: 8px; }
-    .news-title-n { font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 700; line-height: 1.3; }
+    .news-tag-n { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--red); margin-bottom: 8px; }
+    .news-title-n { font-family: 'Oswald', sans-serif; font-size: 17px; font-weight: 700; line-height: 1.3; }
     .news-feat .news-title-n { font-size: 24px; }
     .news-quote { font-size: 14px; color: var(--muted); line-height: 1.7; font-style: italic; border-left: 2px solid var(--red); padding-left: 12px; margin-top: 10px; }
     .news-author { font-size: 12px; color: #999; margin-top: 8px; font-style: normal; }
@@ -61,16 +62,47 @@
 
     .event-item { background: var(--mid); display: grid; grid-template-columns: 70px 1fr auto; align-items: center; gap: 16px; padding: 18px 20px; margin-bottom: 6px; border: 1px solid var(--border); border-left: 3px solid transparent; cursor: pointer; text-decoration: none; color: var(--light); }
     .event-item:hover { border-left-color: var(--red); }
-    .event-num { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: #222; line-height: 1; }
-    .event-name { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; text-transform: uppercase; }
+    .event-num { font-family: 'Anton', sans-serif; font-size: 36px; color: #222; line-height: 1; }
+    .event-name { font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 700; text-transform: uppercase; }
     .event-detail { font-size: 12px; color: var(--muted); margin-top: 4px; }
     .event-r { font-size: 12px; color: var(--muted); text-align: right; line-height: 1.8; }
+
+    /* PATROCINADORES (carrusel) */
+    .sponsors { overflow: hidden; border: 1px solid var(--border); background: var(--mid); padding: 24px 0; position: relative; }
+    .sponsors::before, .sponsors::after { content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2; pointer-events: none; }
+    .sponsors::before { left: 0; background: linear-gradient(to right, var(--mid), transparent); }
+    .sponsors::after { right: 0; background: linear-gradient(to left, var(--mid), transparent); }
+    .sponsors-track { display: flex; align-items: center; gap: 64px; width: max-content; animation: sponsor-scroll 32s linear infinite; }
+    .sponsors:hover .sponsors-track { animation-play-state: paused; }
+    @keyframes sponsor-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .sponsor-item { flex-shrink: 0; display: flex; align-items: center; }
+    .sponsor-item img { height: 48px; width: auto; filter: grayscale(1); opacity: .65; transition: filter .25s, opacity .25s; display: block; }
+    .sponsor-item:hover img { filter: none; opacity: 1; }
+
+    /* POP-UP CONVOCATORIA */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 500; display: none; align-items: center; justify-content: center; padding: 20px; }
+    .modal-overlay.open { display: flex; }
+    .modal-box { position: relative; background: var(--mid); border: 1px solid var(--border); border-left: 3px solid var(--red); max-width: 520px; width: 100%; padding: 42px 36px; text-align: center; }
+    .modal-close { position: absolute; top: 10px; right: 14px; background: none; border: none; color: var(--muted); font-size: 26px; line-height: 1; cursor: pointer; }
+    .modal-close:hover { color: white; }
+    .modal-tag { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
+    .modal-title { font-family: 'Anton', sans-serif; font-size: 40px; line-height: 1.05; letter-spacing: 1px; }
+    .modal-text { font-family: 'Inter', sans-serif; font-size: 15px; color: var(--muted); line-height: 1.6; margin: 14px 0 26px; }
+    .modal-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .modal-later { background: transparent; border: 1px solid var(--border); color: var(--muted); font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; padding: 10px 24px; cursor: pointer; }
+    .modal-later:hover { border-color: #555; color: white; }
+    @media (max-width: 768px) {
+      .sponsor-item img { height: 36px; }
+      .sponsors-track { gap: 40px; }
+      .modal-box { padding: 32px 20px; }
+      .modal-title { font-size: 30px; }
+    }
   </style>
 
   <style id="mobile-index">
   @media (max-width: 768px) {
-    .hero { padding: 20px 16px 16px; min-height: auto; }
-    .hero-title { font-size: 48px; }
+    .hero { padding: 28px 18px 22px; min-height: 460px; }
+    .hero-title { font-size: 56px; }
     .hero-date { font-size: 12px; }
     .btns { flex-wrap: wrap; }
     .cd-num { font-size: 28px; }
@@ -93,15 +125,16 @@
   </style>
 </head>
 <body>
-<header style="background:#0D0F14;border-bottom:1px solid #232830;position:sticky;top:0;z-index:200;">
+<header style="background:#000000;border-bottom:1px solid #1E1E1E;position:sticky;top:0;z-index:200;">
   <div style="max-width:1200px;margin:0 auto;padding:0 16px;">
     <nav style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;">
-      <a href="index.html" style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:white;text-decoration:none;">FIGHT<span style="color:#E8001D;">MFL</span></a>
+      <a href="index.html" style="display:flex;align-items:center;text-decoration:none;"><img src="logo.svg" alt="FightMFL" style="height:30px;width:auto;display:block;"></a>
       <div id="nav-desktop" style="display:flex;gap:28px;">
-        <a href="index.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#ffffff;text-decoration:none;font-weight:700;">Inicio</a>
-        <a href="eventos.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888888;text-decoration:none;">Eventos</a>
-        <a href="noticias.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888888;text-decoration:none;">Noticias</a>
-        <a href="tienda.html" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888888;text-decoration:none;">Tienda</a>
+        <a href="index.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#ffffff;text-decoration:none;font-weight:700;">Inicio</a>
+        <a href="eventos.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888888;text-decoration:none;">Eventos</a>
+        <a href="noticias.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888888;text-decoration:none;">Noticias</a>
+        <a href="tienda.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888888;text-decoration:none;">Tienda</a>
+        <a href="pelear.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#FF0A2A;text-decoration:none;font-weight:700;">Quiero Pelear</a>
       </div>
       <button id="hamburger-btn" style="display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:transparent;border:none;" onclick="toggleMenu()">
         <span style="width:24px;height:2px;background:white;display:block;"></span>
@@ -110,11 +143,12 @@
       </button>
     </nav>
   </div>
-  <div id="mobile-menu" style="display:none;flex-direction:column;background:#0D0F14;border-top:1px solid #232830;">
-    <a href="index.html" style="font-family:'Barlow Condensed',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#ffffff;text-decoration:none;padding:18px 20px;border-bottom:1px solid #232830;display:block;border-left:3px solid #E8001D;">Inicio</a>
-    <a href="eventos.html" style="font-family:'Barlow Condensed',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666666;text-decoration:none;padding:18px 20px;border-bottom:1px solid #232830;display:block;">Eventos</a>
-    <a href="noticias.html" style="font-family:'Barlow Condensed',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666666;text-decoration:none;padding:18px 20px;border-bottom:1px solid #232830;display:block;">Noticias</a>
-    <a href="tienda.html" style="font-family:'Barlow Condensed',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666666;text-decoration:none;padding:18px 20px;border-bottom:1px solid #232830;display:block;">Tienda</a>
+  <div id="mobile-menu" style="display:none;flex-direction:column;background:#000000;border-top:1px solid #1E1E1E;">
+    <a href="index.html" style="font-family:'Oswald',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#ffffff;text-decoration:none;padding:18px 20px;border-bottom:1px solid #1E1E1E;display:block;border-left:3px solid #E8001D;">Inicio</a>
+    <a href="eventos.html" style="font-family:'Oswald',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666666;text-decoration:none;padding:18px 20px;border-bottom:1px solid #1E1E1E;display:block;">Eventos</a>
+    <a href="noticias.html" style="font-family:'Oswald',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666666;text-decoration:none;padding:18px 20px;border-bottom:1px solid #1E1E1E;display:block;">Noticias</a>
+    <a href="tienda.html" style="font-family:'Oswald',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#666666;text-decoration:none;padding:18px 20px;border-bottom:1px solid #1E1E1E;display:block;">Tienda</a>
+    <a href="pelear.html" style="font-family:'Oswald',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase;color:#FF0A2A;text-decoration:none;padding:18px 20px;border-bottom:1px solid #1E1E1E;display:block;font-weight:700;">Quiero Pelear</a>
   </div>
 </header>
 <style>
@@ -150,7 +184,7 @@ function toggleMenu(){
       <div class="hero-title" id="hero-title">MFL <span id="hero-num">—</span></div>
       <div class="hero-date" id="hero-date">Cargando...</div>
       <div class="btns">
-        <a href="evento-proximo.html" class="btn">Ver Cartelera</a>
+        <a href="evento-proximo.html" class="btn" id="btn-cartelera">Ver Cartelera</a>
         <a href="#" class="btn-ghost">Boletos</a>
       </div>
       <div class="countdown" id="countdown-wrap">
@@ -168,7 +202,7 @@ function toggleMenu(){
   <!-- CARTELERA -->
   <div class="section-label" id="cartelera-label">Cartelera Principal</div>
   <div id="cartelera-content">
-    <div style="color:var(--muted);font-family:'Barlow Condensed',sans-serif;padding:20px;text-align:center;letter-spacing:1px;">Cargando cartelera...</div>
+    <div style="color:var(--muted);font-family:'Oswald',sans-serif;padding:20px;text-align:center;letter-spacing:1px;">Cargando cartelera...</div>
   </div>
 
   <!-- NOTICIAS -->
@@ -183,7 +217,7 @@ function toggleMenu(){
   <!-- MODAL VIDEO -->
   <div id="video-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:1000;align-items:center;justify-content:center;padding:20px;" onclick="closeModal()">
     <div style="width:100%;max-width:900px;position:relative;" onclick="event.stopPropagation()">
-      <button onclick="closeModal()" style="position:absolute;top:-40px;right:0;background:none;border:none;color:white;font-size:28px;cursor:pointer;font-family:'Bebas Neue',sans-serif;">✕ CERRAR</button>
+      <button onclick="closeModal()" style="position:absolute;top:-40px;right:0;background:none;border:none;color:white;font-size:28px;cursor:pointer;font-family:'Anton',sans-serif;">CERRAR</button>
       <div style="position:relative;padding-bottom:56.25%;height:0;">
         <iframe id="video-frame" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allowfullscreen allow="autoplay"></iframe>
       </div>
@@ -192,7 +226,7 @@ function toggleMenu(){
 
   <div class="section-label" id="noticias-label" style="display:none">Noticias</div>
   <div class="news-grid" id="noticias-content">
-    <div style="color:var(--muted);font-family:'Barlow Condensed',sans-serif;padding:20px;text-align:center;letter-spacing:1px;grid-column:span 2;">Cargando noticias...</div>
+    <div style="color:var(--muted);font-family:'Oswald',sans-serif;padding:20px;text-align:center;letter-spacing:1px;grid-column:span 2;">Cargando noticias...</div>
   </div>
 
   <!-- ULTIMOS RESULTADOS -->
@@ -200,25 +234,31 @@ function toggleMenu(){
   <div id="resultados-content"></div>
 
   <!-- EVENTOS PASADOS -->
-  <div class="section-label">Eventos Pasados</div>
-  <a href="evento.html" class="event-item">
-    <div class="event-num">07</div>
-    <div><div class="event-name">MFL 7 — Night of Champions</div><div class="event-detail">12 Abr 2026 · Foro Deportivo Norte · CDMX</div></div>
-    <div class="event-r">8 peleas<br>Resultados ✓</div>
-  </a>
-  <a href="evento.html" class="event-item">
-    <div class="event-num">06</div>
-    <div><div class="event-name">MFL 6 — Collision</div><div class="event-detail">15 Feb 2026 · Gimnasio Olímpico · CDMX</div></div>
-    <div class="event-r">7 peleas<br>Resultados ✓</div>
-  </a>
-  <a href="evento.html" class="event-item">
-    <div class="event-num">05</div>
-    <div><div class="event-name">MFL 5 — Rising</div><div class="event-detail">10 Nov 2025 · Arena Norte · CDMX</div></div>
-    <div class="event-r">6 peleas<br>Resultados ✓</div>
-  </a>
+  <div class="section-label" id="pasados-label" style="display:none">Eventos Pasados</div>
+  <div id="eventos-pasados-content"></div>
+
+  <!-- PATROCINADORES -->
+  <div class="section-label" id="sponsors-label" style="display:none">Patrocinadores</div>
+  <div class="sponsors" id="sponsors" style="display:none">
+    <div class="sponsors-track" id="sponsors-track"></div>
+  </div>
+
+  <!-- POP-UP CONVOCATORIA -->
+  <div class="modal-overlay" id="apply-modal" role="dialog" aria-modal="true" aria-labelledby="apply-modal-title">
+    <div class="modal-box">
+      <button class="modal-close" id="apply-modal-close" aria-label="Cerrar">&times;</button>
+      <div class="modal-tag">Convocatoria Abierta</div>
+      <div class="modal-title" id="apply-modal-title">¿QUIERES PELEAR<br>EN <span style="color:var(--red)">MFL</span>?</div>
+      <div class="modal-text">Buscamos peleadores para las próximas carteleras. Manda tu perfil y nuestro equipo de matchmaking lo revisará.</div>
+      <div class="modal-actions">
+        <a href="pelear.html" class="btn" id="apply-modal-go">Quiero pelear</a>
+        <button class="modal-later" id="apply-modal-later">Ahora no</button>
+      </div>
+    </div>
+  </div>
 
   <footer>
-    <a class="footer-logo" href="index.html">FIGHT<span>MFL</span></a>
+    <a class="footer-logo" href="index.html" style="display:inline-flex;align-items:center;"><img src="logo.svg" alt="FightMFL" style="height:22px;width:auto;display:block;"></a>
     <div class="footer-links">
       <a href="#">Instagram</a>
       <a href="#">YouTube</a>
@@ -231,7 +271,7 @@ function toggleMenu(){
 
 <style>
   /* Avatar pequeño para cartelera */
-  .av-sm { width:38px; height:38px; border-radius:50%; background:#1a1a1a; border:2px solid #252525; display:flex; align-items:center; justify-content:center; font-family:'Bebas Neue',sans-serif; font-size:12px; color:#444; flex-shrink:0; }
+  .av-sm { width:38px; height:38px; border-radius:50%; background:#1a1a1a; border:2px solid #252525; display:flex; align-items:center; justify-content:center; font-family:'Anton',sans-serif; font-size:12px; color:#444; flex-shrink:0; }
   .av-sm.w { border-color:rgba(232,0,29,0.4); }
   /* Highlights — Destacado + grid */
   .hl-grid { display:grid; grid-template-columns:2fr 1fr 1fr; grid-template-rows:1fr 1fr; gap:8px; height:520px; }
@@ -250,10 +290,10 @@ function toggleMenu(){
   .hl-card:hover .hl-play-btn { opacity:1; transform:scale(1); }
   .hl-card.feat .hl-play-btn { width:68px; height:68px; }
   .hl-play-btn::after { content:''; border-left:18px solid white; border-top:11px solid transparent; border-bottom:11px solid transparent; margin-left:5px; }
-  .hl-tag { position:absolute; top:12px; left:12px; z-index:3; background:var(--red); font-family:'Barlow Condensed',sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase; padding:4px 10px; font-weight:700; }
-  .hl-tipo { position:absolute; top:12px; right:12px; z-index:3; background:rgba(0,0,0,0.7); font-family:'Barlow Condensed',sans-serif; font-size:10px; letter-spacing:1px; text-transform:uppercase; padding:3px 8px; color:#ddd; }
+  .hl-tag { position:absolute; top:12px; left:12px; z-index:3; background:var(--red); font-family:'Oswald',sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase; padding:4px 10px; font-weight:700; }
+  .hl-tipo { position:absolute; top:12px; right:12px; z-index:3; background:rgba(0,0,0,0.7); font-family:'Oswald',sans-serif; font-size:10px; letter-spacing:1px; text-transform:uppercase; padding:3px 8px; color:#ddd; }
   .hl-info { position:absolute; left:0; right:0; bottom:0; z-index:3; padding:16px; }
-  .hl-title { font-family:'Barlow Condensed',sans-serif; font-weight:700; text-transform:uppercase; line-height:1.2; color:white; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .hl-title { font-family:'Oswald',sans-serif; font-weight:700; text-transform:uppercase; line-height:1.2; color:white; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
   .hl-card:not(.feat) .hl-title { font-size:14px; }
   .hl-card.feat .hl-title { font-size:26px; }
   @media(max-width:768px){
@@ -330,7 +370,7 @@ function toggleMenu(){
       return `
       <div class="hl-card${feat}" onclick="openModal('${embedUrl}')">
         <div class="hl-img">
-          ${thumb ? `<img src="${thumb}" alt="" loading="lazy">` : '<div style="width:100%;height:100%;background:#111;display:flex;align-items:center;justify-content:center;font-size:40px;">🎬</div>'}
+          ${thumb ? `<img src="${thumb}" alt="" loading="lazy">` : '<div style="width:100%;height:100%;background:#111;display:flex;align-items:center;justify-content:center;font-size:40px;"></div>'}
         </div>
         <div class="hl-overlay"></div>
         <div class="hl-play"><div class="hl-play-btn"></div></div>
@@ -384,14 +424,24 @@ function toggleMenu(){
   // Prioridad de tipo: estelar > coestelar > principal > preliminar
   const TIPO_PRIO = { estelar: 0, coestelar: 1, principal: 2, preliminar: 3 }
   function tipoBadge(tipo) {
-    return { estelar:'⭐ Pelea Estelar', coestelar:'🥈 Co-Estelar', principal:'📋 Cartelera Principal', preliminar:'🥊 Preliminar' }[tipo] || tipo
+    return { estelar:'Pelea Estelar', coestelar:'Co-Estelar', principal:'Cartelera Principal', preliminar:'Preliminar' }[tipo] || tipo
+  }
+  function estadoPelea(p) {
+    if (p.status === 'live') {
+      return `<div style="display:inline-flex;align-items:center;gap:6px;margin-top:8px;background:rgba(255,10,42,0.15);border:1px solid rgba(255,10,42,0.45);color:var(--red);font-family:'Oswald',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;"><span class="live-dot"></span>En Vivo Ahora</div>`
+    }
+    if (p.status === 'terminada') {
+      const g = p.ganador
+      return `<div style="margin-top:8px;font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)">Ganador: <span style="color:#fff;font-weight:700">${g?.nombre||'—'}</span>${p.metodo?` · ${p.metodo}`:''}${p.round_final?` R${p.round_final}`:''}</div>`
+    }
+    return ''
   }
 
   function cardGrande(p, label) {
     const p1 = p.peleador1, p2 = p.peleador2
     return `
     <div class="fight-main">
-      <div class="fight-badge-main">${label} · ${p.rounds} Rounds · ${p.peso_lbs} lbs</div>
+      <div class="fight-badge-main">${label} · ${p.rounds} Rounds · ${p.peso_lbs} lbs ${estadoPelea(p)}</div>
       <div class="matchup">
         <div class="fc">
           ${avatarHtml(p1, 'lg', 'red')}
@@ -414,7 +464,7 @@ function toggleMenu(){
     const p1 = p.peleador1, p2 = p.peleador2
     return `
     <div class="fight-co">
-      <div class="fight-badge-main" style="color:var(--muted)">${label} · ${p.rounds} Rounds · ${p.peso_lbs} lbs</div>
+      <div class="fight-badge-main" style="color:var(--muted)">${label} · ${p.rounds} Rounds · ${p.peso_lbs} lbs ${estadoPelea(p)}</div>
       <div class="matchup">
         <div class="fc">
           ${avatarHtml(p1, 'md', 'red')}
@@ -439,20 +489,21 @@ function toggleMenu(){
     <div class="fight-sm" style="padding:14px 20px;">
       <div class="tr" style="display:flex;align-items:center;gap:10px;justify-content:flex-end;">
         <div>
-          <div class="fn-sm-home">${p1?.nombre||'TBA'}</div>
-          <div class="fr-sm">${p1?`${p1.record_g}-${p1.record_p}-${p1.record_e}`:''} ${p1?.pais||''}</div>
+          <div class="fn-sm-home">${p1?.nombre||'TBA'} <span class="flag-sm">${p1?.pais||'🏳️'}</span></div>
+          <div class="fr-sm">${p1?`${p1.record_g}-${p1.record_p}-${p1.record_e}`:''}</div>
         </div>
         ${avatarHtml(p1, 'sm', 'red')}
       </div>
       <div style="text-align:center;">
         <div class="vs-tiny">VS</div>
         <span class="wt-sm">${p.peso_lbs} lbs</span>
+        ${estadoPelea(p)}
       </div>
       <div style="display:flex;align-items:center;gap:10px;">
         ${avatarHtml(p2, 'sm', '')}
         <div>
-          <div class="fn-sm-home">${p2?.nombre||'TBA'}</div>
-          <div class="fr-sm">${p2?`${p2.record_g}-${p2.record_p}-${p2.record_e}`:''} ${p2?.pais||''}</div>
+          <div class="fn-sm-home">${p2?.nombre||'TBA'} <span class="flag-sm">${p2?.pais||'🏳️'}</span></div>
+          <div class="fr-sm">${p2?`${p2.record_g}-${p2.record_p}-${p2.record_e}`:''}</div>
         </div>
       </div>
     </div>`
@@ -528,29 +579,44 @@ function toggleMenu(){
   }
 
   // ── Render resultados ─────────────────────────────────────
+  // Un lado (peleador) del resultado — respeta su lado real y marca si ganó
+  function ladoResultado(peleador, esGanador, lado) {
+    const avCls = esGanador ? 'r-av-w' : 'r-av-l'
+    const av = peleador?.foto_url
+      ? `<div class="${avCls}" style="overflow:hidden;padding:0;"><img src="${peleador.foto_url}" style="width:100%;height:100%;object-fit:cover;object-position:top center;" alt=""></div>`
+      : `<div class="${avCls}">${initiales(peleador?.nombre)}</div>`
+    const align = lado === 'left' ? 'left' : 'right'
+    const info = esGanador
+      ? `<div style="text-align:${align}"><div class="r-win-tag">Ganador</div><div class="r-winner">${peleador?.nombre||'—'}</div></div>`
+      : `<div class="r-loser" style="text-align:${align}">${peleador?.nombre||'—'}</div>`
+    const justify = lado === 'left' ? 'flex-start' : 'flex-end'
+    const contenido = lado === 'left' ? av + info : info + av
+    return `<div style="display:flex;align-items:center;gap:12px;justify-content:${justify}">${contenido}</div>`
+  }
+
   function renderResultados(evento, peleas) {
     document.getElementById('resultados-label').style.display = ''
     document.getElementById('resultados-label').textContent = `Últimos Resultados — ${evento.nombre}`
-    const terminadas = peleas.filter(p => p.status === 'terminada')
+    // Solo las 3 peleas principales: estelar, co-estelar y la siguiente en jerarquía
+    const PRIO = { estelar: 0, coestelar: 1, principal: 2, preliminar: 3 }
+    const TIPO_TXT = { estelar: 'Estelar', coestelar: 'Co-Estelar', principal: 'Cartelera Principal', preliminar: 'Preliminar' }
+    const terminadas = peleas
+      .filter(p => p.status === 'terminada')
+      .sort((a, b) => (PRIO[a.tipo] ?? 99) - (PRIO[b.tipo] ?? 99) || (a.orden || 0) - (b.orden || 0))
+      .slice(0, 3)
     if (!terminadas.length) return
-    let rows = terminadas.map(p => {
-      const ganador = p.ganador_id === p.peleador1_id ? p.peleador1 : p.peleador2
-      const perdedor = p.ganador_id === p.peleador1_id ? p.peleador2 : p.peleador1
+    let rows = terminadas.map((p) => {
+      const p1gano = p.ganador_id === p.peleador1_id
       const metCort = metodoCort(p.metodo)
       return `
       <div class="result-row">
-        <div style="display:flex;align-items:center;gap:12px">
-          <div class="r-av-w">${initiales(ganador?.nombre)}</div>
-          <div><div class="r-win-tag">Ganador</div><div class="r-winner">${ganador?.nombre||'—'}</div></div>
-        </div>
+        ${ladoResultado(p.peleador1, p1gano, 'left')}
         <div class="r-center">
+          <div class="r-tipo-c">${TIPO_TXT[p.tipo] || ''}</div>
           <div class="r-method-c">${metCort}</div>
           <div class="r-detail-c">R${p.round_final} · ${p.tiempo||''}</div>
         </div>
-        <div style="display:flex;align-items:center;gap:12px;justify-content:flex-end">
-          <div class="r-loser">${perdedor?.nombre||'—'}</div>
-          <div class="r-av-l">${initiales(perdedor?.nombre)}</div>
-        </div>
+        ${ladoResultado(p.peleador2, !p1gano, 'right')}
       </div>`
     }).join('')
     document.getElementById('resultados-content').innerHTML = `
@@ -565,17 +631,39 @@ function toggleMenu(){
 
   // ── Main ──────────────────────────────────────────────────
   async function main() {
+    // ── Lanzar TODAS las consultas a la vez (en paralelo) ──
+    // Así cada sección aparece en cuanto llega su dato, sin esperar a las demás.
+    const pProximo   = db.from('eventos').select('*').in('status', ['live','upcoming']).order('fecha').limit(1)
+    const pSlots     = db.from('home_slots').select('slot, highlights(*)').order('slot').limit(10)
+    const pNoticias  = db.from('noticias').select('*').order('created_at', { ascending: false }).limit(3)
+    const pDone      = db.from('eventos').select('*').eq('status','done').order('fecha', { ascending: false })
+    const pPatros    = db.from('patrocinadores').select('*').eq('activo', true).order('orden')
+
+    // Resultados: apenas sepamos el último evento, pedimos sus peleas (sin esperar al resto)
+    const pResultados = pDone.then(({ data }) => {
+      const ultimo = data?.[0]
+      if (!ultimo) return { ultimo: null, peleas: [] }
+      return db.from('peleas')
+        .select('*, peleador1:peleador1_id(*), peleador2:peleador2_id(*), ganador:ganador_id(*)')
+        .eq('evento_id', ultimo.id).order('orden')
+        .then(({ data: peleas }) => ({ ultimo, peleas: peleas || [] }))
+    })
+
     try {
       // Próximo evento (upcoming) o live
-      const { data: eventos, error: evErr } = await db.from('eventos').select('*')
-        .in('status', ['live','upcoming']).order('fecha').limit(1)
+      const { data: eventos, error: evErr } = await pProximo
       const proximo = eventos?.[0]
 
       if (proximo) {
         // Hero
         const num = proximo.nombre.replace(/[^0-9]/g,'')
         document.getElementById('hero-num').textContent = num || proximo.nombre
-        document.getElementById('hero-tag').textContent = proximo.status === 'live' ? '🔴 EN VIVO' : 'Próximo Evento'
+        document.getElementById('hero-tag').textContent = proximo.status === 'live' ? 'EN VIVO' : 'Próximo Evento'
+        if (proximo.status === 'live') {
+          const btnCart = document.getElementById('btn-cartelera')
+          btnCart.href = 'evento-live.html'
+          btnCart.textContent = 'Ver en Vivo'
+        }
         const fechaFormato = proximo.fecha
           ? new Date(proximo.fecha+'T12:00:00').toLocaleDateString('es-MX',{weekday:'short',day:'numeric',month:'short',year:'numeric'})
           : ''
@@ -606,10 +694,7 @@ function toggleMenu(){
 
     // Highlights — cargar desde home_slots con el highlight asociado
     try {
-      const { data: slots } = await db.from('home_slots')
-        .select('slot, highlights(*)')
-        .order('slot')
-        .limit(10)
+      const { data: slots } = await pSlots
       renderHighlights(slots || [])
     } catch(e) {
       console.error('Error cargando highlights:', e)
@@ -617,28 +702,76 @@ function toggleMenu(){
 
     // Noticias
     try {
-      const { data: noticias } = await db.from('noticias')
-        .select('*').order('created_at', { ascending: false }).limit(3)
+      const { data: noticias } = await pNoticias
       renderNoticias(noticias || [])
     } catch(e) { console.error('Error noticias:', e) }
 
     // Últimos resultados
     try {
-      const { data: terminados } = await db.from('eventos').select('*')
-        .eq('status','done').order('fecha', { ascending: false }).limit(1)
-      const ultimo = terminados?.[0]
-      if (ultimo) {
-        const { data: peleasT } = await db.from('peleas')
-          .select('*, peleador1:peleador1_id(*), peleador2:peleador2_id(*), ganador:ganador_id(*)')
-          .eq('evento_id', ultimo.id).order('orden')
-        if (peleasT?.some(p => p.status === 'terminada')) {
-          renderResultados(ultimo, peleasT)
-        }
+      const { ultimo, peleas: peleasT } = await pResultados
+      if (ultimo && peleasT?.some(p => p.status === 'terminada')) {
+        renderResultados(ultimo, peleasT)
       }
     } catch(e) { console.error('Error resultados:', e) }
+
+    // Eventos pasados (reusa la misma consulta de eventos terminados)
+    try {
+      const { data: pasados } = await pDone
+      if (pasados && pasados.length) {
+        document.getElementById('pasados-label').style.display = ''
+        document.getElementById('eventos-pasados-content').innerHTML = pasados.map(ev => {
+          const num = (ev.nombre.match(/\d+/) || [''])[0]
+          const fecha = ev.fecha ? new Date(ev.fecha+'T12:00:00').toLocaleDateString('es-MX',{day:'numeric',month:'short',year:'numeric'}) : ''
+          return `<a href="evento.html?id=${ev.id}" class="event-item">
+            <div class="event-num">${num ? num.padStart(2,'0') : '··'}</div>
+            <div><div class="event-name">${ev.nombre}${ev.subtitulo?' — '+ev.subtitulo:''}</div><div class="event-detail">${fecha}${ev.lugar?' · '+ev.lugar:''}</div></div>
+            <div class="event-r">Resultados</div>
+          </a>`
+        }).join('')
+      }
+    } catch(e) { console.error('Error eventos pasados:', e) }
+
+    // Patrocinadores (carrusel). Si la tabla aún no existe, la sección no se muestra.
+    try {
+      const { data: pats, error } = await pPatros
+      if (!error && pats && pats.length) {
+        const item = p => `
+          <div class="sponsor-item">
+            ${p.sitio_url ? `<a href="${p.sitio_url}" target="_blank" rel="noopener noreferrer">` : ''}
+              <img src="${p.logo_url}" alt="${p.nombre}" loading="lazy">
+            ${p.sitio_url ? '</a>' : ''}
+          </div>`
+        const html = pats.map(item).join('')
+        // duplicado: hace que el carrusel gire en bucle sin cortes
+        document.getElementById('sponsors-track').innerHTML = html + html
+        document.getElementById('sponsors-label').style.display = ''
+        document.getElementById('sponsors').style.display = ''
+      }
+    } catch(e) { console.error('Error patrocinadores:', e) }
   }
 
   main()
+
+  // ── Pop-up de convocatoria (se muestra una vez por sesión) ──
+  ;(function(){
+    const KEY = 'mfl_convocatoria_vista'
+    const modal = document.getElementById('apply-modal')
+    if (!modal) return
+    const marcarVisto = () => { try { sessionStorage.setItem(KEY, '1') } catch(e) {} }
+    const cerrar = () => { modal.classList.remove('open'); marcarVisto() }
+
+    let vista = false
+    try { vista = sessionStorage.getItem(KEY) === '1' } catch(e) {}
+    if (!vista) setTimeout(() => modal.classList.add('open'), 1800)
+
+    document.getElementById('apply-modal-close').addEventListener('click', cerrar)
+    document.getElementById('apply-modal-later').addEventListener('click', cerrar)
+    document.getElementById('apply-modal-go').addEventListener('click', marcarVisto)
+    modal.addEventListener('click', e => { if (e.target === modal) cerrar() })
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && modal.classList.contains('open')) cerrar()
+    })
+  })()
 </script>
 
 
