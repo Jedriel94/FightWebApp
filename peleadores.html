@@ -134,18 +134,14 @@ function toggleMenu(){ var m=document.getElementById('mobile-menu'); m.style.dis
 
   function pintar(){
     const lista = filtroActivo === 'firmados'
-      ? todos.filter(p => p.firmado)
-      : filtroActivo === 'todos'
-        ? todos
-        : todos.filter(p => (p.categoria||'').startsWith(filtroActivo));
+      ? todos
+      : todos.filter(p => (p.categoria||'').startsWith(filtroActivo));
     const grid = document.getElementById('grid');
     grid.innerHTML = lista.length
       ? lista.map(card).join('')
       : '<div class="vacio" style="grid-column:1/-1">Sin peleadores en esta categoría.</div>';
     document.getElementById('roster-sub').textContent =
-      filtroActivo === 'firmados'
-        ? `${lista.length} atletas firmados con Mexico Fight League`
-        : `${lista.length} peleadores`;
+      `${lista.length} atletas firmados con Mexico Fight League`;
   }
 
   function setFiltro(val, btn){
@@ -156,12 +152,13 @@ function toggleMenu(){ var m=document.getElementById('mobile-menu'); m.style.dis
   }
 
   (async function(){
+    // Solo el roster oficial: atletas firmados con MFL
     const { data } = await db.from('peleadores')
-      .select('*').order('firmado', { ascending: false }).order('nombre');
+      .select('*').eq('firmado', true).order('nombre');
     todos = data || [];
 
-    // Filtros: Firmados, Todos, y las categorías que existan
-    const cats = [...new Set(todos.map(p => (p.categoria||'').split('·')[0].trim()).filter(Boolean))];
+    // Filtros por categoría de peso (dentro del roster)
+    const cats = [...new Set(todos.map(p => (p.categoria||'').split('·')[0].trim()).filter(Boolean))].sort();
     const cont = document.getElementById('filtros');
     const mk = (txt, val, activo) => {
       const b = document.createElement('button');
@@ -170,8 +167,7 @@ function toggleMenu(){ var m=document.getElementById('mobile-menu'); m.style.dis
       b.onclick = () => setFiltro(val, b);
       cont.appendChild(b);
     };
-    mk('★ Firmados', 'firmados', true);
-    mk('Todos', 'todos', false);
+    mk('Todos', 'firmados', true);
     cats.forEach(c => mk(c, c, false));
     pintar();
   })();
