@@ -15,6 +15,61 @@
     .tabs { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
     .tab { font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; padding: 12px 20px; cursor: pointer; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px; }
     .tab.active { color: white; border-bottom-color: var(--red); }
+
+    /* ── Card de pelea estilo UFC (oscuro) ── */
+    .uf-card { background: var(--mid); border: 1px solid var(--border); margin-bottom: 8px; overflow: hidden; }
+    .uf-card.main { border-left: 3px solid var(--red); }
+    .uf-top { display: grid; grid-template-columns: 150px 1fr 150px; align-items: stretch; }
+    .uf-foto { position: relative; height: 200px; overflow: hidden; background: linear-gradient(160deg,#141414,#0a0a0a); display: flex; align-items: center; justify-content: center; }
+    .uf-foto img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+    .uf-foto.perdio img { filter: grayscale(80%) brightness(.55); }
+    .uf-sinfoto { font-family: 'Anton', sans-serif; font-size: 34px; color: #2a2a2a; }
+    .uf-win { position: absolute; top: 10px; background: var(--red); color: #fff; font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 2px; font-weight: 700; padding: 3px 10px; z-index: 2; }
+    .uf-centro { padding: 20px 18px; display: flex; flex-direction: column; justify-content: center; text-align: center; }
+    .uf-tipo { font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+    .uf-tipo.est { color: var(--red); }
+    .uf-nombres { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .uf-nombre { font-family: 'Anton', sans-serif; font-size: 21px; text-transform: uppercase; line-height: 1.05; color: #fff; }
+    .uf-nombre.dim { color: #4a4a4a; }
+    .uf-vs { font-family: 'Anton', sans-serif; font-size: 17px; color: var(--red); }
+    .uf-datos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; border-top: 1px solid var(--border); padding-top: 12px; }
+    .uf-dl { font-family: 'Oswald', sans-serif; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: #555; }
+    .uf-dv { font-family: 'Oswald', sans-serif; font-size: 14px; font-weight: 700; color: #fff; text-transform: uppercase; margin-top: 3px; }
+    .uf-pie { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; border-top: 1px solid var(--border); background: #0d0d0d; padding: 9px 16px; }
+    .uf-pais { display: flex; align-items: center; gap: 8px; font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+    .uf-pais.der { justify-content: flex-end; }
+    .uf-rec { color: #fff; font-weight: 700; }
+    /* Encabezado superior y datos al pie: solo en celular */
+    .uf-tipo-top, .uf-datos-m { display: none; }
+
+    @media (max-width: 768px) {
+      /* Encabezado del tipo de pelea arriba, centrado */
+      .uf-tipo-top { display: block; text-align: center; font-family: 'Oswald', sans-serif;
+        font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--red);
+        padding: 12px 10px 4px; }
+      .uf-tipo { display: none; }              /* el del centro se oculta */
+
+      .uf-top { grid-template-columns: 1fr 1.15fr 1fr; }
+      .uf-foto { height: 190px; }
+      .uf-centro { padding: 10px 4px; }
+
+      /* Nombres apilados: uno arriba, VS, el otro abajo */
+      .uf-nombres { grid-template-columns: 1fr; gap: 6px; margin-bottom: 0; }
+      .uf-nombre { font-size: 15px; }
+      .uf-vs { font-size: 13px; color: #888; }
+
+      /* El bloque de datos del centro se oculta; va al pie */
+      .uf-centro .uf-datos { display: none; }
+      .uf-datos-m { display: grid; border-top: 1px solid var(--border);
+        background: #0d0d0d; padding: 10px 12px; }
+
+      /* Badge WIN abajo a la izquierda de la foto */
+      .uf-win { top: auto; bottom: 0; left: 0 !important; right: auto !important; padding: 4px 12px; }
+
+      .uf-pie { padding: 9px 12px; }
+      .uf-pais { font-size: 9px; gap: 5px; }
+      .uf-dv { font-size: 12px; }
+    }
   </style>
 
   <style id="mobile-evento">
@@ -106,25 +161,61 @@ function toggleMenu(){
     if (p && p.foto_url) return `<div class="${cls}" style="overflow:hidden;padding:0"><img src="${p.foto_url}" style="width:100%;height:100%;object-fit:cover" alt=""></div>`;
     return `<div class="${cls}">${ini(p && p.nombre)}</div>`;
   }
+  // Nombre del país a partir del emoji de bandera
+  const PAIS_TXT = {'🇲🇽':'México','🇻🇪':'Venezuela','🇦🇷':'Argentina','🇺🇸':'Estados Unidos','🇨🇴':'Colombia',
+                    '🇧🇷':'Brasil','🇵🇪':'Perú','🇨🇱':'Chile','🇪🇨':'Ecuador','🇪🇸':'España'};
+
+  // Un lado con foto grande + badge WIN si ganó
+  function ufFoto(p, gano, perdio, lado){
+    const img = p?.foto_url
+      ? `<img src="${p.foto_url}" alt="${p.nombre||''}" loading="lazy">`
+      : `<div class="uf-sinfoto">${ini(p?.nombre)}</div>`;
+    const badge = gano ? `<div class="uf-win" style="${lado==='izq'?'left:10px':'right:10px'}">WIN</div>` : '';
+    return `<div class="uf-foto${perdio?' perdio':''}">${img}${badge}</div>`;
+  }
+
   function fightCard(p){
     const term = p.status === 'terminada';
     const a = p.peleador1, b = p.peleador2;
     const aWin = term && p.ganador_id === p.peleador1_id;
     const bWin = term && p.ganador_id === p.peleador2_id;
-    const ganador = aWin ? a : (bWin ? b : null);
-    const dim1 = term && !aWin ? ' dim' : '';
-    const dim2 = term && !bWin ? ' dim' : '';
-    return `<div class="fight-card${p.tipo==='estelar'?' main':''}"><div class="fight-inner" style="padding:14px 20px">
-      <div class="fight-badge${p.tipo==='coestelar'?' co':''}${p.tipo==='preliminar'?' pre':''}">${TIPO_LABEL[p.tipo]||p.tipo} · ${p.peso_lbs||''} lbs · ${p.rounds||3} Rounds</div>
-      <div class="matchup">
-        <div class="fc">${avatar(a,'md',aWin)}${flag(a,'md')}<div class="fn-md${dim1}">${a?.nombre||'TBA'}</div><div class="rec">${rec(a)}</div></div>
-        <div class="vs-col"><div class="vs-md">VS</div><div class="wt">${p.peso_lbs||''} lbs</div></div>
-        <div class="fc">${avatar(b,'md',bWin)}${flag(b,'md')}<div class="fn-md${dim2}">${b?.nombre||'TBA'}</div><div class="rec">${rec(b)}</div></div>
-      </div></div>
-      ${ganador ? (bWin
-        ? `<div class="result-bar"><div class="r-name" style="margin-left:0;margin-right:auto">${ganador.nombre}</div><div><span class="r-method">${p.metodo||''}</span> <span class="r-detail">${p.round_final?`R${p.round_final}`:''}${p.tiempo?` · ${p.tiempo}`:''}</span></div><div class="win-tag">Ganador</div></div>`
-        : `<div class="result-bar"><div class="win-tag">Ganador</div><div><span class="r-method">${p.metodo||''}</span> <span class="r-detail">${p.round_final?`R${p.round_final}`:''}${p.tiempo?` · ${p.tiempo}`:''}</span></div><div class="r-name">${ganador.nombre}</div></div>`
-      ) : ''}
+    const esEstelar = p.tipo === 'estelar';
+
+    // Datos centrales: si terminó muestra el resultado, si no, los datos de la pelea
+    const datos = term
+      ? [['Asalto', p.round_final || '—'], ['Tiempo', p.tiempo || '—'], ['Método', p.metodo || '—']]
+      : [['Peso', `${p.peso_lbs||'—'} lbs`], ['Rounds', p.rounds || 3], ['Estado', 'Por pelear']];
+
+    const paisLado = (pel, der) => `
+      <div class="uf-pais${der?' der':''}">
+        <span style="font-size:14px">${pel?.pais || '🏳️'}</span>
+        <span>${PAIS_TXT[pel?.pais] || ''}</span>
+        <span class="uf-rec">${rec(pel)}</span>
+      </div>`;
+
+    const bloqueDatos = datos.map(([l,v]) => `<div><div class="uf-dl">${l}</div><div class="uf-dv">${v}</div></div>`).join('');
+    const encabezado = `${TIPO_LABEL[p.tipo]||p.tipo} · ${p.peso_lbs||''} LBS · ${p.rounds||3} ROUNDS`;
+
+    return `<div class="uf-card${esEstelar?' main':''}">
+      <div class="uf-tipo-top${esEstelar?' est':''}">${encabezado}</div>
+      <div class="uf-top">
+        ${ufFoto(a, aWin, term && !aWin, 'izq')}
+        <div class="uf-centro">
+          <div class="uf-tipo${esEstelar?' est':''}">${encabezado}</div>
+          <div class="uf-nombres">
+            <div class="uf-nombre${term && !aWin ? ' dim':''}">${a?.nombre||'TBA'}</div>
+            <div class="uf-vs">VS</div>
+            <div class="uf-nombre${term && !bWin ? ' dim':''}">${b?.nombre||'TBA'}</div>
+          </div>
+          <div class="uf-datos">${bloqueDatos}</div>
+        </div>
+        ${ufFoto(b, bWin, term && !bWin, 'der')}
+      </div>
+      <div class="uf-pie">
+        ${paisLado(a, false)}
+        ${paisLado(b, true)}
+      </div>
+      <div class="uf-datos uf-datos-m">${bloqueDatos}</div>
     </div>`;
   }
 
