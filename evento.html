@@ -186,7 +186,7 @@ function toggleMenu(){
     // Datos centrales: si terminó muestra el resultado, si no, los datos de la pelea
     const datos = term
       ? [['Asalto', p.round_final || '—'], ['Tiempo', p.tiempo || '—'], ['Método', p.metodo || '—']]
-      : [['Peso', `${p.peso_lbs||'—'} lbs`], ['Rounds', p.rounds || 3], ['Estado', 'Por pelear']];
+      : [['Peso', p.peso_lbs ? `${p.peso_lbs} lbs` : 'Por anunciar'], ['Rounds', p.rounds || 3], ['Estado', 'Por pelear']];
 
     const paisLado = (pel, der) => `
       <div class="uf-pais${der?' der':''}">
@@ -196,7 +196,8 @@ function toggleMenu(){
       </div>`;
 
     const bloqueDatos = datos.map(([l,v]) => `<div><div class="uf-dl">${l}</div><div class="uf-dv">${v}</div></div>`).join('');
-    const encabezado = `${TIPO_LABEL[p.tipo]||p.tipo} · ${p.peso_lbs||''} LBS · ${p.rounds||3} ROUNDS`;
+    const pesoTxt = p.peso_lbs ? `${p.peso_lbs} LBS` : 'PESO POR ANUNCIAR';
+    const encabezado = `${TIPO_LABEL[p.tipo]||p.tipo} · ${pesoTxt} · ${p.rounds||3} ROUNDS`;
 
     return `<div class="uf-card${esEstelar?' main':''}">
       <div class="uf-tipo-top${esEstelar?' est':''}">${encabezado}</div>
