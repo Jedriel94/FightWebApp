@@ -290,7 +290,10 @@ async function placeOrder(){
   const numPedido = 'MFL-'+Date.now().toString(36).toUpperCase()
 
   // Insertar pedido
-  const {data:pedido, error:pe} = await db.from('pedidos').insert([{
+  const pedidoId = crypto.randomUUID()
+
+  const {error:pe} = await db.from('pedidos').insert([{
+    id: pedidoId,
     numero_pedido: numPedido,
     status: 'pendiente',
     subtotal, envio, impuesto:0, total,
@@ -305,13 +308,13 @@ async function placeOrder(){
     notas: val('f-notas'),
     metodo_pago: metodoPago,
     pago_status: 'pendiente'
-  }]).select().single()
+  }])
 
-  if(pe||!pedido){ btn.disabled=false; btn.textContent='Confirmar pedido →'; errEl.textContent='Error al procesar el pedido. Intenta de nuevo.'; errEl.style.display='block'; return }
+  if(pe){ btn.disabled=false; btn.textContent='Confirmar pedido →'; errEl.textContent='Error al procesar el pedido. Intenta de nuevo.'; errEl.style.display='block'; return }
 
   // Insertar items
   const items = cart.map(i=>({
-    pedido_id: pedido.id,
+    pedido_id: pedidoId,
     producto_id: i.id,
     producto_nombre: i.nombre,
     talla: i.talla||'',
@@ -326,7 +329,7 @@ async function placeOrder(){
   localStorage.removeItem('mfl_cart')
 
   // Mostrar confirmación
-  showConfirm(pedido, nombre, total, sym, cart)
+  showConfirm({ numero_pedido: numPedido }, nombre, total, sym, cart)
 }
 
 function showConfirm(pedido, nombre, total, sym, cart){

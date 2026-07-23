@@ -74,8 +74,6 @@
     .ev-logo { display: flex; flex-direction: column; align-items: center; justify-content: center;
       padding: 0 10px 0 22px; }
     .ev-logo-txt { font-family: 'Anton', sans-serif; font-size: 28px; letter-spacing: 1px; color: #fff; line-height: 1; }
-    .ev-logo-sub { font-family: 'Oswald', sans-serif; font-size: 8px; letter-spacing: 2px;
-      text-transform: uppercase; color: var(--red); margin-top: 3px; }
     .ev-fotos { display: grid; grid-template-columns: 1fr 1fr; height: 118px; }
     .ev-foto { overflow: hidden; background: linear-gradient(160deg,#141414,#0a0a0a);
       display: flex; align-items: center; justify-content: center; }
@@ -270,7 +268,6 @@ function toggleMenu(){
     return `<a href="evento.html?id=${ev.id}" class="ev-fila">
       <div class="ev-logo">
         <div class="ev-logo-txt">${ev.nombre}</div>
-        <div class="ev-logo-sub">Mexico Fight League</div>
       </div>
       <div class="ev-fotos">${fotoLado(a)}${fotoLado(b)}</div>
       <div class="ev-datos">
