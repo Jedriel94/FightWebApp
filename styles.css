@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Unica+One&family=Oswald:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 a { color: inherit; text-decoration: none; }
@@ -45,7 +45,7 @@ nav {
   padding: 14px 0;
 }
 .logo {
-  font-family: 'Anton', sans-serif;
+  font-family: 'Unica One', sans-serif;
   font-size: 28px;
   letter-spacing: 2px;
   color: white !important;
@@ -108,7 +108,7 @@ nav {
   .hamburger { display: flex; }
 }
 .logo {
-  font-family: 'Anton', sans-serif;
+  font-family: 'Unica One', sans-serif;
   font-size: 28px;
   letter-spacing: 2px;
   color: white;
@@ -201,7 +201,7 @@ nav {
   background: #1a1a1a;
   border: 2px solid #252525;
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Anton', sans-serif;
+  font-family: 'Unica One', sans-serif;
   font-size: 22px; color: #444;
 }
 .av-md {
@@ -210,7 +210,7 @@ nav {
   background: #1a1a1a;
   border: 2px solid #252525;
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Anton', sans-serif;
+  font-family: 'Unica One', sans-serif;
   font-size: 17px; color: #333;
 }
 .av-sm {
@@ -219,7 +219,7 @@ nav {
   background: #1a1a1a;
   border: 2px solid #252525;
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Anton', sans-serif;
+  font-family: 'Unica One', sans-serif;
   font-size: 13px; color: #333;
 }
 .av-lg.w, .av-md.w, .av-sm.w { border-color: rgba(232,0,29,0.45); }
@@ -236,9 +236,9 @@ nav {
   align-items: center; text-align: center; gap: 5px;
 }
 .vs-col { display: flex; flex-direction: column; align-items: center; gap: 4px; }
-.vs-lg { font-family: 'Anton', sans-serif; font-size: 32px; color: var(--red); }
-.vs-md { font-family: 'Anton', sans-serif; font-size: 24px; color: var(--red); }
-.vs-sm { font-family: 'Anton', sans-serif; font-size: 18px; color: #2a2a2a; }
+.vs-lg { font-family: 'Unica One', sans-serif; font-size: 32px; color: var(--red); }
+.vs-md { font-family: 'Unica One', sans-serif; font-size: 24px; color: var(--red); }
+.vs-sm { font-family: 'Unica One', sans-serif; font-size: 18px; color: #2a2a2a; }
 .wt { font-family: 'Oswald', sans-serif; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; text-align: center; }
 
 .fn-lg { font-family: 'Oswald', sans-serif; font-size: 17px; font-weight: 700; text-transform: uppercase; line-height: 1.1; }
@@ -293,7 +293,7 @@ footer {
   margin-top: 32px; padding: 20px 0;
   display: flex; justify-content: space-between; align-items: center;
 }
-.footer-logo { font-family: 'Anton', sans-serif; font-size: 20px; letter-spacing: 2px; color: white; text-decoration: none; }
+.footer-logo { font-family: 'Unica One', sans-serif; font-size: 20px; letter-spacing: 2px; color: white; text-decoration: none; }
 .footer-logo span { color: var(--red); }
 .footer-links { display: flex; gap: 16px; }
 .footer-links a { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); text-decoration: none; cursor: pointer; }
