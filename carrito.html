@@ -45,6 +45,13 @@
     .cart-nav { position:relative; display:flex; align-items:center; text-decoration:none; color:white; font-size:20px; }
     .cart-nav-count { position:absolute; top:-8px; right:-8px; background:#E8001D; color:white; font-size:10px; font-weight:700; width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
     @media(max-width:768px){ .cart-wrap{grid-template-columns:1fr;} .cart-summary{position:static;} }
+  
+    .nav-acciones { display: flex; align-items: center; gap: 16px; }
+    .cart-nav { position: relative; display: flex; align-items: center; color: #fff; text-decoration: none; }
+    .cart-nav:hover { color: var(--red); }
+    .cart-nav-count { position: absolute; top: -7px; right: -8px; background: #E8001D; color: #fff;
+      font-family: 'Oswald', sans-serif; font-size: 10px; font-weight: 700; min-width: 17px; height: 17px;
+      border-radius: 9px; display: flex; align-items: center; justify-content: center; padding: 0 4px; }
   </style>
 </head>
 <body>
@@ -56,7 +63,6 @@
         <a href="index.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888;text-decoration:none;">Inicio</a>
         <a href="tienda.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#888;text-decoration:none;">Tienda</a>
         <a href="pelear.html" style="font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#FF0A2A;text-decoration:none;font-weight:700;">Quiero Pelear</a>
-        <a href="carrito.html" class="cart-nav"><span class="cart-nav-count" id="cart-count" style="display:none">0</span></a>
       </div>
     </nav>
   </div>

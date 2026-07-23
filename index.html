@@ -103,7 +103,7 @@
     .uf-card.main { border-left: 3px solid var(--red); }
     .uf-top { display: grid; grid-template-columns: 150px 1fr 150px; align-items: stretch; }
     .uf-foto { position: relative; height: 200px; overflow: hidden; background: linear-gradient(160deg,#141414,#0a0a0a); display: flex; align-items: center; justify-content: center; }
-    .uf-foto img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+    .uf-foto img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; }
     .uf-foto.perdio img { filter: grayscale(80%) brightness(.55); }
     .uf-sinfoto { font-family: 'Anton', sans-serif; font-size: 34px; color: #2a2a2a; }
     .uf-win { position: absolute; top: 10px; background: var(--red); color: #fff; font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 2px; font-weight: 700; padding: 3px 10px; z-index: 2; }
@@ -357,7 +357,7 @@ function toggleMenu(){
   }
   /* Avatares con foto */
   .av-foto { padding:0!important; overflow:hidden; }
-  .av-foto img { width:100%; height:100%; object-fit:cover; object-position:top center; display:block; }
+  .av-foto img { width:100%; height:100%; object-fit:cover; object-position:center 15%; display:block; }
   /* Silueta TBA */
   .av-tba { opacity:.35; }
 </style>
@@ -371,7 +371,7 @@ function toggleMenu(){
   function timeAgo(dateStr) {
     const diff = Date.now() - new Date(dateStr)
     const d = Math.floor(diff/86400000)
-    if (d === 0) return 'Hoy'
+    if (d <= 0) return 'Hoy'
     if (d === 1) return 'Ayer'
     if (d < 7) return `Hace ${d} días`
     return new Date(dateStr).toLocaleDateString('es-MX',{day:'numeric',month:'short'})
@@ -475,9 +475,9 @@ function toggleMenu(){
 
   // ── Render cartelera ─────────────────────────────────────
   // Prioridad de tipo: estelar > coestelar > principal > preliminar
-  const TIPO_PRIO = { estelar: 0, coestelar: 1, principal: 2, preliminar: 3 }
+  const TIPO_PRIO = { estelar: 0, coestelar: 1, principal: 2, preliminar: 3, tbd: 4 }
   function tipoBadge(tipo) {
-    return { estelar:'Pelea Estelar', coestelar:'Co-Estelar', principal:'Cartelera Principal', preliminar:'Preliminar' }[tipo] || tipo
+    return { estelar:'Pelea Estelar', coestelar:'Co-Estelar', principal:'Cartelera Principal', preliminar:'Preliminar', tbd:'Por Anunciar' }[tipo] || tipo
   }
   function estadoPelea(p) {
     if (p.status === 'live') {
@@ -577,7 +577,7 @@ function toggleMenu(){
     const [first, ...rest] = noticias.slice(0, 3)
     let html = `
     <a href="noticia.html?id=${first.id}" class="news-feat" style="text-decoration:none;color:inherit;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;cursor:pointer;position:relative;overflow:hidden;">
-      ${first.imagen_url ? `<div style="position:absolute;inset:0;background:url('${first.imagen_url}') center/cover no-repeat;opacity:0.15;"></div>` : ''}
+      ${first.imagen_url ? `<div style="position:absolute;inset:0;background:url('${first.imagen_url}') center 15%/cover no-repeat;opacity:0.15;"></div>` : ''}
       <div style="position:relative;z-index:1;">
         <div class="news-tag-n">${first.categoria||'MFL'}</div>
         <div class="news-title-n">${first.titulo}</div>
@@ -585,14 +585,14 @@ function toggleMenu(){
       </div>
       <div style="position:relative;z-index:1;">
         ${first.imagen_url
-          ? `<img src="${first.imagen_url}" style="width:100%;height:160px;object-fit:cover;border:1px solid rgba(232,0,29,0.2);" alt="">`
+          ? `<img src="${first.imagen_url}" style="width:100%;height:160px;object-fit:cover;object-position:center 15%;border:1px solid rgba(232,0,29,0.2);" alt="">`
           : first.contenido ? `<div class="news-quote">${first.contenido.substring(0,200)}${first.contenido.length>200?'...':''}</div>` : ''}
       </div>
     </a>`
     rest.forEach(n => {
       html += `
     <a href="noticia.html?id=${n.id}" class="news-card" style="text-decoration:none;color:inherit;">
-      ${n.imagen_url ? `<div style="height:120px;overflow:hidden;"><img src="${n.imagen_url}" style="width:100%;height:100%;object-fit:cover;" alt=""></div>` : ''}
+      ${n.imagen_url ? `<div style="height:120px;overflow:hidden;"><img src="${n.imagen_url}" style="width:100%;height:100%;object-fit:cover;object-position:center 15%;" alt=""></div>` : ''}
       <div style="padding:${n.imagen_url?'12px 16px':'0'};">
         <div class="news-tag-n">${n.categoria||'MFL'}</div>
         <div class="news-title-n">${n.titulo}</div>
@@ -608,7 +608,7 @@ function toggleMenu(){
   function ladoResultado(peleador, esGanador, lado) {
     const avCls = esGanador ? 'r-av-w' : 'r-av-l'
     const av = peleador?.foto_url
-      ? `<div class="${avCls}" style="overflow:hidden;padding:0;"><img src="${peleador.foto_url}" style="width:100%;height:100%;object-fit:cover;object-position:top center;" alt=""></div>`
+      ? `<div class="${avCls}" style="overflow:hidden;padding:0;"><img src="${peleador.foto_url}" style="width:100%;height:100%;object-fit:cover;object-position:center 15%;" alt=""></div>`
       : `<div class="${avCls}">${initiales(peleador?.nombre)}</div>`
     const align = lado === 'left' ? 'left' : 'right'
     const info = esGanador
@@ -623,7 +623,7 @@ function toggleMenu(){
     document.getElementById('resultados-label').style.display = ''
     document.getElementById('resultados-label').textContent = `Últimos Resultados — ${evento.nombre}`
     // Solo las 3 peleas principales: estelar, co-estelar y la siguiente en jerarquía
-    const PRIO = { estelar: 0, coestelar: 1, principal: 2, preliminar: 3 }
+    const PRIO = { estelar: 0, coestelar: 1, principal: 2, preliminar: 3, tbd: 4 }
     const TIPO_TXT = { estelar: 'Estelar', coestelar: 'Co-Estelar', principal: 'Cartelera Principal', preliminar: 'Preliminar' }
     const terminadas = peleas
       .filter(p => p.status === 'terminada')

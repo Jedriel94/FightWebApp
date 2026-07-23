@@ -8,7 +8,7 @@
   <style>
     .news-hero { position:relative; margin:24px 0 0; min-height:420px; display:flex; align-items:flex-end; overflow:hidden; border:1px solid var(--border); cursor:pointer; text-decoration:none; color:var(--light); }
     .news-hero-bg { position:absolute; inset:0; background:linear-gradient(135deg,#1a0005,#0a0a0a); }
-    .news-hero-bg img { width:100%; height:100%; object-fit:cover; }
+    .news-hero-bg img { width:100%; height:100%; object-fit:cover; object-position:center 15%; }
     .news-hero-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,0.95) 0%,rgba(0,0,0,0.4) 50%,transparent 100%); z-index:1; }
     .news-hero-content { position:relative; z-index:2; padding:36px 40px; max-width:70%; }
     .news-hero-cat { display:inline-block; background:var(--red); font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; padding:4px 12px; margin-bottom:16px; }
@@ -22,7 +22,7 @@
     .ncard { background:var(--mid); border:1px solid var(--border); cursor:pointer; text-decoration:none; color:var(--light); display:block; transition:border-color .2s; overflow:hidden; }
     .ncard:hover { border-color:#333; }
     .ncard-img { height:160px; background:linear-gradient(135deg,#1a0005,#111); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
-    .ncard-img img { width:100%; height:100%; object-fit:cover; position:absolute; inset:0; }
+    .ncard-img img { width:100%; height:100%; object-fit:cover; object-position:center 15%; position:absolute; inset:0; }
     .ncard-img-pattern { position:absolute; inset:0; background:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(232,0,29,0.04) 20px,rgba(232,0,29,0.04) 40px); }
     .ncard-ph { font-family:'Anton',sans-serif; font-size:36px; color:rgba(232,0,29,0.2); position:relative; z-index:1; }
     .ncard-body { padding:16px 18px; }
@@ -109,7 +109,7 @@ let todas = [], filtroActivo = null
 function timeAgo(d) {
   const diff = Date.now() - new Date(d)
   const days = Math.floor(diff/86400000)
-  if (days===0) return 'Hoy'
+  if (days<=0) return 'Hoy'
   if (days===1) return 'Ayer'
   if (days<7) return `Hace ${days} días`
   return new Date(d).toLocaleDateString('es-MX',{day:'numeric',month:'short',year:'numeric'})

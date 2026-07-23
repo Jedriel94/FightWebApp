@@ -225,8 +225,8 @@ function toggleMenu(){
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="supabase-client.js"></script>
 <script>
-  const TIPO_LABEL = { estelar:'Pelea Estelar', coestelar:'Co-Estelar', principal:'Cartelera Principal', preliminar:'Preliminar' };
-  const PRIO = { estelar:0, coestelar:1, principal:2, preliminar:3 };
+  const TIPO_LABEL = { estelar:'Pelea Estelar', coestelar:'Co-Estelar', principal:'Cartelera Principal', preliminar:'Preliminar', tbd:'Por Anunciar' };
+  const PRIO = { estelar:0, coestelar:1, principal:2, preliminar:3, tbd:4 };
   const ini = n => (n||'?').trim().split(/\s+/).slice(0,2).map(w=>w[0]||'').join('').toUpperCase();
   const rec = p => p ? `${p.record_g}-${p.record_p}-${p.record_e}` : '—';
   const flag = p => `${p?.pais || '🏳️'}`;

@@ -168,7 +168,7 @@
 <script src="supabase-client.js"></script>
 <script>
   function toggleMenu(){ var m=document.getElementById('mobile-menu'); m.style.display=m.style.display==='flex'?'none':'flex'; m.style.flexDirection='column'; }
-  const TIPO_LABEL = { estelar:'Pelea Estelar', coestelar:'Co-Estelar', principal:'Cartelera Principal', preliminar:'Preliminar' };
+  const TIPO_LABEL = { estelar:'Pelea Estelar', coestelar:'Co-Estelar', principal:'Cartelera Principal', preliminar:'Preliminar', tbd:'Por Anunciar' };
   const rec = p => p ? `${p.record_g}-${p.record_p}-${p.record_e}` : '—';
   const fl = p => (p && p.pais) || '🏳️';
   const statRow = (label, a, b) => `<div class="stat-row"><div class="stat-val red">${a}</div><div class="stat-label">${label}</div><div class="stat-val blue">${b}</div></div>`;

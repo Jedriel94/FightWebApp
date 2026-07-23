@@ -106,7 +106,7 @@ function toggleMenu(){
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="supabase-client.js"></script>
 <script>
-  const TIPO_LABEL = { estelar:'Estelar · Main Event', coestelar:'Co-Estelar', principal:'Cartelera Principal', preliminar:'Preliminar' };
+  const TIPO_LABEL = { estelar:'Estelar · Main Event', coestelar:'Co-Estelar', principal:'Cartelera Principal', preliminar:'Preliminar', tbd:'Por Anunciar' };
   const ini = n => (n||'?').trim().split(/\s+/).slice(0,2).map(w=>w[0]||'').join('').toUpperCase();
   const rec = p => p ? `${p.record_g}-${p.record_p}-${p.record_e}` : '—';
   function flag(p, size){ return `<div class="flag-${size}">${p?.pais||'🏳️'}</div>`; }

@@ -21,7 +21,7 @@
     .uf-card.main { border-left: 3px solid var(--red); }
     .uf-top { display: grid; grid-template-columns: 150px 1fr 150px; align-items: stretch; }
     .uf-foto { position: relative; height: 200px; overflow: hidden; background: linear-gradient(160deg,#141414,#0a0a0a); display: flex; align-items: center; justify-content: center; }
-    .uf-foto img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+    .uf-foto img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; }
     .uf-foto.perdio img { filter: grayscale(80%) brightness(.55); }
     .uf-sinfoto { font-family: 'Anton', sans-serif; font-size: 34px; color: #2a2a2a; }
     .uf-win { position: absolute; top: 10px; background: var(--red); color: #fff; font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 2px; font-weight: 700; padding: 3px 10px; z-index: 2; }
@@ -153,8 +153,8 @@ function toggleMenu(){
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="supabase-client.js"></script>
 <script>
-  const TIPO_LABEL = { estelar:'Pelea Estelar', coestelar:'Co-Estelar', principal:'Cartelera Principal', preliminar:'Preliminar' };
-  const PRIO = { estelar:0, coestelar:1, principal:2, preliminar:3 };
+  const TIPO_LABEL = { estelar:'Pelea Estelar', coestelar:'Co-Estelar', principal:'Cartelera Principal', preliminar:'Preliminar', tbd:'Por Anunciar' };
+  const PRIO = { estelar:0, coestelar:1, principal:2, preliminar:3, tbd:4 };
   const ini = n => (n||'?').trim().split(/\s+/).slice(0,2).map(w=>w[0]||'').join('').toUpperCase();
   const rec = p => p ? `${p.record_g}-${p.record_p}-${p.record_e}` : '—';
   function flag(p, size){ return `<div class="flag-${size}">${p?.pais || '🏳️'}</div>`; }
